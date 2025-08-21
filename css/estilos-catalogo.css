@@ -38,6 +38,7 @@ img {
 
 .contenedor-productos {
     display: grid;
+    grid-template-columns: repeat(4,1fr);
     gap: 2rem;
     justify-content: center;
     padding: 1rem;
@@ -71,4 +72,15 @@ img {
     font-weight: bold;
     margin-bottom: 1rem;
     display: block;
+}
+
+@media (min-width: 768px) {
+    .contenedor-productos {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        padding: 1rem;
+    }
+    .carta-pruducto {
+        max-width: 100%;
+    }
 }
