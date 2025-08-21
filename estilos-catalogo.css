@@ -1,0 +1,13 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.carta-pruducto {
+    width: 350px;
+    padding: 25px;
+    border: 1px solid #cccccc;
+    box-shadow: 5px 5px 10px #e0e0e0;
+    margin: 40px auto;
+}
