@@ -5,25 +5,33 @@
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #f9f9f9;
+    font-family: sans-serif, Arial, Helvetica , Georgia, 'Times New Roman', Times, serif;
+    background-color: #F5E6D3;
     padding: 1rem;
     color: black;
 }
 
 header {
-    text-align: center;
+    text-align: left;
+    text-transform: uppercase;
     padding: 1rem;
+    margin: 0.1em;
+    border: black 1px solid;
     background-color: #A0522D;
     color: white;
     font-size: 1.5rem;
-    font-weight: bold; 
+    font-weight: bold;
+    img {
+        width: 120px;
+        height: auto;
+    }
+     
 }
 
 img {
         max-width: 100%; 
         height: auto; 
-    }
+}
 
 .contenedor-productos {
     display: grid;
