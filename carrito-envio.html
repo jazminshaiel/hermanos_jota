@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Envío - Hermanos Jota</title>
+    <link rel="stylesheet" href="css/carrito.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <span>Carrito-envio</span>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <span class="logo-text">hj</span>
+        </div>
+        <nav class="nav">
+            <a href="#" class="nav-link">seccion 1</a>
+            <a href="#" class="nav-link">seccion 2</a>
+            <a href="#" class="nav-link">seccion 3</a>
+            <a href="#" class="nav-link">seccion 4</a>
+        </nav>
+        <div class="header-icons">
+            <i class="fas fa-user"></i>
+            <i class="fas fa-search"></i>
+            <i class="fas fa-heart"></i>
+            <i class="fas fa-shopping-cart"></i>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-logo">hj</div>
+            <h1>Envío</h1>
+            <div class="breadcrumb">
+                <span>Inicio > Envío</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Shipping Details -->
+            <div class="shipping-details">
+                <h2>Datos de envío</h2>
+                <form class="shipping-form">
+                    <div class="form-group">
+                        <label for="nombre">Nombre completo</label>
+                        <input type="text" id="nombre" name="nombre" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="pais">País / Región</label>
+                        <select id="pais" name="pais" required>
+                            <option value="argentina" selected>Argentina</option>
+                            <option value="chile">Chile</option>
+                            <option value="uruguay">Uruguay</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="provincia">Provincia</label>
+                        <select id="provincia" name="provincia" required>
+                            <option value="cordoba" selected>Córdoba</option>
+                            <option value="buenos-aires">Buenos Aires</option>
+                            <option value="mendoza">Mendoza</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="ciudad">Ciudad</label>
+                        <input type="text" id="ciudad" name="ciudad" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="direccion">Dirección</label>
+                        <input type="text" id="direccion" name="direccion" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="codigo-postal">Código postal</label>
+                        <input type="text" id="codigo-postal" name="codigo-postal" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="telefono">Teléfono de contacto</label>
+                        <input type="tel" id="telefono" name="telefono" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Correo electrónico</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="informacion-adicional">Información adicional</label>
+                        <textarea id="informacion-adicional" name="informacion-adicional" rows="4"></textarea>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Product Summary and Payment -->
+            <div class="product-payment">
+                <h2>Producto</h2>
+                
+                <div class="order-summary">
+                    <div class="summary-item">
+                        <span>Lalala sofa x 1</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Subtotal</span>
+                        <span>$ 350,000.00</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Envío</span>
+                        <span>$ 0.00</span>
+                    </div>
+                    <div class="summary-item total">
+                        <span>Total</span>
+                        <span>$ 350,000.00</span>
+                    </div>
+                </div>
+
+                <div class="payment-methods">
+                    <h3>Métodos de pago</h3>
+                    
+                    <div class="payment-option">
+                        <input type="radio" id="transferencia" name="payment" value="transferencia" checked>
+                        <label for="transferencia">Transferencia bancaria</label>
+                        <p class="payment-description">Realiza tu pago desde transferencia bancaria al siguiente...</p>
+                    </div>
+                    
+                    <div class="payment-option">
+                        <input type="radio" id="tarjeta" name="payment" value="tarjeta">
+                        <label for="tarjeta">Tarjeta de débito / crédito</label>
+                    </div>
+                    
+                    <div class="payment-option">
+                        <input type="radio" id="efectivo" name="payment" value="efectivo">
+                        <label for="efectivo">Efectivo / retiro en sucursal</label>
+                    </div>
+                </div>
+
+                <div class="privacy-policy">
+                    <p>Sus datos personales se utilizarán para respaldar su experiencia en este sitio web, para administrar el acceso a su cuenta y para otros fines descritos en nuestra política de privacidad.</p>
+                </div>
+
+                <button class="checkout-btn" onclick="alert('Esto no funca jeje')">
+                    Ir a pagar
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="feature">
+                <i class="fas fa-trophy"></i>
+                <h4>Alta calidad</h4>
+                <p>Diseñado con materiales premium</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-check-circle"></i>
+                <h4>Garantía</h4>
+                <p>Hasta 1 año</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-truck"></i>
+                <h4>Envío</h4>
+                <p>Envios a todo el país</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-headset"></i>
+                <h4>24/7 Soporte</h4>
+                <p>Contactanos</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-section">
+                <div class="footer-logo">hj</div>
+                <div class="company-info">
+                    <p>Hermanos Jota - Casa Taller</p>
+                    <p>Av. San Juan 2847</p>
+                    <p>C1232AAB - Barrio de San Cristóbal</p>
+                    <p>Ciudad Autónoma de Buenos Aires</p>
+                    <p>Argentina</p>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Links</h4>
+                <a href="#">Seccion 1</a>
+                <a href="#">Seccion 2</a>
+                <a href="#">Seccion 3</a>
+                <a href="#">Seccion 4</a>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Help</h4>
+                <a href="#">Métodos de pago</a>
+                <a href="#">Cambios y devoluciones</a>
+                <a href="#">Politicas de privacidad</a>
+                
+                <div class="newsletter">
+                    <h4>Newsletter</h4>
+                    <div class="newsletter-input">
+                        <input type="email" placeholder="Ingresá tu email">
+                        <button onclick="alert('Esto no funca jeje')">SUSCRIBIRSE</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>2025 HJ. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/carrito.js"></script>
+</body>
+</html>
