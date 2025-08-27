@@ -55,13 +55,13 @@ img {
     color: white;
 }
 
-.carta-pruducto img {
+.carta-producto img {
     width: 100%;
     height: auto;
     margin-bottom: 1rem;
 }
 
-.carta-pruducto p {
+.carta-producto p {
     color: white;
     margin-bottom: 1rem;
     font-size: 0.9rem;
@@ -80,7 +80,7 @@ img {
         gap: 1.5rem;
         padding: 1rem;
     }
-    .carta-pruducto {
+    .carta-producto {
         max-width: 100%;
     }
 }
