@@ -4,6 +4,11 @@
     padding: 0;
 }
 
+img {
+    max-width: 100%; 
+    height: auto; 
+}
+
 body {
     font-family: 'Inter', sans-serif, Arial, Georgia;
     background-color: #F5E6D3;
@@ -14,9 +19,10 @@ body {
 
 header {
     display: flex;
-    text-align: left;
+    flex-direction: column;
+    text-align: center;
     text-transform: uppercase;
-    padding: 1.5rem 2rem;
+    padding: 2rem;
     margin-bottom: 2rem;
     border: 2px solid #A0522D;
     background-color: #A0522D;
@@ -26,14 +32,26 @@ header {
     box-shadow: 0 4px 15px rgba(160, 82, 45, 0.2);
 }
 
-header img {
-    width: 120px;
-    height: auto;
+.contenedor-logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 
-img {
-        max-width: 100%; 
-        height: auto; 
+.placeholder-logo {
+    background-color: #F5E6D3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #A0522D;
+}
+
+.nombre-marca {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
 }
 
 .contenedor-productos {

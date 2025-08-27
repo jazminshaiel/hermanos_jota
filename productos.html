@@ -5,14 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo de Productos</title>
     <link rel="stylesheet" href="css/estilos-catalogo.css">
-    <link  rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Playfair+Display:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Playfair+Display:wght@400;700&display=swap">
 </head>
 <body>
-    <header> <img src="#" alt="Logo Marca"> Hermanos Jota </header>
+    <header>
+        <img src="#" alt="Logo Marca">
+        <div class="contenedor-logo">
+            <div class="placeholder-logo">HJ</div>
+            <div class="nombre-marca">Hermanos Jota</div>
+        </div>
+    </header>
+    
     <main>
         <div class="contenedor-productos" id="contenedorProductos"></div>
     </main>
-    <footer></footer>
+
+    <footer>
+        <p>&copy; 2025 Hermanos Jota. Todos los derechos reservados.</p>
+    </footer>
+
     <script src="js/funcionalidad-catalogo.js"></script>
     <script>document.addEventListener('DOMContentLoaded', cargarProductos); //Carga los productos cuando carga la pagina</script>
 </body>
