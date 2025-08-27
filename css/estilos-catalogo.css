@@ -5,25 +5,25 @@
 }
 
 body {
-    font-family: sans-serif, Arial, Georgia, 'Times New Roman';
+    font-family: 'Inter', sans-serif, Arial, Georgia;
     background-color: #F5E6D3;
     padding: 1rem;
     color: black;
+    line-height: 1.6;
 }
 
 header {
     display: flex;
     text-align: left;
     text-transform: uppercase;
-    padding: 1rem;
-    margin: 0.1em;
-    border: black 1px solid;
+    padding: 1.5rem 2rem;
+    margin-bottom: 2rem;
+    border: 2px solid #A0522D;
     background-color: #A0522D;
     color: white;
-    font-size: 1.5rem;
-    font-weight: bold;
     gap: 1rem;
-    align-items: center; 
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(160, 82, 45, 0.2);
 }
 
 header img {
@@ -80,7 +80,12 @@ img {
         gap: 1.5rem;
         padding: 1rem;
     }
-    .carta-producto {
-        max-width: 100%;
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .contenedor-productos {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        padding: 1rem;
     }
 }
