@@ -1,0 +1,56 @@
+
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    display: flex;
+    text-align: left;
+    padding: 0.5rem 0.1rem;
+    margin-bottom: 2rem;
+    border: 2px solid #A0522D;
+    background-color: #A0522D;
+    color: white;
+    gap: 20rem;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(160, 82, 45, 0.2);
+    justify-content: space-around;
+}
+
+.logo-header{
+    display: flex;
+    align-items: center;
+    
+}
+
+.logo-header img{
+    width: 60px;
+    height: auto;
+}
+
+.logo-header p{
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    color: black;
+}
+
+.header-links{
+    display: flex;
+    gap: 2rem;
+}
+
+.header-links a{
+    font-size: medium;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    text-decoration: none;
+    color: black;
+}
+
+.header-items{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}

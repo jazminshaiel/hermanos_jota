@@ -4,6 +4,7 @@
     padding: 0;
 }
 
+
 body {
     font-family: 'Inter', sans-serif, Arial, Georgia;
     background-color: #F5E6D3;
@@ -43,6 +44,7 @@ img {
     justify-content: center;
     padding: 1rem;
     margin: auto;
+    z-index: 1;
 }
 
 .carta-producto {

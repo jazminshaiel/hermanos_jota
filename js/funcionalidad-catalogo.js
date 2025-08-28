@@ -73,6 +73,7 @@ const productos = [ //contenedor de productos.
     }
 ];
 
+const modal = document.getElementById("contenedorModal");
 function crearCartaProducto(producto) {
     return `
         <div class="carta-producto">
