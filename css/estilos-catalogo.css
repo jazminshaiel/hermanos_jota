@@ -54,6 +54,41 @@ header {
     letter-spacing: 0.1em;
 }
 
+.contenedor-busqueda{
+    margin: 2rem auto;
+    max-width: 600px;
+    position: relative;
+}
+
+.busqueda-input{
+    width: 100%;
+    padding: 1rem 3rem 1rem 1rem;
+    border: 2px solid #A0522D;
+    font-size: 1rem;
+    background-color: white;
+    color: #333;
+    outline: none;
+}
+
+.busqueda-input:focus{
+    box-shadow: 0 0 10px rgba(160, 82, 45, 0.3);
+    border-color: #87A96B;
+}
+
+.boton-busqueda{
+    position: absolute;
+    background-color: #A0522D;
+    color: white;
+    border: none;
+    padding: 0.7rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.3 ease;
+}
+
+.boton-busqueda:hover{
+    background-color: #87A96B;
+}
+
 .contenedor-productos {
     display: grid;
     grid-template-columns: repeat(4,1fr);

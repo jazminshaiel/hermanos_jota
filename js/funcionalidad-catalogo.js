@@ -92,3 +92,24 @@ function cargarProductos() {
     });
     contenedor.innerHTML = html; //inserta el html.
 }
+
+let productosFiltrados = [...productos]; /* Creamos copia del array original '...' apunta a otro array independiente. */
+
+function buscarProductos(){
+    const searchTerm = document.getElementById('busquedaInput').ariaValueMax.toLocaleLowerCase();
+    aplicarBusqueda(searchTerm);
+}
+
+function aplicarBusqueda(termino){
+    if (termino){
+        productosFiltrados=productos.filter(producto =>
+            producto.nombre.toLowerCase().includes(termino) ||
+            producto.descripcion.toLowerCase().includes(termino) ||
+            producto.categoria.toLowerCase().includes(termino)
+        );
+    }else{
+        productosFiltrados=productos;
+    }
+
+    mostrarProductos(productosFiltrados)
+}
