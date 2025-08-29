@@ -31,5 +31,16 @@
 
     <script src="js/funcionalidad-catalogo.js"></script>
     <script>document.addEventListener('DOMContentLoaded', cargarProductos); //Carga los productos cuando carga la pagina</script>
+    <script>document.getElementById('busquedaInput').addEventListener('keyup',function(event){
+        if(event.key === 'Enter'){
+            buscarProductos();
+        }else{ //busqueda en tiempo real
+            clearTimeout(this.searchTimeout);
+            this.searchTimeout=setTimeout(()=> {
+                aplicarBusqueda(this.value.toLowerCase());
+            },300);
+        }
+    });
+    </script>
 </body>
 </html>

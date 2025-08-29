@@ -83,6 +83,9 @@ header {
     padding: 0.7rem 1rem;
     cursor: pointer;
     transition: background-color 0.3 ease;
+    right: 5px;
+    border-radius: 20px;
+    top: 15%;
 }
 
 .boton-busqueda:hover{
