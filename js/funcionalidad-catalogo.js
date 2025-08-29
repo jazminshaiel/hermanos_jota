@@ -73,6 +73,8 @@ const productos = [ //contenedor de productos.
     }
 ];
 
+let productosFiltrados = [...productos]; /* Creamos copia del array original '...' apunta a otro array independiente. */
+
 function crearCartaProducto(producto) {
     return `
         <div class="carta-producto">
@@ -85,15 +87,22 @@ function crearCartaProducto(producto) {
 }
 
 function cargarProductos() {
-    const contenedor = document.getElementById("contenedorProductos");
-    let html = '';
-    productos.forEach(producto => { //genera html para c/producto.
-        html += crearCartaProducto(producto);
-    });
-    contenedor.innerHTML = html; //inserta el html.
+    mostrarProductos(productos);
 }
 
-let productosFiltrados = [...productos]; /* Creamos copia del array original '...' apunta a otro array independiente. */
+function mostrarProductos(productosAMostrar){
+    const contenedor = document.getElementById("contenedorProductos");
+    if(productosAMostrar.length === 0){
+        contenedor.innerHTML = '<div class="no-results">No se encontraron productos</div>';
+        return;
+    }
+
+    let html = '';
+    productosAMostrar.forEach(producto =>{
+        html += crearCartaProducto(producto);
+    });
+    contenedor.innerHTML=html;
+}
 
 function buscarProductos(){
     const searchTerm = document.getElementById('busquedaInput').ariaValueMax.toLocaleLowerCase();
