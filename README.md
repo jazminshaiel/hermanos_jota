@@ -1,4 +1,4 @@
-﻿# e-comerce Hermanos Jota
+﻿# E-Commerce Hermanos Jota
 ### Integrantes
  - Srdos Gorosito Silvana
  - Roman Ezequiel Zorrilla
@@ -12,3 +12,4 @@
  - HTML
  - CSS
  - JavaScript
+
