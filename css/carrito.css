@@ -28,7 +28,7 @@ body {
 
 /* Header */
 .header {
-    background-color: white;
+    background-color: #a0522d;
     padding: 15px 20px;
     display: flex;
     justify-content: space-between;
@@ -39,7 +39,7 @@ body {
 .logo-text {
     font-size: 24px;
     font-weight: bold;
-    color: #A0522D;
+    color: white;
     text-transform: lowercase;
 }
 
@@ -50,21 +50,21 @@ body {
 
 .nav-link {
     text-decoration: none;
-    color: #333;
+    color: white;
     font-size: 14px;
     text-transform: lowercase;
     transition: color 0.3s;
 }
 
 .nav-link:hover {
-    color: #A0522D;
+    color: #d4a574;
 }
 
 .header-icons {
     display: flex;
     gap: 20px;
     font-size: 18px;
-    color: #666;
+    color: white;
 }
 
 .header-icons i {
@@ -73,7 +73,7 @@ body {
 }
 
 .header-icons i:hover {
-    color: #A0522D;
+    color: #d4a574;
 }
 
 /* Hero Section */
@@ -100,7 +100,7 @@ body {
 .hero-logo {
     font-size: 48px;
     font-weight: bold;
-    color: #A0522D;
+    color: white;
     margin-bottom: 20px;
 }
 
@@ -233,8 +233,8 @@ body {
 .checkout-btn {
     width: 100%;
     padding: 15px;
-    background-color: #A0522D;
-    color: white;
+    background-color: white;
+    color: #333;
     border: none;
     border-radius: 8px;
     font-size: 16px;
@@ -245,7 +245,7 @@ body {
 }
 
 .checkout-btn:hover {
-    background-color: #8B4513;
+    background-color: #f8f9fa;
 }
 
 /* Features Section */
@@ -268,7 +268,7 @@ body {
 
 .feature i {
     font-size: 40px;
-    color: #A0522D;
+    color: #a0522d;
     margin-bottom: 20px;
 }
 
@@ -300,7 +300,7 @@ body {
 .footer-logo {
     font-size: 24px;
     font-weight: bold;
-    color: #A0522D;
+    color: #a0522d;
     margin-bottom: 20px;
 }
 
@@ -326,7 +326,7 @@ body {
 }
 
 .footer-section a:hover {
-    color: #A0522D;
+    color: #a0522d;
 }
 
 .newsletter {
@@ -349,8 +349,8 @@ body {
 
 .newsletter-input button {
     padding: 10px 20px;
-    background-color: #A0522D;
-    color: white;
+    background-color: white;
+    color: #333;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -360,7 +360,7 @@ body {
 }
 
 .newsletter-input button:hover {
-    background-color: #8B4513;
+    background-color: #f8f9fa;
 }
 
 .footer-bottom {
@@ -415,7 +415,7 @@ body {
 .form-group select:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: #A0522D;
+    border-color: #a0522d;
 }
 
 .form-group textarea {
@@ -457,7 +457,7 @@ body {
 }
 
 .payment-option:hover {
-    border-color: #A0522D;
+    border-color: #a0522d;
 }
 
 .payment-option input[type="radio"] {
