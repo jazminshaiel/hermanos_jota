@@ -132,8 +132,7 @@ function aplicarBusqueda(termino) {
     productosFiltrados = productos.filter(
       (producto) =>
         producto.nombre.toLowerCase().includes(termino) ||
-        producto.descripcion.toLowerCase().includes(termino) ||
-        producto.categoria.toLowerCase().includes(termino)
+        producto.descripcion.toLowerCase().includes(termino)
     );
   } else {
     productosFiltrados = productos;
