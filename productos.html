@@ -1,19 +1,120 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Catálogo de Productos</title>
-    <link rel="stylesheet" href="css/estilos-catalogo.css">
-    <link  rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Playfair+Display:wght@400;700&display=swap">
-</head>
-<body>
-    <header> <img src="#" alt="Logo Marca"> Hermanos Jota </header>
+    <link rel="stylesheet" href="css/estilos-catalogo.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Playfair+Display:wght@400;700&display=swap"
+    />
+  </head>
+
+  <body>
+    <header>
+      <div class="contenedor-logo">
+        <img src="../logo.svg" alt="Logo Marca" />
+        <div class="placeholder-logo">HJ</div>
+        <div class="nombre-marca">Hermanos Jota</div>
+      </div>
+    </header>
+
+    <div class="contenedor-busqueda">
+      <input
+        type="text"
+        class="busqueda-input"
+        id="busquedaInput"
+        placeholder="Buscar productos"
+      />
+      <button class="boton-busqueda" onclick="buscarProductos()">Buscar</button>
+    </div>
+
     <main>
-        <div class="contenedor-productos" id="contenedorProductos"></div>
+      <div class="contenedor-productos" id="contenedorProductos"></div>
     </main>
-    <footer></footer>
+
+    <footer>
+      <div class="contenido-footer">
+        <!--Showroom-->
+        <div class="seccion-footer">
+          <h3>Showroom</h3>
+          <div class="info-showroom">
+            <div class="nombre-showroom">Hermanos Jota</div>
+            <div class="direccion-showroom">
+              Av. San Juan 2847 <br />
+              C1232AAB - Barrio de San Cristóbal <br />
+              Ciudad Autónoma de Buenos Aires <br />
+              Argentina
+            </div>
+            <div class="calendario">
+              <div class="titulo-calendario">Horarios:</div>
+              <div>Lunes a Viernes: 10:00 - 19:00</div>
+              <div>Sábados: 10:00 - 14:00</div>
+            </div>
+          </div>
+        </div>
+
+        <!--Contacto Digital-->
+        <div class="seccion-footer">
+          <h3>Contacto Digital</h3>
+          <div class="contacto-item">
+            <span class="contacto-etiqueta">Sitio web:</span>
+            <span class="contacto-valor">
+              <a href="http://www.hermanosjota.com.ar" target="_blank">www.hermanosjota.com.ar</a>
+            </span>
+          </div>
+          <div class="contacto-item">
+            <span class="contacto-etiqueta">Email General:</span>
+            <span class="contacto-valor">
+              <a href="mailto:info@hermanosjota.com.ar">info@hermanosjota.com.ar</a>
+            </span>
+          </div>
+          <div class="contacto-item">
+            <span class="contacto-etiqueta">Ventas:</span>
+            <span class="contacto-valor">
+              <a href="mailto:ventas@hermanosjota.com.ar">ventas@hermanosjota.com.ar</a>
+            </span>
+          </div>
+          <div class="contacto-item">
+            <span class="contacto-etiqueta">Instagram:</span>
+            <span class="contacto-valor">
+              <a href="https://instagram.com/hermanosjota_ba" target="_blank">@hermanosjota_ba</a>
+            </span>
+          </div>
+          <div class="contacto-item">
+            <span class="contacto-etiqueta">WhatsApp:</span>
+            <span class="contacto-valor">
+              <a href="https://wa.me/5411456789000" target="_blank">+54 11 4567-8900</a>
+            </span>
+          </div>
+        </div>
+      
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2024 Hermanos Jota. Todos los derechos reservados.</p>
+      </div>
+    </footer>
+
     <script src="js/funcionalidad-catalogo.js"></script>
-    <script>document.addEventListener('DOMContentLoaded', cargarProductos); //Carga los productos cuando carga la pagina</script>
-</body>
+    <script>
+      document.addEventListener("DOMContentLoaded", cargarProductos); //Carga los productos cuando carga la pagina
+    </script>
+    <script>
+      document
+        .getElementById("busquedaInput")
+        .addEventListener("keyup", function (event) {
+          if (event.key === "Enter") {
+            buscarProductos();
+          } else {
+            //busqueda en tiempo real
+            clearTimeout(this.searchTimeout);
+            this.searchTimeout = setTimeout(() => {
+              aplicarBusqueda(this.value.toLowerCase());
+            }, 300);
+          }
+        });
+    </script>
+  </body>
 </html>
