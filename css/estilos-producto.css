@@ -3,6 +3,7 @@ body {
 	padding: 0;
 	box-sizing: border-box;
 	font-family: "Inter", sans-serif;
+	overflow-x: hidden;
 }
 
 header {
@@ -26,7 +27,7 @@ header {
 }
 
 .logo-header img {
-	width: 60px;
+	width: 120px;
 	height: auto;
 }
 
@@ -60,11 +61,12 @@ header {
 	display: flex;
 	justify-content: center;
 	align-items: stretch;
-	height: 50vh;
+	height: 70vh;
 	width: 70%;
 	margin: auto;
 	gap: 2rem;
 	padding: 0 2rem;
+	margin-bottom: 30px;
 }
 
 .producto-imagen {
@@ -116,5 +118,11 @@ header {
 	width: 80%;
 	margin: auto;
 	border-radius: 15px;
+	background-color: #a0522d;
+}
+
+footer {
+	display: flex;
+	flex-direction: row;
 	background-color: #a0522d;
 }
