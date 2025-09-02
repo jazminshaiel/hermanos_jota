@@ -91,15 +91,15 @@ let productosFiltrados = [...productos];
 
 function crearCartaProducto(producto) {
   return `
-        <div class="carta-producto">
-            <a href="#" class="link-producto">
-              <img src="${producto.imagen}" alt="${producto.nombre}">
-              <h2>${producto.nombre}</h2>
-              <p>${producto.descripcion}</p>
-              <span class="precio-producto">${producto.precio}</span>
-            </a>
+    <a href="#" class="carta-producto">
+        <img src="${producto.imagen}" alt="${producto.nombre}">
+        <div class="info-producto">
+            <h2>${producto.nombre}</h2>
+            <p>${producto.descripcion}</p>
+            <span class="precio-producto">${producto.precio}</span>
         </div>
-    `;
+    </a>
+  `;
 }
 
 function mostrarProductos(productosAMostrar) {
