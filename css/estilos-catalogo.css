@@ -48,10 +48,11 @@ body {
   gap: 0.8rem;
 }
 
-.logo-icono {
+.logo-imagen {
   width: 32px;
   height: 32px;
   flex-shrink: 0;
+  filter: brightness(0) invert(1) brightness(2);
 }
 
 .nombre-marca {
