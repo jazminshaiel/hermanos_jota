@@ -92,20 +92,20 @@ let productosFiltrados = [...productos];
 function crearCartaProducto(producto) {
   return `
         <div class="carta-producto">
-            <img src="${producto.imagen}" alt="${producto.nombre}">
-            <h2> ${producto.nombre} </h2>
-            <p> ${producto.descripcion} </p>
-            <span class="precio-producto"> ${producto.precio} </span>
+            <a href="#" class="link-producto">
+              <img src="${producto.imagen}" alt="${producto.nombre}">
+              <h2>${producto.nombre}</h2>
+              <p>${producto.descripcion}</p>
+              <span class="precio-producto">${producto.precio}</span>
+            </a>
         </div>
     `;
 }
 
-function cargarProductos() {
-  mostrarProductos(productos);
-}
-
 function mostrarProductos(productosAMostrar) {
   const contenedor = document.getElementById("contenedorProductos");
+  // Limpiamos contenido anterior
+  contenedor.innerHTML = "";
   if (productosAMostrar.length === 0) {
     contenedor.innerHTML =
       '<div class="no-results">No se encontraron productos</div>';
@@ -119,12 +119,16 @@ function mostrarProductos(productosAMostrar) {
   contenedor.innerHTML = html;
 }
 
-function buscarProductos() {
-  const termino = document
-    .getElementById("busquedaInput")
-    .value.toLowerCase()
-    .trim();
-  aplicarBusqueda(termino);
+// Función para simular la carga asíncrona de datos con una Promesa
+function cargarProductosAsync() {
+  const contenedor = document.getElementById("contenedorProductos");
+  contenedor.innerHTML = '<div class="cargando">Cargando productos...</div>'; // Loading message
+
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(productos);
+    }, 1500); // 1.5s delay
+  });
 }
 
 function aplicarBusqueda(termino) {
@@ -140,3 +144,27 @@ function aplicarBusqueda(termino) {
 
   mostrarProductos(productosFiltrados);
 }
+
+//Eventos de "escucha"
+document.addEventListener("DOMContentLoaded", () => {
+  cargarProductosAsync().then((data) => {
+    mostrarProductos(data);
+  });
+});
+
+const busquedaInput = document.getElementById("busquedaInput");
+const busquedaButton = document.querySelector(".btn-busqueda");
+
+busquedaButton.addEventListener("click", (event) => {
+  event.preventDefault(); // Prevent form submission
+  const termino = busquedaInput.value.toLowerCase().trim();
+  aplicarBusqueda(termino);
+});
+
+busquedaInput.addEventListener("keyup", (event) => {
+  // Real-time search with a debounce
+  clearTimeout(busquedaInput.searchTimeout);
+  busquedaInput.searchTimeout = setTimeout(() => {
+    aplicarBusqueda(busquedaInput.value.toLowerCase().trim());
+  }, 300);
+});
