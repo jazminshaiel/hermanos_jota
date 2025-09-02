@@ -8,7 +8,7 @@
  
 ### Funcionalidad
 
-#### Catalogo de Productos
+ - #### Catalogo de Productos
 La página de catálogo de productos de Hermanos Jota ha sido desarrollada siguiendo un enfoque de grilla de tarjetas para una navegación intuitiva y visualmente atractiva. Principales funcionalidades implementadas:
  - **Visualización en Grilla**: Todos los productos disponibles se presentan en una grilla dinámica de tarjetas, optimizada para mostrar la información de manera ordenada y atractiva en un solo lugar.
  - **Renderizado Dinámico**: La información de cada producto se carga desde un array de objetos en un archivo de JavaScript local (funcionalidad-catalogo.js). Esto evita que los datos estén "hardcodeados" en el HTML, facilitando su gestión y actualización. El catálogo se renderiza dinámicamente manipulando el DOM, garantizando que el HTML se mantenga limpio y semántico.
@@ -21,3 +21,4 @@ La página de catálogo de productos de Hermanos Jota ha sido desarrollada sigui
     - El diseño es 100% responsivo, utilizando Flexbox para la maquetación principal, asegurando una visualización óptima en dispositivos móviles (enfoque "Mobile-First") y de escritorio. Todo el estilo se gestiona desde un archivo CSS externo (estilos-catalogo.css).
  - JavaScript
     - La interactividad, incluida la carga de datos y la funcionalidad de búsqueda, se maneja con JavaScript moderno. La carga de productos simula ser asíncrona mediante el uso de setTimeout y Promises, y todos los eventos de interacción se gestionan con addEventListener.
+
