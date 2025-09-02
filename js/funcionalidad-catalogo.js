@@ -86,9 +86,8 @@ const productos = [
   },
 ];
 
-let productosFiltrados = [
-  ...productos,
-]; /* Creamos copia del array original '...' apunta a otro array independiente. */
+let productosFiltrados = [...productos ]; 
+/* Creamos copia del array original '...' apunta a otro array independiente. */
 
 function crearCartaProducto(producto) {
   return `
@@ -121,10 +120,8 @@ function mostrarProductos(productosAMostrar) {
 }
 
 function buscarProductos() {
-  const searchTerm = document
-    .getElementById("busquedaInput")
-    .value.toLowerCase();
-  aplicarBusqueda(searchTerm);
+  const termino = document.getElementById("busquedaInput").value.toLowerCase().trim();
+  aplicarBusqueda(termino);
 }
 
 function aplicarBusqueda(termino) {
