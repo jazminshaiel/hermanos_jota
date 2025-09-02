@@ -86,7 +86,7 @@ const productos = [
   },
 ];
 
-let productosFiltrados = [...productos ]; 
+let productosFiltrados = [...productos];
 /* Creamos copia del array original '...' apunta a otro array independiente. */
 
 function crearCartaProducto(producto) {
@@ -120,7 +120,10 @@ function mostrarProductos(productosAMostrar) {
 }
 
 function buscarProductos() {
-  const termino = document.getElementById("busquedaInput").value.toLowerCase().trim();
+  const termino = document
+    .getElementById("busquedaInput")
+    .value.toLowerCase()
+    .trim();
   aplicarBusqueda(termino);
 }
 
