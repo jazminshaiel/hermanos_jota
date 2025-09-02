@@ -5,84 +5,84 @@ const productos = [
     descripcion:
       "Aparador de seis puertas fabricado en nogal sostenible con tiradores metálicos en acabado latón. Su silueta minimalista realza el veteado natural de la madera, creando una pieza que combina funcionalidad y elegancia atemporal para espacios contemporáneos.",
     precio: "$XX.XXX",
-    imagen: "../Kit de imágenes/Aparador Uspallata.png",
+    imagen: "../img/Aparador Uspallata.png",
   },
   {
     nombre: "Biblioteca Recoleta",
     descripcion:
       "Aparador de seis puertas fabricado en nogal sostenible con tiradores metálicos en acabado latón. Su silueta minimalista realza el veteado natural de la madera, creando una pieza que combina funcionalidad y elegancia atemporal para espacios contemporáneos.",
     precio: "$XX.XXX",
-    imagen: "../Kit de imágenes/Biblioteca Recoleta.png",
+    imagen: "../img/Biblioteca Recoleta.png",
   },
   {
     nombre: "Butaca Mendoza",
     descripcion:
       "Aparador de seis puertas fabricado en nogal sostenible con tiradores metálicos en acabado latón. Su silueta minimalista realza el veteado natural de la madera, creando una pieza que combina funcionalidad y elegancia atemporal para espacios contemporáneos.",
     precio: "$XX.XXX",
-    imagen: "../Kit de imágenes/Butaca Mendoza.png",
+    imagen: "../img/Butaca Mendoza.png",
   },
   {
     nombre: "Sillon Copacabana",
     descripcion:
       "Aparador de seis puertas fabricado en nogal sostenible con tiradores metálicos en acabado latón. Su silueta minimalista realza el veteado natural de la madera, creando una pieza que combina funcionalidad y elegancia atemporal para espacios contemporáneos.",
     precio: "$XX.XXX",
-    imagen: "../Kit de imágenes/Sillón Copacabana.png",
+    imagen: "../img/Sillón Copacabana.png",
   },
   {
     nombre: "Mesa de Centro Araucaria",
     descripcion:
       "Aparador de seis puertas fabricado en nogal sostenible con tiradores metálicos en acabado latón. Su silueta minimalista realza el veteado natural de la madera, creando una pieza que combina funcionalidad y elegancia atemporal para espacios contemporáneos.",
     precio: "$XX.XXX",
-    imagen: "../Kit de imágenes/Mesa de Centro Araucaria.png",
+    imagen: "../img/Mesa de Centro Araucaria.png",
   },
   {
     nombre: "Mesa de Noche Aconcagua",
     descripcion:
       "Aparador de seis puertas fabricado en nogal sostenible con tiradores metálicos en acabado latón. Su silueta minimalista realza el veteado natural de la madera, creando una pieza que combina funcionalidad y elegancia atemporal para espacios contemporáneos.",
     precio: "$XX.XXX",
-    imagen: "../Kit de imágenes/Mesa de Noche Aconcagua.png",
+    imagen: "../img/Mesa de Noche Aconcagua.png",
   },
   {
     nombre: "Cama Neuquén",
     descripcion:
       "Aparador de seis puertas fabricado en nogal sostenible con tiradores metálicos en acabado latón. Su silueta minimalista realza el veteado natural de la madera, creando una pieza que combina funcionalidad y elegancia atemporal para espacios contemporáneos.",
     precio: "$XX.XXX",
-    imagen: "../Kit de imágenes/Cama Neuquén.png",
+    imagen: "../img/Cama Neuquén.png",
   },
   {
     nombre: "Sofá Patagonia",
     descripcion:
       "Aparador de seis puertas fabricado en nogal sostenible con tiradores metálicos en acabado latón. Su silueta minimalista realza el veteado natural de la madera, creando una pieza que combina funcionalidad y elegancia atemporal para espacios contemporáneos.",
     precio: "$XX.XXX",
-    imagen: "../Kit de imágenes/Sofá Patagonia.png",
+    imagen: "../img/Sofá Patagonia.png",
   },
   {
     nombre: "Mesa Comedor Pampa",
     descripcion:
       "Aparador de seis puertas fabricado en nogal sostenible con tiradores metálicos en acabado latón. Su silueta minimalista realza el veteado natural de la madera, creando una pieza que combina funcionalidad y elegancia atemporal para espacios contemporáneos.",
     precio: "$XX.XXX",
-    imagen: "../Kit de imágenes/Mesa Comedor Pampa.png",
+    imagen: "../img/Mesa Comedor Pampa.png",
   },
   {
     nombre: "Sillas Córdoba",
     descripcion:
       "Aparador de seis puertas fabricado en nogal sostenible con tiradores metálicos en acabado latón. Su silueta minimalista realza el veteado natural de la madera, creando una pieza que combina funcionalidad y elegancia atemporal para espacios contemporáneos.",
     precio: "$XX.XXX",
-    imagen: "../Kit de imágenes/Sillas Córdoba.png",
+    imagen: "../img/Sillas Córdoba.png",
   },
   {
     nombre: "Escritorio Costa",
     descripcion:
       "Aparador de seis puertas fabricado en nogal sostenible con tiradores metálicos en acabado latón. Su silueta minimalista realza el veteado natural de la madera, creando una pieza que combina funcionalidad y elegancia atemporal para espacios contemporáneos.",
     precio: "$XX.XXX",
-    imagen: "../Kit de imágenes/Escritorio Costa.png",
+    imagen: "../img/Escritorio Costa.png",
   },
   {
     nombre: "Silla de Trabajo Belgrano",
     descripcion:
       "Aparador de seis puertas fabricado en nogal sostenible con tiradores metálicos en acabado latón. Su silueta minimalista realza el veteado natural de la madera, creando una pieza que combina funcionalidad y elegancia atemporal para espacios contemporáneos.",
     precio: "$XX.XXX",
-    imagen: "../Kit de imágenes/Silla de Trabajo Belgrano.png",
+    imagen: "../img/Silla de Trabajo Belgrano.png",
   },
 ];
 
