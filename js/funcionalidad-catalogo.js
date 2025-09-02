@@ -122,7 +122,7 @@ function mostrarProductos(productosAMostrar) {
 // Función para simular la carga asíncrona de datos con una Promesa
 function cargarProductosAsync() {
   const contenedor = document.getElementById("contenedorProductos");
-  contenedor.innerHTML = '<div class="cargando">Cargando productos...</div>'; // Loading message
+  contenedor.innerHTML = '<div class="cargando">Cargando productos...</div>'; // Mensaje de carga
 
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -156,13 +156,13 @@ const busquedaInput = document.getElementById("busquedaInput");
 const busquedaButton = document.querySelector(".btn-busqueda");
 
 busquedaButton.addEventListener("click", (event) => {
-  event.preventDefault(); // Prevent form submission
+  event.preventDefault(); // Prevención del comportamiento por defecto
   const termino = busquedaInput.value.toLowerCase().trim();
   aplicarBusqueda(termino);
 });
 
 busquedaInput.addEventListener("keyup", (event) => {
-  // Real-time search with a debounce
+  // Busqueda en tiempo real con debounce
   clearTimeout(busquedaInput.searchTimeout);
   busquedaInput.searchTimeout = setTimeout(() => {
     aplicarBusqueda(busquedaInput.value.toLowerCase().trim());
