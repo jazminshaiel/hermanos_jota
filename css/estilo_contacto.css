@@ -1,0 +1,96 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    
+}
+/* comienza el header*/
+header{
+    font-family: georgia;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #a0522d;
+}
+
+#navbar>ul>li{
+    list-style-type: none;
+    display:inline-block;
+    text-align: center;
+    margin: 15px;
+}
+#navbar>ul>li>a{
+    text-decoration: none;
+    color:inherit;
+}
+
+#iconos{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 25px;
+}
+/*fin del css del header*/
+ /*comienzo del css del body*/
+body{
+     font-family: georgia;
+    background-color: #f5e6d3;
+}
+
+#mini_banner{
+    background-size: cover;
+    background-image: url(../img/banner_contacto.jpg);
+    text-align: center;
+
+}
+
+#contenerdor_NombreYcorreo{
+    gap: 20px;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+}
+/*fin del css del body*/
+/*comienzo del css del footer*/
+footer{
+    display: flex;
+    flex-direction: row;
+    background-color:#a0522d;
+}
+
+/*fin del css del footer*/
+@media (min-width: 768px) {
+  .contenedor-header {
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
+  .navegacion-principal {
+    gap: 1.5rem;
+  }
+  .acciones-header {
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 767px) {
+    .contenedor-header {
+      flex-direction: column;
+      text-align: center;
+      padding: 1rem 1rem 0;
+    }
+    .acciones-header {
+      width: 100%;
+      justify-content: space-between;
+      gap: 0.5rem;
+      padding: 1rem 0;
+    }
+    .navegacion-principal {
+      display: none; /* Hide for now, can be a hamburger menu later */
+    }
+    .contenedor-busqueda-header .busqueda-input {
+      width: 100%;
+      min-width: unset;
+    }
+    .logo-y-marca {
+      margin-bottom: 1rem;
+    }
