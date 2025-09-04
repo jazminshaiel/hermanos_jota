@@ -21,19 +21,21 @@
 
   <body>
     <header class="header">
-      <div class="logo">Hermanos Jota</div>
-      <nav class="nav">
-        <a href="#">Inicio</a>
-        <a href="#">Productos</a>
-        <a href="#">Ofertas</a>
-        <a href="#">Contacto</a>
-      </nav>
-      <div class="header-icons">
-        <i class="fas fa-user"></i>
-        <i class="fas fa-search"></i>
-        <i class="fas fa-heart"></i>
-        <i class="fas fa-shopping-cart"></i>
+      <div class="logo">
+        <img src="../img/logo.svg" alt="Hermanos Jota Logo" class="logo-image">
       </div>
+      <nav class="nav">
+            <a href="index.html" class="nav-link">Inicio</a>
+            <a href="productos.html" class="nav-link">Productos</a>
+            <a href="#" class="nav-link">Nosotros</a>
+            <a href="#" class="nav-link">Contacto</a>
+        </nav>
+        <div class="header-icons">
+            <i class="fas fa-user"></i>
+            <i class="fas fa-search"></i>
+            <i class="fas fa-heart"></i>
+            <a href="carrito.html"><i class="fas fa-shopping-cart"></i></a>
+        </div>
     </header>
 
     <main>
@@ -41,22 +43,47 @@
     </main>
 
     <footer class="footer">
-      <div class="footer-section">
-        <div class="footer-logo">Hermanos Jota</div>
-        <div class="footer-links">
-          <a href="#">Términos</a>
-          <a href="#">Privacidad</a>
-          <a href="#">Ayuda</a>
+        <div class="container">
+            <div class="footer-section">
+                <div class="footer-logo">
+                    <img src="../img/logo.svg" alt="Hermanos Jota Logo" class="footer-logo-image">
+                </div>
+                <div class="company-info">
+                    <p>Hermanos Jota - Casa Taller</p>
+                    <p>Av. San Juan 2847</p>
+                    <p>C1232AAB - Barrio de San Cristóbal</p>
+                    <p>Ciudad Autónoma de Buenos Aires</p>
+                    <p>Argentina</p>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Links</h4>
+                <a href="#">Seccion 1</a>
+                <a href="#">Seccion 2</a>
+                <a href="#">Seccion 3</a>
+                <a href="#">Seccion 4</a>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Ayuda</h4>
+                <a href="#">Métodos de pago</a>
+                <a href="#">Cambios y devoluciones</a>
+                <a href="#">Politicas de privacidad</a>
+                
+                <div class="newsletter">
+                    <h4>Newsletter</h4>
+                    <div class="newsletter-input">
+                        <input type="email" placeholder="Ingresá tu email">
+                        <button onclick="alert('Esto no funca jeje')">SUSCRIBIRSE</button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="newsletter">
-          <input type="email" placeholder="Suscríbete a nuestro newsletter" />
-          <button>Suscribirse</button>
+        
+        <div class="footer-bottom">
+            <p>2025 HJ. Todos los derechos reservados.</p>
         </div>
-      </div>
-
-      <div class="footer-bottom">
-        &copy; 2025 Hermanos Jota. Todos los derechos reservados.
-      </div>
     </footer>
 
     <script src="js/funcionalidad-catalogo.js"></script>
