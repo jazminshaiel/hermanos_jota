@@ -66,13 +66,20 @@ body {
     color: white;
 }
 
-.header-icons i {
+.header-icons i,
+.header-icons a {
     cursor: pointer;
     transition: color 0.3s;
+    color: white;
 }
 
-.header-icons i:hover {
+.header-icons i:hover,
+.header-icons a:hover {
     color: #d4a574;
+}
+
+.header-icons a {
+    text-decoration: none;
 }
 
 /* Hero Section */
