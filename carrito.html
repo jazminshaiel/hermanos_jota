@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito - Hermanos Jota</title>
+    <link rel="stylesheet" href="css/carrito.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <img src="Kit de imágenes/logo.svg" alt="Hermanos Jota Logo" class="logo-image">
+        </div>
+        <nav class="nav">
+            <a href="index.html" class="nav-link">Inicio</a>
+            <a href="productos.html" class="nav-link">Productos</a>
+            <a href="#" class="nav-link">Nosotros</a>
+            <a href="#" class="nav-link">Contacto</a>
+        </nav>
+        <div class="header-icons">
+            <i class="fas fa-user"></i>
+            <i class="fas fa-search"></i>
+            <i class="fas fa-heart"></i>
+            <a href="carrito.html"><i class="fas fa-shopping-cart"></i></a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-logo">
+                <img src="Kit de imágenes/logo.svg" alt="Hermanos Jota Logo" class="hero-logo-image">
+            </div>
+            <h1>Carrito</h1>
+            <div class="breadcrumb">
+                <span>Inicio > Carrito</span>
+            </div>
+        </div>
+    </section>
+
+     <!-- main o contenido principal -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Product List -->
+            <div class="product-list">
+                <div class="cart-header">
+                    <div class="header-producto">Producto</div>
+                    <div class="header-precio">Precio</div>
+                    <div class="header-cantidad">Cantidad</div>
+                    <div class="header-subtotal">Subtotal</div>
+                </div>
+                
+                <div class="cart-item">
+                    <div class="item-producto">
+                        <img src="Kit de imágenes/Sofá Patagonia.png" alt="Sofá Patagonia" class="product-image">
+                        <span class="product-name">Sofá Patagonia</span>
+                    </div>
+                    <div class="item-precio">$ 350,000.00</div>
+                    <div class="item-cantidad">
+                        <input type="number" value="1" min="1" class="quantity-input">
+                    </div>
+                    <div class="item-subtotal">$ 350,000.00</div>
+                    <div class="item-remove">
+                        <i class="fas fa-trash"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- suma de la compra -->
+            <div class="order-summary">
+                <h3>Total de carrito</h3>
+                <div class="summary-item">
+                    <span>Subtotal</span>
+                    <span>$350,000.00</span>
+                </div>
+                <div class="summary-item total">
+                    <span>Total</span>
+                    <span>$350,000.00</span>
+                </div>
+                <button class="checkout-btn" onclick="window.location.href='carrito-envio.html'">
+                    Continuar
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- seccion ¿?-->
+    <section class="features">
+        <div class="container">
+            <div class="feature">
+                <i class="fas fa-trophy"></i>
+                <h4>Alta calidad</h4>
+                <p>Diseñado con materiales premium</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-check-circle"></i>
+                <h4>Garantía</h4>
+                <p>Hasta 1 año</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-truck"></i>
+                <h4>Envío</h4>
+                <p>Envios a todo el país</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-headset"></i>
+                <h4>24/7 Soporte</h4>
+                <p>Contactanos</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-section">
+                <div class="footer-logo">
+                    <img src="Kit de imágenes/logo.svg" alt="Hermanos Jota Logo" class="footer-logo-image">
+                </div>
+                <div class="company-info">
+                    <p>Hermanos Jota - Casa Taller</p>
+                    <p>Av. San Juan 2847</p>
+                    <p>C1232AAB - Barrio de San Cristóbal</p>
+                    <p>Ciudad Autónoma de Buenos Aires</p>
+                    <p>Argentina</p>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Links</h4>
+                <a href="#">Seccion 1</a>
+                <a href="#">Seccion 2</a>
+                <a href="#">Seccion 3</a>
+                <a href="#">Seccion 4</a>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Help</h4>
+                <a href="#">Métodos de pago</a>
+                <a href="#">Cambios y devoluciones</a>
+                <a href="#">Politicas de privacidad</a>
+                
+                <div class="newsletter">
+                    <h4>Newsletter</h4>
+                    <div class="newsletter-input">
+                        <input type="email" placeholder="Ingresá tu email">
+                        <button onclick="alert('Esto no funca jeje')">SUSCRIBIRSE</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>2025 HJ. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
