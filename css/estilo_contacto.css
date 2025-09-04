@@ -59,3 +59,38 @@ footer{
 }
 
 /*fin del css del footer*/
+@media (min-width: 768px) {
+  .contenedor-header {
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
+  .navegacion-principal {
+    gap: 1.5rem;
+  }
+  .acciones-header {
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 767px) {
+    .contenedor-header {
+      flex-direction: column;
+      text-align: center;
+      padding: 1rem 1rem 0;
+    }
+    .acciones-header {
+      width: 100%;
+      justify-content: space-between;
+      gap: 0.5rem;
+      padding: 1rem 0;
+    }
+    .navegacion-principal {
+      display: none; /* Hide for now, can be a hamburger menu later */
+    }
+    .contenedor-busqueda-header .busqueda-input {
+      width: 100%;
+      min-width: unset;
+    }
+    .logo-y-marca {
+      margin-bottom: 1rem;
+    }
