@@ -50,11 +50,35 @@
             placeholder="Buscar productos por nombre o descripción..."
             autocomplete="off"
           />
-          <button class="btn-busqueda" type="button">
-            <i class="fas fa-search"></i> Buscar
+          <button class="btn-busqueda" type="button" aria-label="Ejecutar búsqueda">
+            <i class="fas fa-search" aria-hidden="true"></i> Buscar
           </button>
         </div>
       </div>
+        
+      <!-- Agregado texto de ayuda para accesibilidad -->
+      <div id="busqueda-ayuda" class="sr-only">
+          Usa este campo para buscar productos por nombre, descripción o categoría. Los resultados se actualizarán automáticamente mientras escribes.
+        </div>
+        
+        <!-- Filtro por categorías -->
+        <div class="contenedor-filtros">
+          <label for="filtro-categoria" class="label-filtro">Filtrar por categoría:</label>
+          <select id="filtro-categoria" class="select-filtro">
+            <option value="todos">Todas las categorías</option>
+            <option value="aparadores">Aparadores</option>
+            <option value="bibliotecas">Bibliotecas</option>
+            <option value="sillones">Sillones</option>
+            <option value="mesas">Mesas</option>
+            <option value="camas">Camas</option>
+            <option value="sillas">Sillas</option>
+            <option value="escritorios">Escritorios</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Contenedor de resultados con aria-live para lectores de pantalla -->
+      <div id="resultados-info" class="resultados-info" aria-live="polite" aria-atomic="true"></div>
 
       <div class="contenedor-productos" id="contenedorProductos"></div>
     </main>
