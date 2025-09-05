@@ -7,68 +7,105 @@
     <title>Contacto</title>
 </head>
 <body>
-    <header>
-        <div class="Logo">
-             <img src="./img/Logo-inverso.svg" alt="imagen logo" width="50px" heigth="50px">
+    <header class="header">
+        <div class="logo">
+            <img src="./img/logo.svg" alt="Hermanos Jota Logo" class="logo-image">
         </div>
-        <div>
-             <nav id="navbar">
-                <ul>
-                    <li><a href="/index.html">inicio</a></li>
-                    <li><a href="/productos.html">productos</a></li>
-                    <li><a href="/contacto.html">contacto</a></li>
-                </ul>
-            </nav>
-        </div>
-        <div id="iconos">
-            <img src="./img/sinLogin.svg" alt="sin cuenta">
-            <img src="./img/busqueda.svg" alt="busqueda">
-            <img src="./img/carrito.svg" alt="carrito">
+        <nav class="nav">
+            <a href="index.html" class="nav-link">Inicio</a>
+            <a href="productos.html" class="nav-link">Productos</a>
+            <a href="#" class="nav-link">Nosotros</a>
+            <a href="contacto.html" class="nav-link">Contacto</a>
+        </nav>
+        <div class="header-icons">
+            <i class="fas fa-user"></i>
+            <i class="fas fa-search"></i>
+            <i class="fas fa-heart"></i>
+            <a href="carrito.html" id="carrito">carrito<i class="fas fa-shopping-cart"></i></a>
         </div>
     </header>
+
     <main>
         <div id="mini_banner">
-            <h1>Contacto</h1>
-                <h3>estamos para ayudarte</h3>
+            <div id="palabras-banner">
+                <h1>Contacto</h1>
+                <h4>estamos para ayudarte</h3>
+            </div>
         </div>
         
-       <form>
-        <div id="contenerdor_NombreYcorreo">
+        <div class="formulario-contenedor">
+          
+       <form id="contactoForm">
+        <!-- para enviar meensajes de error o exito-->
+       <div id="mensajes">
+
+       </div>
         <div >
-            <label for="#Nombre">Nombre<br></label>
-            <input type="text" id="Nombre">
+            <label for="Nombre">Nombre<br></label>
+            <input class="campo" type="text" id="Nombre" required>
         </div>
         <div>
-            <label for="#Email">Correo<br></label>
-            <input type="email" id="Email">
-        </div>
-        </div>
-        <div>
-            <label for="#telefono">Telefono<br></label>
-            <input type="text" id="telefono">
+            <label for="Email">Correo<br></label>
+            <input  class="campo" type="email" id="Email" required>
         </div>
         <div>
-            <label for="#Comentario">Comentario<br></be></label>
-            <textarea name="comentario" id="Comentario" rows="10" cols="50"></textarea>
+            <label for="Comentario">Comentario<br></be></label>
+            <textarea class="campo" name="comentario" id="Comentario" rows="10" required></textarea>
         </div>
+        <div class="boton">
+        <button id="Enviar" type="submit">enviar</button>
+        </div>
+         <div id="mensajes">
+
+       </div>
        </form>
+       
+       </div>
         
     </main>
-    <footer id="footer"> 
-            <div>
-                <img  class="Logo" src="./img/Logo-inverso.svg" alt="imagen logo" width="50px" heigth="50px">
-                <h5>Av.San Juan 2847</h5>
-                <h5>C1232AAB-Barrio de San Cristobal</h5>
-                <h5>Ciudad Autónoma de Buenos Aires</h5>
-                <h5>Argentina</h5>
+     <!-- comienzo footer-->
+  <footer class="footer">
+        <div class="container">
+            <div class="footer-section">
+                <div class="footer-logo">
+                    <img src="img/Logo-inverso.svg" alt="Hermanos Jota Logo" class="footer-logo-image">
+                </div>
+                <div class="company-info">
+                    <p>Hermanos Jota - Casa Taller</p>
+                    <p>Av. San Juan 2847</p>
+                    <p>C1232AAB - Barrio de San Cristóbal</p>
+                    <p>Ciudad Autónoma de Buenos Aires</p>
+                    <p>Argentina</p>
+                </div>
             </div>
-            <div>
-                <h4>Contacto</h4>
-                <h3>Email general: info@hermanosJota.com.ar</h3>
-                <h3>Ventas: ventas@hemanosjota.com.ar</h3>
-                <h3>Instagram: @hermanosjota_ba</h3>
-                <h3>+54 11 4567-8900</h3>
-            </div>     
+            
+            <div class="footer-section">
+                <h4>Links</h4>
+                <a href="index.html">Inicio</a>
+                <a href="productos.html">productos</a>
+                <a href="contacto.html">contacto</a>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Help</h4>
+                <a href="#">Métodos de pago</a>
+                <a href="#">Cambios y devoluciones</a>
+                <a href="#">Politicas de privacidad</a>
+                
+                <div class="newsletter">
+                    <h4>Newsletter</h4>
+                    <div class="newsletter-input">
+                        <input type="email" placeholder="Ingresá tu email">
+                        <button onclick="alert('Esto no funca jeje')">SUSCRIBIRSE</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>2025 HJ. Todos los derechos reservados.</p>
+        </div>
     </footer>
+    <script src="js/funcionalidad-contacto.js"></script>
 </body>
 </html>
