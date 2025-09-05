@@ -29,6 +29,28 @@ function inicializarLazyLoading() {
   }
 }
 
+// Función para generar opciones de categoría dinámicamente
+function generarOpcionesCategorias() {
+  const selectCategoria = document.getElementById("filtro-categoria");
+  if (!selectCategoria) return;
+
+  // Obtener categorías únicas de los productos
+  const categoriasUnicas = [...new Set(productos.map(p => p.categoria))].sort();
+  
+  // Limpiar opciones existentes (mantener solo "todos")
+  selectCategoria.innerHTML = '<option value="todos">Todas las categorías</option>';
+  
+  // Agregar opciones dinámicamente
+  categoriasUnicas.forEach(categoria => {
+    if (categoria && categoria !== "sin-categoria") {
+      const option = document.createElement("option");
+      option.value = categoria;
+      option.textContent = categoria.charAt(0).toUpperCase() + categoria.slice(1);
+      selectCategoria.appendChild(option);
+    }
+  });
+}
+
 // Cargar datos desde el archivo externo
 function inicializarProductos() {
   try {
@@ -45,6 +67,9 @@ function inicializarProductos() {
         categoria: producto.categoria?.toLowerCase()?.trim() || "sin-categoria",
       }));
       productosFiltrados = [...productos];
+
+      generarOpcionesCategorias();
+
       return true;
     } else {
       throw new Error("Datos de productos no encontrados o formato incorrecto");
@@ -188,19 +213,26 @@ function mostrarProductos(productosAMostrar) {
 
 // Función para simular la carga asíncrona de datos con una Promesa
 function cargarProductosAsync() {
-  const contenedor = document.getElementById("contenedorProductos");
+   const contenedor = document.getElementById("contenedorProductos");
   if (contenedor) {
-    contenedor.innerHTML = '<div class="cargando">Cargando productos...</div>';
+    contenedor.innerHTML = `
+      <div class="cargando" style="grid-column: 1/-1; text-align: center; padding: 3rem;">
+        <p>Cargando productos...</p>
+      </div>
+    `;
   }
 
   return new Promise((resolve, reject) => {
+    // Simular carga de red más realista
+    const tiempoCarga = Math.random() * 1000 + 500; // Entre 500ms y 1.5s
+    
     setTimeout(() => {
       if (productos.length > 0) {
         resolve(productos);
       } else {
         reject(new Error("No se pudieron cargar los productos"));
       }
-    }, 1500);
+    }, tiempoCarga);
   });
 }
 
@@ -274,16 +306,6 @@ function limpiarBusqueda() {
   limpiarTodosFiltros();
 }
 
-// Función para estadísticas de búsqueda
-function mostrarEstadisticas(cantidad, total, termino, categoria = "todos") {
-  let mensaje = `Búsqueda: "${termino}"`;
-  if (categoria !== "todos") {
-    mensaje += `, Categoría: "${categoria}"`;
-  }
-  mensaje += ` - ${cantidad} de ${total} productos encontrados`;
-  console.log(mensaje);
-}
-
 // Función para configurar filtro de categoría
 function configurarFiltroCategoria() {
   const filtroCategoria = document.getElementById("filtro-categoria");
@@ -292,16 +314,6 @@ function configurarFiltroCategoria() {
     filtroCategoria.addEventListener("change", (event) => {
       const categoria = event.target.value;
       aplicarFiltroPorCategoria(categoria);
-
-      // Mostrar estadísticas
-      if (terminoBuscado || categoria !== "todos") {
-        mostrarEstadisticas(
-          productosFiltrados.length,
-          productos.length,
-          terminoBuscado,
-          categoria
-        );
-      }
     });
   }
 }
@@ -313,40 +325,24 @@ function configurarEventosBusqueda() {
   if (busquedaButton) {
     busquedaButton.addEventListener("click", (event) => {
       event.preventDefault();
-      const termino = busquedaInput
-        ? busquedaInput.value.toLowerCase().trim()
-        : "";
+      const termino = busquedaInput ? busquedaInput.value.toLowerCase().trim() : "";
       aplicarBusqueda(termino);
-
-      if (termino || categoriaSeleccionada !== "todos") {
-        mostrarEstadisticas(
-          productosFiltrados.length,
-          productos.length,
-          termino,
-          categoriaSeleccionada
-        );
-      }
     });
 
     if (busquedaInput) {
-      // Debouncing mejorado para búsqueda en tiempo real
       let timeoutId;
 
       busquedaInput.addEventListener("input", (event) => {
         const termino = busquedaInput.value.toLowerCase().trim();
-
-        // Limpiar timeout anterior
         clearTimeout(timeoutId);
 
         if (busquedaActiva) return;
 
-        // Búsqueda más rápida para mejor UX
         timeoutId = setTimeout(() => {
           aplicarBusqueda(termino);
-        }, 200); // Reducido a 200ms para mejor responsividad
+        }, 300); // Aumentado a 300ms para mejor performance
       });
 
-      // Manejo de teclas especiales
       busquedaInput.addEventListener("keydown", (event) => {
         switch (event.key) {
           case "Enter":
@@ -360,14 +356,10 @@ function configurarEventosBusqueda() {
             event.preventDefault();
             limpiarTodosFiltros();
             break;
-
-          default:
-            // No hacer nada para otras teclas
-            break;
         }
       });
 
-      // Agregar evento para mejor accesibilidad
+      // Mejorar accesibilidad
       busquedaInput.addEventListener("focus", () => {
         busquedaInput.setAttribute("aria-expanded", "true");
       });

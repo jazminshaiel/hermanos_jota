@@ -96,8 +96,3 @@ const productosData = [
     categoria: "sillas"
   }
 ];
-
-// Exportar los datos para uso en otros archivos
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = productosData;
-}
