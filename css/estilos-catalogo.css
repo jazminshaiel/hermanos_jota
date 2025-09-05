@@ -73,7 +73,8 @@ body {
   color: white;
 }
 
-.header-icons i:hover .header-icons a:hover {
+.header-icons i:hover,
+.header-icons a:hover {
   color: #d4a574;
 }
 
@@ -333,20 +334,84 @@ h1 {
 }
 
 @keyframes fa-spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
-
 /*Responsividad*/
+@media (min-width: 1400px) {
+  .contenedor-productos {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
+}
+
+@media (max-width: 1024px) {
+  body {
+    padding: 0.5rem;
+  }
+
+  .contenedor-productos {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.8rem;
+  }
+
+  .titulo-catalogo {
+    font-size: 2.2rem;
+  }
+}
+
 @media (max-width: 768px) {
-  .footer .container {
-    grid-template-columns: 1fr;
-    gap: 30px;
+  body {
+    padding: 0.25rem;
+  }
+
+  .header {
+    padding: 12px 15px;
+  }
+
+  .nav {
+    gap: 20px;
+  }
+
+  .nav-link {
+    font-size: 13px;
+  }
+
+  .logo-image {
+    height: 35px;
   }
 
   .header-icons {
     gap: 15px;
+    font-size: 16px;
+  }
+
+  .seccion-busqueda {
+    padding: 20px 15px;
+    margin-bottom: 15px;
+  }
+
+  .titulo-catalogo {
+    font-size: 2rem;
+    margin-bottom: 25px;
+  }
+
+  .contenedor-busqueda {
+    flex-direction: column;
+    max-width: 100%;
+  }
+
+  .btn-busqueda {
+    width: 100%;
+    padding: 14px 24px;
+  }
+
+  .input-busqueda {
+    font-size: 16px; /* Evita zoom en iOS */
   }
 
   .contenedor-productos {
@@ -354,42 +419,105 @@ h1 {
     gap: 1.5rem;
   }
 
-  .contenedor-busqueda {
-    flex-direction: column;
+  .carta-producto {
+    padding: 20px;
   }
 
-  .btn-busqueda {
-    width: 100%;
+  .carta-producto img {
+    height: 220px;
   }
 
-  .titulo-catalogo {
-    font-size: 2rem;
+  .carta-producto h2 {
+    font-size: 1.3rem;
+  }
+
+  .precio-producto {
+    font-size: 1.3rem;
+  }
+
+  .footer .container {
+    grid-template-columns: 1fr;
+    gap: 30px;
   }
 }
 
 @media (max-width: 600px) {
+  main {
+    padding: 30px 15px;
+  }
+
   .titulo-catalogo {
-    font-size: 2rem;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
+
+  .contenedor-productos {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .carta-producto {
+    padding: 18px;
+  }
+
+  .carta-producto img {
+    height: 200px;
+  }
+
+  .carta-producto h2 {
+    font-size: 1.25rem;
+  }
+
+  .carta-producto p {
+    font-size: 0.85rem;
+  }
+
+  .precio-producto {
+    font-size: 1.2rem;
   }
 }
 
-
 @media (max-width: 480px) {
+  body {
+    padding: 0;
+  }
+
   .header {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     padding: 15px;
+    gap: 15px;
+    position: static; /* Remove sticky en móviles muy pequeños */
   }
 
   .nav {
-    margin-top: 10px;
-    display: flex;
+    order: 2;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 15px;
   }
 
+  .header-icons {
+    order: 3;
+  }
+
   .logo {
-    margin-bottom: 1rem;
+    order: 1;
+  }
+
+  .seccion-busqueda {
+    padding: 20px 15px;
+    border-radius: 0;
+    margin-bottom: 0;
+  }
+
+  .titulo-catalogo {
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+  }
+
+  main {
+    padding: 20px 10px;
   }
 
   .contenedor-productos {
@@ -397,7 +525,69 @@ h1 {
     gap: 1rem;
   }
 
-  main {
-    padding: 20px 10px;
+  .carta-producto {
+    padding: 15px;
+    border-radius: 8px;
+  }
+
+  .carta-producto img {
+    height: 180px;
+  }
+
+  .carta-producto h2 {
+    font-size: 1.2rem;
+  }
+
+  .carta-producto p {
+    font-size: 0.8rem;
+    line-height: 1.4rem;
+  }
+
+  .precio-producto {
+    font-size: 1.1rem;
+  }
+
+  .no-results {
+    padding: 2rem 1rem;
+  }
+
+  .no-results button {
+    padding: 10px 20px !important;
+    font-size: 14px !important;
+  }
+
+  /* Footer móvil */
+  .footer .container {
+    padding: 0 15px;
+  }
+
+  .newsletter-input {
+    flex-direction: column;
+  }
+
+  .newsletter-input button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 320px) {
+  .titulo-catalogo {
+    font-size: 1.4rem;
+  }
+
+  .carta-producto {
+    padding: 12px;
+  }
+
+  .carta-producto img {
+    height: 160px;
+  }
+
+  .carta-producto h2 {
+    font-size: 1.1rem;
+  }
+
+  .precio-producto {
+    font-size: 1rem;
   }
 }
