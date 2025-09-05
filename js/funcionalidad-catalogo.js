@@ -5,18 +5,27 @@ let terminoBuscado = "";
 
 // Cargar datos desde el archivo externo
 function inicializarProductos() {
-  if (typeof productosData !== "undefined") {
-    productos = [...productosData];
+  if (typeof productosData !== "undefined" && Array.isArray(productosData)) {
+    // Limpiar URLs de espacios en blanco
+    productos = productosData.map(producto => ({
+      ...producto,
+      imagen: producto.imagen.trim()
+    }));
     productosFiltrados = [...productos];
+    return true;
   } else {
     console.error("Error: No se pudieron cargar los datos de productos");
+    return false;
   }
 }
 
 function crearCartaProducto(producto) {
   return `
     <a href="detalle-producto.html?id=${producto.id}" class="carta-producto">
-        <img src="${producto.imagen}" alt="${producto.nombre}">
+        <img src="${producto.imagen.trim()}" 
+             alt="${producto.nombre}"
+             onerror="this.src='https://jazminshaiel.github.io/hermanos_jota/img/placeholder.png'; this.onerror=null;"
+             loading="lazy">
         <div class="info-producto">
             <h2>${producto.nombre}</h2>
             <p>${producto.descripcion}</p>
@@ -82,6 +91,7 @@ function cargarProductosAsync() {
 
 function aplicarBusqueda(termino) {
   if (termino) {
+    terminoBuscado = termino;
     productosFiltrados = productos.filter(
       (producto) =>
         producto.nombre.toLowerCase().includes(termino) ||
