@@ -85,6 +85,7 @@ const productos = [
     imagen: "../img/Silla de Trabajo Belgrano.png",
   },
 ];
+let busquedaActiva = false;
 
 let productosFiltrados = [...productos];
 /* Creamos copia del array original '...' apunta a otro array independiente. */
@@ -107,8 +108,20 @@ function mostrarProductos(productosAMostrar) {
   // Limpiamos contenido anterior
   contenedor.innerHTML = "";
   if (productosAMostrar.length === 0) {
-    contenedor.innerHTML =
-      '<div class="no-results">No se encontraron productos</div>';
+    contenedor.innerHTML =`
+      <div class="no-results">
+        <div style="margin-bottom: 1rem;">
+          <i class="fas fa-search" style="font-size: 3rem; color: #ccc;"></i>
+        </div>
+        <h3 style="margin-bottom: 1rem; color: #333;">No se encontraron productos</h3>
+        ${terminoBuscado ? `<p style="margin-bottom: 0.5rem; color: #666;">No hay resultados para "<strong style="color: #a0522d;">${terminoBuscado}</strong>"</p>` : ''}
+        <p style="color: #888; font-size: 0.9rem;">Intenta con otros términos como "mesa", "silla", "sofá" o el nombre de una región</p>
+        <button onclick="document.getElementById('busquedaInput').value=''; aplicarBusqueda('');" 
+                style="margin-top: 1rem; padding: 8px 16px; background: #a0522d; color: white; border: none; border-radius: 4px; cursor: pointer;">
+          Mostrar todos los productos
+        </button>
+      </div>
+    `;
     return;
   }
 
@@ -132,6 +145,24 @@ function cargarProductosAsync() {
 }
 
 function aplicarBusqueda(termino) {
+  const contenedor = document.getElementById("contenedorProductos");
+  
+  // AGREGADO: Mostrar indicador de búsqueda para términos no vacíos
+  if (termino && termino.length > 1) {
+    busquedaActiva = true;
+    contenedor.innerHTML = '<div class="cargando"><i class="fas fa-search fa-spin"></i> Buscando productos...</div>';
+    
+    // Simular pequeño delay para UX más natural
+    setTimeout(() => {
+      realizarBusqueda(termino);
+    }, 200);
+  } else {
+    realizarBusqueda(termino);
+  }
+}
+
+// Función separada para la lógica de búsqueda
+function realizarBusqueda(termino) {
   if (termino) {
     productosFiltrados = productos.filter(
       (producto) =>
@@ -139,10 +170,26 @@ function aplicarBusqueda(termino) {
         producto.descripcion.toLowerCase().includes(termino)
     );
   } else {
-    productosFiltrados = productos;
+    productosFiltrados = [...productos]; // Crear nueva copia
   }
 
+  busquedaActiva = false;
   mostrarProductos(productosFiltrados);
+}
+
+// Función para limpiar búsqueda
+function limpiarBusqueda() {
+  const busquedaInput = document.getElementById("busquedaInput");
+  if (busquedaInput) {
+    busquedaInput.value = "";
+    aplicarBusqueda("");
+    busquedaInput.focus();
+  }
+}
+
+// Función para estadísticas de búsqueda
+function mostrarEstadisticas(cantidad, total, termino) {
+  console.log(`Búsqueda: "${termino}" - ${cantidad} de ${total} productos encontrados`);
 }
 
 //Eventos de "escucha"
@@ -159,12 +206,44 @@ busquedaButton.addEventListener("click", (event) => {
   event.preventDefault(); // Prevención del comportamiento por defecto
   const termino = busquedaInput.value.toLowerCase().trim();
   aplicarBusqueda(termino);
+
+  if (termino) {
+    mostrarEstadisticas(productosFiltrados.length, productos.length, termino);
+  }
 });
 
-busquedaInput.addEventListener("keyup", (event) => {
-  // Busqueda en tiempo real con debounce
+busquedaInput.addEventListener("input", (event) => {
+  // Limpiar timeout anterior para evitar búsquedas innecesarias
   clearTimeout(busquedaInput.searchTimeout);
+  const termino = busquedaInput.value.toLowerCase().trim();
+
+  if (busquedaActiva) return;
+  
   busquedaInput.searchTimeout = setTimeout(() => {
-    aplicarBusqueda(busquedaInput.value.toLowerCase().trim());
-  }, 300);
+    aplicarBusqueda(termino);
+  }, 300); // 300ms de delay
 });
+
+busquedaInput.addEventListener("keydown", (event) => {
+  switch(event.key) {
+    case "Enter":
+      event.preventDefault();
+      clearTimeout(busquedaInput.searchTimeout);
+      const termino = busquedaInput.value.toLowerCase().trim();
+      aplicarBusqueda(termino);
+      break;
+      
+    case "Escape":
+      event.preventDefault();
+      limpiarBusqueda();
+      break;
+      
+    default:
+      // No hacer nada para otras teclas
+      break;
+  }
+});
+
+// Exponer función globalmente para uso en HTML
+window.aplicarBusqueda = aplicarBusqueda;
+window.limpiarBusqueda = limpiarBusqueda;

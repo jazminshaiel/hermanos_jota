@@ -31,18 +31,31 @@
       <nav class="nav">
         <a href="index.html" class="nav-link">Inicio</a>
         <a href="productos.html" class="nav-link">Productos</a>
-        <a href="#" class="nav-link">Nosotros</a>
-        <a href="#" class="nav-link">Contacto</a>
+        <a href="contacto.html" class="nav-link">Contacto</a>
       </nav>
       <div class="header-icons">
-        <i class="fas fa-user"></i>
-        <i class="fas fa-search"></i>
-        <i class="fas fa-heart"></i>
         <a href="carrito.html"><i class="fas fa-shopping-cart"></i></a>
       </div>
     </header>
 
     <main>
+
+      <h1 class="titulo-catalogo">Nuestro Catálogo</h1>
+      <div class="seccion-busqueda">
+        <div class="contenedor-busqueda">
+          <input 
+            type="text" 
+            id="busquedaInput" 
+            class="input-busqueda" 
+            placeholder="Buscar productos por nombre o descripción..."
+            autocomplete="off"
+          />
+          <button class="btn-busqueda" type="button">
+            <i class="fas fa-search"></i> Buscar
+          </button>
+        </div>
+      </div>
+
       <div class="contenedor-productos" id="contenedorProductos"></div>
     </main>
 
