@@ -193,7 +193,9 @@ h1 {
   display: grid;
   grid-template-columns: 2fr 1fr 2fr;
   gap: 40px;
-  margin-bottom: 30px;
+  max-width: 1200px;
+  margin: 0 auto 30px auto;
+  padding: 0 20px;
 }
 
 .footer-logo-image {
@@ -248,7 +250,7 @@ h1 {
 .newsletter-input button {
   padding: 10px 20px;
   background-color: #a0522d;
-  color: #333;
+  color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -270,7 +272,7 @@ h1 {
 }
 
 /*Responsividad*/
-@media (min-width: 768px) {
+@media (max-width: 768px) {
   .footer .container {
     grid-template-columns: 1fr;
     gap: 30px;
