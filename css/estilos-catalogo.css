@@ -150,35 +150,38 @@ body {
 
 .contenedor-filtros {
   display: flex;
-  align-items: center;
-  gap: 10px;
-  max-width: 600px;
-  margin: 0 auto;
-  flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin: 30px auto;
+  padding: 15px 20px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
 }
 
 .label-filtro {
-  font-weight: 500;
-  color: #333;
-  font-size: 14px;
+  font-weight: 600;
+  color: #a0522d; /* mismo tono que usas en botones/encabezados */
+  font-size: 1rem;
 }
 
 .select-filtro {
-  padding: 8px 12px;
+  padding: 10px 16px;
   border: 2px solid #ddd;
-  border-radius: 6px;
-  font-size: 14px;
-  font-family: "Inter", sans-serif;
-  background-color: white;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #fff;
   cursor: pointer;
-  transition: border-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
+.select-filtro:hover,
 .select-filtro:focus {
-  outline: none;
   border-color: #a0522d;
-  box-shadow: 0 0 0 3px rgba(160, 82, 45, 0.1);
+  box-shadow: 0 0 0 3px rgba(160, 82, 45, 0.15);
+  outline: none;
 }
 
 .resultados-info {
@@ -503,181 +506,180 @@ h1 {
     width: 100%;
   }
 
-    .contenedor-productos {
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .carta-producto {
-      padding: 20px;
-    }
-
-    .carta-producto img {
-      height: 220px;
-    }
-
-    .carta-producto h2 {
-      font-size: 1.3rem;
-    }
-
-    .precio-producto {
-      font-size: 1.3rem;
-    }
-
-    .footer .container {
-      grid-template-columns: 1fr;
-      gap: 30px;
-    }
+  .contenedor-productos {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
   }
 
-  @media (max-width: 600px) {
-    main {
-      padding: 30px 15px;
-    }
-
-    .titulo-catalogo {
-      font-size: 1.8rem;
-      margin-bottom: 20px;
-    }
-
-    .contenedor-productos {
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.2rem;
-    }
-
-    .carta-producto {
-      padding: 18px;
-    }
-
-    .carta-producto img {
-      height: 200px;
-    }
-
-    .carta-producto h2 {
-      font-size: 1.25rem;
-    }
-
-    .carta-producto p {
-      font-size: 0.85rem;
-    }
-
-    .precio-producto {
-      font-size: 1.2rem;
-    }
+  .carta-producto {
+    padding: 20px;
   }
 
-  @media (max-width: 480px) {
-    body {
-      padding: 0;
-    }
-
-    .header {
-      flex-direction: column;
-      align-items: center;
-      padding: 15px;
-      gap: 15px;
-      position: static;
-    }
-
-    .nav {
-      order: 2;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-    }
-
-    .header-icons {
-      order: 3;
-    }
-
-    .logo {
-      order: 1;
-    }
-
-    .seccion-busqueda {
-      padding: 20px 15px;
-      border-radius: 0;
-      margin-bottom: 0;
-    }
-
-    .titulo-catalogo {
-      font-size: 1.6rem;
-      margin-bottom: 20px;
-    }
-
-    main {
-      padding: 20px 10px;
-    }
-
-    .contenedor-productos {
-      grid-template-columns: 1fr;
-      gap: 1rem;
-    }
-
-    .carta-producto {
-      padding: 15px;
-      border-radius: 8px;
-    }
-
-    .carta-producto img {
-      height: 180px;
-    }
-
-    .carta-producto h2 {
-      font-size: 1.2rem;
-    }
-
-    .carta-producto p {
-      font-size: 0.8rem;
-      line-height: 1.4rem;
-    }
-
-    .precio-producto {
-      font-size: 1.1rem;
-    }
-
-    .no-results {
-      padding: 2rem 1rem;
-    }
-
-    .no-results button {
-      padding: 10px 20px !important;
-      font-size: 14px !important;
-    }
-
-    /* Footer móvil */
-    .footer .container {
-      padding: 0 15px;
-    }
-
-    .newsletter-input {
-      flex-direction: column;
-    }
-
-    .newsletter-input button {
-      width: 100%;
-    }
+  .carta-producto img {
+    height: 220px;
   }
 
-  @media (max-width: 320px) {
-    .titulo-catalogo {
-      font-size: 1.4rem;
-    }
-
-    .carta-producto {
-      padding: 12px;
-    }
-
-    .carta-producto img {
-      height: 160px;
-    }
-
-    .carta-producto h2 {
-      font-size: 1.1rem;
-    }
-
-    .precio-producto {
-      font-size: 1rem;
-    }
+  .carta-producto h2 {
+    font-size: 1.3rem;
   }
 
+  .precio-producto {
+    font-size: 1.3rem;
+  }
+
+  .footer .container {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  main {
+    padding: 30px 15px;
+  }
+
+  .titulo-catalogo {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
+
+  .contenedor-productos {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .carta-producto {
+    padding: 18px;
+  }
+
+  .carta-producto img {
+    height: 200px;
+  }
+
+  .carta-producto h2 {
+    font-size: 1.25rem;
+  }
+
+  .carta-producto p {
+    font-size: 0.85rem;
+  }
+
+  .precio-producto {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 0;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    gap: 15px;
+    position: static;
+  }
+
+  .nav {
+    order: 2;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .header-icons {
+    order: 3;
+  }
+
+  .logo {
+    order: 1;
+  }
+
+  .seccion-busqueda {
+    padding: 20px 15px;
+    border-radius: 0;
+    margin-bottom: 0;
+  }
+
+  .titulo-catalogo {
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+  }
+
+  main {
+    padding: 20px 10px;
+  }
+
+  .contenedor-productos {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .carta-producto {
+    padding: 15px;
+    border-radius: 8px;
+  }
+
+  .carta-producto img {
+    height: 180px;
+  }
+
+  .carta-producto h2 {
+    font-size: 1.2rem;
+  }
+
+  .carta-producto p {
+    font-size: 0.8rem;
+    line-height: 1.4rem;
+  }
+
+  .precio-producto {
+    font-size: 1.1rem;
+  }
+
+  .no-results {
+    padding: 2rem 1rem;
+  }
+
+  .no-results button {
+    padding: 10px 20px !important;
+    font-size: 14px !important;
+  }
+
+  /* Footer móvil */
+  .footer .container {
+    padding: 0 15px;
+  }
+
+  .newsletter-input {
+    flex-direction: column;
+  }
+
+  .newsletter-input button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 320px) {
+  .titulo-catalogo {
+    font-size: 1.4rem;
+  }
+
+  .carta-producto {
+    padding: 12px;
+  }
+
+  .carta-producto img {
+    height: 160px;
+  }
+
+  .carta-producto h2 {
+    font-size: 1.1rem;
+  }
+
+  .precio-producto {
+    font-size: 1rem;
+  }
+}

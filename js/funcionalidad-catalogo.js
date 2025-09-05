@@ -35,17 +35,21 @@ function generarOpcionesCategorias() {
   if (!selectCategoria) return;
 
   // Obtener categorías únicas de los productos
-  const categoriasUnicas = [...new Set(productos.map(p => p.categoria))].sort();
-  
+  const categoriasUnicas = [
+    ...new Set(productos.map((p) => p.categoria)),
+  ].sort();
+
   // Limpiar opciones existentes (mantener solo "todos")
-  selectCategoria.innerHTML = '<option value="todos">Todas las categorías</option>';
-  
+  selectCategoria.innerHTML =
+    '<option value="todos">Todas las categorías</option>';
+
   // Agregar opciones dinámicamente
-  categoriasUnicas.forEach(categoria => {
+  categoriasUnicas.forEach((categoria) => {
     if (categoria && categoria !== "sin-categoria") {
       const option = document.createElement("option");
       option.value = categoria;
-      option.textContent = categoria.charAt(0).toUpperCase() + categoria.slice(1);
+      option.textContent =
+        categoria.charAt(0).toUpperCase() + categoria.slice(1);
       selectCategoria.appendChild(option);
     }
   });
@@ -129,7 +133,7 @@ function crearCartaProducto(producto) {
   const imagenSrc = imageObserver
     ? "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjUwIiBoZWlnaHQ9IjI1MCIgdmlld0JveD0iMCAwIDI1MCAyNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjI1MCIgaGVpZ2h0PSIyNTAiIGZpbGw9IiNmNWU2ZDMiLz48L3N2Zz4="
     : producto.imagen;
-  const dataSrc = imageObserver ? (producto.imagen || '') : '';
+  const dataSrc = imageObserver ? producto.imagen || "" : "";
   const lazyClass = imageObserver ? "lazy" : "";
 
   return `
@@ -213,7 +217,7 @@ function mostrarProductos(productosAMostrar) {
 
 // Función para simular la carga asíncrona de datos con una Promesa
 function cargarProductosAsync() {
-   const contenedor = document.getElementById("contenedorProductos");
+  const contenedor = document.getElementById("contenedorProductos");
   if (contenedor) {
     contenedor.innerHTML = `
       <div class="cargando" style="grid-column: 1/-1; text-align: center; padding: 3rem;">
@@ -225,7 +229,7 @@ function cargarProductosAsync() {
   return new Promise((resolve, reject) => {
     // Simular carga de red más realista
     const tiempoCarga = Math.random() * 1000 + 500; // Entre 500ms y 1.5s
-    
+
     setTimeout(() => {
       if (productos.length > 0) {
         resolve(productos);
@@ -325,7 +329,9 @@ function configurarEventosBusqueda() {
   if (busquedaButton) {
     busquedaButton.addEventListener("click", (event) => {
       event.preventDefault();
-      const termino = busquedaInput ? busquedaInput.value.toLowerCase().trim() : "";
+      const termino = busquedaInput
+        ? busquedaInput.value.toLowerCase().trim()
+        : "";
       aplicarBusqueda(termino);
     });
 
@@ -397,7 +403,6 @@ document.addEventListener("DOMContentLoaded", () => {
   configurarFiltroCategoria();
 });
 
-
 // Función para manejar errores de imágenes de forma global
 function manejarErrorImagen(img) {
   img.src = "https://jazminshaiel.github.io/hermanos_jota/img/placeholder.png";
@@ -411,7 +416,6 @@ window.addEventListener("beforeunload", () => {
     imageObserver.disconnect();
   }
 });
-
 
 // Exponer funciones globalmente con mejor organización
 window.aplicarBusqueda = aplicarBusqueda;
