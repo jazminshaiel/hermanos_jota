@@ -1,11 +1,21 @@
+let productos = [];
 let busquedaActiva = false;
+let productosFiltrados = [];
+let terminoBuscado = '';
 
-let productosFiltrados = [...productos];
-/* Creamos copia del array original '...' apunta a otro array independiente. */
+// Cargar datos desde el archivo externo
+function inicializarProductos() {
+  if (typeof productosData !== 'undefined') {
+    productos = [...productosData];
+    productosFiltrados = [...productos];
+  } else {
+    console.error('Error: No se pudieron cargar los datos de productos');
+  }
+}
 
 function crearCartaProducto(producto) {
   return `
-    <a href="#" class="carta-producto">
+    <a href="detalle-producto.html?id=${producto.id}" class="carta-producto">
         <img src="${producto.imagen}" alt="${producto.nombre}">
         <div class="info-producto">
             <h2>${producto.nombre}</h2>
@@ -18,10 +28,17 @@ function crearCartaProducto(producto) {
 
 function mostrarProductos(productosAMostrar) {
   const contenedor = document.getElementById("contenedorProductos");
+  
+  if (!contenedor) {
+    console.error('Contenedor de productos no encontrado');
+    return;
+  }
+  
   // Limpiamos contenido anterior
   contenedor.innerHTML = "";
+  
   if (productosAMostrar.length === 0) {
-    contenedor.innerHTML =`
+    contenedor.innerHTML = `
       <div class="no-results">
         <div style="margin-bottom: 1rem;">
           <i class="fas fa-search" style="font-size: 3rem; color: #ccc;"></i>
@@ -29,7 +46,7 @@ function mostrarProductos(productosAMostrar) {
         <h3 style="margin-bottom: 1rem; color: #333;">No se encontraron productos</h3>
         ${terminoBuscado ? `<p style="margin-bottom: 0.5rem; color: #666;">No hay resultados para "<strong style="color: #a0522d;">${terminoBuscado}</strong>"</p>` : ''}
         <p style="color: #888; font-size: 0.9rem;">Intenta con otros términos como "mesa", "silla", "sofá" o el nombre de una región</p>
-        <button onclick="document.getElementById('busquedaInput').value=''; aplicarBusqueda('');" 
+        <button onclick="limpiarBusqueda();" 
                 style="margin-top: 1rem; padding: 8px 16px; background: #a0522d; color: white; border: none; border-radius: 4px; cursor: pointer;">
           Mostrar todos los productos
         </button>
@@ -48,7 +65,9 @@ function mostrarProductos(productosAMostrar) {
 // Función para simular la carga asíncrona de datos con una Promesa
 function cargarProductosAsync() {
   const contenedor = document.getElementById("contenedorProductos");
-  contenedor.innerHTML = '<div class="cargando">Cargando productos...</div>'; // Mensaje de carga
+  if (contenedor) {
+    contenedor.innerHTML = '<div class="cargando">Cargando productos...</div>';
+  }
 
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -58,20 +77,20 @@ function cargarProductosAsync() {
 }
 
 function aplicarBusqueda(termino) {
-  const contenedor = document.getElementById("contenedorProductos");
-  
-  // AGREGADO: Mostrar indicador de búsqueda para términos no vacíos
-  if (termino && termino.length > 1) {
-    busquedaActiva = true;
-    contenedor.innerHTML = '<div class="cargando"><i class="fas fa-search fa-spin"></i> Buscando productos...</div>';
-    
-    // Simular pequeño delay para UX más natural
-    setTimeout(() => {
-      realizarBusqueda(termino);
-    }, 200);
+  if (termino) {
+    productosFiltrados = productos.filter(
+      (producto) =>
+        producto.nombre.toLowerCase().includes(termino) ||
+        producto.descripcion.toLowerCase().includes(termino) ||
+        (producto.categoria && producto.categoria.toLowerCase().includes(termino))
+    );
   } else {
-    realizarBusqueda(termino);
+    productosFiltrados = [...productos]; // Crear nueva copia
+    terminoBuscado = '';
   }
+
+  busquedaActiva = false;
+  mostrarProductos(productosFiltrados)
 }
 
 // Función separada para la lógica de búsqueda
@@ -107,13 +126,46 @@ function mostrarEstadisticas(cantidad, total, termino) {
 
 //Eventos de "escucha"
 document.addEventListener("DOMContentLoaded", () => {
-  cargarProductosAsync().then((data) => {
-    mostrarProductos(data);
-  });
+  inicializarProductos();
+  
+  if (productos.length > 0) {
+    cargarProductosAsync().then((data) => {
+      mostrarProductos(data);
+    });
+  }
+  
+  // Configurar eventos de búsqueda
+  configurarEventosBusqueda();
 });
 
-const busquedaInput = document.getElementById("busquedaInput");
-const busquedaButton = document.querySelector(".btn-busqueda");
+function configurarEventosBusqueda() {
+  const busquedaInput = document.getElementById("busquedaInput");
+  const busquedaButton = document.querySelector(".btn-busqueda");
+
+  if (busquedaButton) {
+    busquedaButton.addEventListener("click", (event) => {
+      event.preventDefault();
+      const termino = busquedaInput ? busquedaInput.value.toLowerCase().trim() : '';
+      aplicarBusqueda(termino);
+
+      if (termino) {
+        mostrarEstadisticas(productosFiltrados.length, productos.length, termino);
+      }
+    });
+
+    if (busquedaInput) {
+    busquedaInput.addEventListener("input", (event) => {
+      // Limpiar timeout anterior para evitar búsquedas innecesarias
+      clearTimeout(busquedaInput.searchTimeout);
+      const termino = busquedaInput.value.toLowerCase().trim();
+
+      if (busquedaActiva) return;
+      
+      busquedaInput.searchTimeout = setTimeout(() => {
+        aplicarBusqueda(termino);
+      }, 300); // 300ms de delay
+    });
+  }
 
 busquedaButton.addEventListener("click", (event) => {
   event.preventDefault(); // Prevención del comportamiento por defecto
@@ -138,24 +190,26 @@ busquedaInput.addEventListener("input", (event) => {
 });
 
 busquedaInput.addEventListener("keydown", (event) => {
-  switch(event.key) {
-    case "Enter":
-      event.preventDefault();
-      clearTimeout(busquedaInput.searchTimeout);
-      const termino = busquedaInput.value.toLowerCase().trim();
-      aplicarBusqueda(termino);
-      break;
-      
-    case "Escape":
-      event.preventDefault();
-      limpiarBusqueda();
-      break;
-      
-    default:
-      // No hacer nada para otras teclas
-      break;
+      switch(event.key) {
+        case "Enter":
+          event.preventDefault();
+          clearTimeout(busquedaInput.searchTimeout);
+          const termino = busquedaInput.value.toLowerCase().trim();
+          aplicarBusqueda(termino);
+          break;
+          
+        case "Escape":
+          event.preventDefault();
+          limpiarBusqueda();
+          break;
+          
+        default:
+          // No hacer nada para otras teclas
+          break;
+      }
+    });
   }
-});
+}
 
 // Exponer función globalmente para uso en HTML
 window.aplicarBusqueda = aplicarBusqueda;
