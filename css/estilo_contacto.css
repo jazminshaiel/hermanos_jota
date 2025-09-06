@@ -3,56 +3,60 @@
     margin: 0;
     padding: 0;
     
-}
+}/*normalizar pagina*/
+
 /* comienza el header*/
 /* Header principal */
-.header {
-    background-color: #a0522d;
-    padding: 15px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
+ .header {
+            background-color: #a0522d;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
 
-.logo-image {
-    height: 40px;
-    width: auto;
-    filter: brightness(0) invert(1);
-}
+        .logo-image {
+            height: 40px;
+            width: auto;
+            filter: brightness(0) invert(1);
+        }
 
-.nav {
-    display: flex;
-    gap: 30px;
-}
+        .nav {
+            display: flex;
+            gap: 30px;
+        }
 
-.nav-link {
-    text-decoration: none;
-    color: white;
-    font-size: 14px;
-    text-transform: lowercase;
-    transition: color 0.3s;
-}
+        .nav-link {
+            text-decoration: none;
+            color: white;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
 
-.nav-link:hover {
-    color: #d4a574;
-}
+        .nav-link:hover {
+            color: #d4a574;
+        }
 
-.header-icons {
-    display: flex;
-    gap: 20px;
-    font-size: 18px;
-    color: white;
-}
+        .header-icons {
+            display: flex;
+            gap: 20px;
+            font-size: 18px;
+            color: white;
+        }
 
-.header-icons i {
-    cursor: pointer;
-    transition: color 0.3s;
-}
+        .header-icons i,
+        .header-icons a {
+            cursor: pointer;
+            transition: color 0.3s;
+            color: white;
+            text-decoration: none;
+        }
 
-.header-icons i:hover {
-    color: #d4a574;
-}
+        .header-icons i:hover,
+        .header-icons a:hover {
+            color: #d4a574;
+        }
 
 /*fin del css del header*/
  /*comienzo del css del body*/
@@ -73,7 +77,7 @@ main{
     justify-content: center;
     align-items: center;  
     background-size: cover;
-    background-image: url(../img/banner_contacto.jpg);
+    background-image: url(https://jazminshaiel.github.io/hermanos_jota/img/banner_contacto.jpg);
     background-position: center center;
     background-repeat: no-repeat;
 }
@@ -129,129 +133,159 @@ form{
   background-color: #8b4513;
 }
 /*fin del css del body*/
-/*comienzo del css del footer*/
-.footer {
-    background-color: #a0522d;
-    padding: 40px 0 20px;
-    border-top: 1px solid #e9ecef;
-}
+ .footer {
+            background-color: white;
+            padding: 40px 0 20px;
+            border-top: 1px solid #e9ecef;
+        }
 
-.footer .container {
-    display: grid;
-    grid-template-columns: 2fr 1fr 2fr;
-    gap: 40px;
-    margin-bottom: 30px;
-}
+        .footer .container {
+            display: grid;
+            grid-template-columns: 2fr 1fr 2fr;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto 30px auto;
+            padding: 0 20px;
+        }
 
-.footer-logo-image {
-    height: 40px;
-    width: auto;
-    margin-bottom: 20px;
-}
+        .footer-logo-image {
+            height: 40px;
+            width: auto;
+            margin-bottom: 20px;
+        }
 
-.company-info p {
-    margin-bottom: 5px;
-    color: #ffffff;
-    font-size: 14px;
-}
+        .company-info p {
+            margin-bottom: 5px;
+            color: #666;
+            font-size: 14px;
+        }
 
-.footer-section h4 {
-    margin-bottom: 15px;
-    color: #ffffff;
-    font-size: 16px;
-}
+        .footer-section h4 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 16px;
+        }
 
-.footer-section a {
-    display: block;
-    color: #ffffff;
-    text-decoration: none;
-    margin-bottom: 8px;
-    font-size: 14px;
-    transition: color 0.3s;
-}
+        .footer-section a {
+            display: block;
+            color: #666;
+            text-decoration: none;
+            margin-bottom: 8px;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
 
-.footer-section a:hover {
-    color: #666;
-}
+        .footer-section a:hover {
+            color: #a0522d;
+        }
 
-.newsletter {
-    margin-top: 30px;
-}
+        .newsletter {
+            margin-top: 30px;
+        }
 
-.newsletter-input {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-}
+        .newsletter-input {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
 
-.newsletter-input input {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
-}
+        .newsletter-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
 
-.newsletter-input button {
-    padding: 10px 20px;
-    background-color: white;
-    color: #333;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 12px;
-    font-weight: bold;
-    transition: background-color 0.3s;
-}
+        .newsletter-input button {
+            padding: 10px 20px;
+            background-color: #a0522d;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
 
-.newsletter-input button:hover {
-    background-color: #f8f9fa;
-}
+        .newsletter-input button:hover {
+            background-color: #8b4513;
+        }
 
-.footer-bottom {
-    text-align: center;
-    padding-top: 20px;
-    border-top: 1px solid #e9ecef;
-    color: #ffffff;
-    font-size: 14px;
-}
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+            color: #666;
+            font-size: 14px;
+        }
 
-/*fin del css del footer*/
+        /* Responsive */
+       @media (max-width: 768px) {
+            .header {
+                padding: 12px 15px;
+            }
 
-/*responsividad*/
-@media (min-width: 768px) {
-  .contenedor-header {
-    flex-wrap: nowrap;
-    justify-content: space-between;
-  }
-  .navegacion-principal {
-    gap: 1.5rem;
-  }
-  .acciones-header {
-    gap: 0.5rem;
-  }
-}
+            .nav {
+                gap: 20px;
+            }
 
-@media (max-width: 767px) {
-    .contenedor-header {
-      flex-direction: column;
-      text-align: center;
-      padding: 1rem 1rem 0;
-    }
-    .acciones-header {
-      width: 100%;
-      justify-content: space-between;
-      gap: 0.5rem;
-      padding: 1rem 0;
-    }
-    .navegacion-principal {
-      display: none; /* Hide for now, can be a hamburger menu later */
-    }
-    .contenedor-busqueda-header .busqueda-input {
-      width: 100%;
-      min-width: unset;
-    }
-    .logo-y-marca {
-      margin-bottom: 1rem;
-    }
-}
+            .nav-link {
+                font-size: 13px;
+            }
+
+            .logo-image {
+                height: 35px;
+            }
+
+            .header-icons {
+                gap: 15px;
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                flex-direction: column;
+                align-items: center;
+                padding: 15px;
+                gap: 15px;
+                position: static;
+            }
+
+            .nav {
+                order: 2;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .header-icons {
+                order: 3;
+            }
+
+            .logo {
+                order: 1;
+            }
+        }
+        @media (max-width: 768px) {
+            .footer .container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer .container {
+                padding: 0 15px;
+            }
+
+            .newsletter-input {
+                flex-direction: column;
+            }
+
+            .newsletter-input button {
+                width: 100%;
+            }
+        }
