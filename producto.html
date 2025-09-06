@@ -14,80 +14,87 @@
 	</head>
 	<body>
 		<header class="header">
-        <div class="logo">
-            <img
-                src="https://jazminshaiel.github.io/hermanos_jota/img/logo.svg"
-                alt="Hermanos Jota Logo"
-                class="logo-image"
-            />
-        </div>
-        <nav class="nav">
-            <a href="index.html" class="nav-link">Inicio</a>
-            <a href="productos.html" class="nav-link">Productos</a>
-            <a href="contacto.html" class="nav-link">Contacto</a>
-        </nav>
-        <div class="header-icons">
-            <a href="carrito.html"><i class="fas fa-shopping-cart"></i></a>
-        </div>
-    </header>
+			<div class="logo">
+				<img
+					src="https://jazminshaiel.github.io/hermanos_jota/img/logo.svg"
+					alt="Hermanos Jota Logo"
+					class="logo-image"
+				/>
+			</div>
+			<nav class="nav">
+				<a href="index.html" class="nav-link">Inicio</a>
+				<a href="productos.html" class="nav-link">Productos</a>
+				<a href="contacto.html" class="nav-link">Contacto</a>
+			</nav>
+			<div class="header-icons">
+				<a href="carrito.html"><i class="fas fa-shopping-cart"></i></a>
+			</div>
+		</header>
 		<main class="main-producto">
 			<aside class="producto-imagen">
-				<img src="/Kit de imágenes/Aparador Uspallata.png" alt="producto1" />
+				<img src="" alt="Imagen del producto" />
 			</aside>
 			<section class="producto-info">
-				<h1>Producto 1</h1>
-				<p class="precio">$100.00</p>
-				<p class="descripcion">
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-					eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-					minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-					aliquip ex ea commodo consequat.
-				</p>
+				<h1></h1>
+				<p class="precio"></p>
+				<p class="descripcion"></p>
 				<button class="boton-carrito">Añadir al carrito</button>
+			</section>
 		</main>
+		<section class="relacionados">
+			<h2>Productos relacionados</h2>
+			<div class="relacionados-grid" id="relacionados-container"></div>
+		</section>
 		<footer class="footer">
-        <div class="container">
-            <div class="footer-section">
-                <div class="footer-logo">
-                    <img
-                        src="https://jazminshaiel.github.io/hermanos_jota/img/logo.svg"
-                        alt="Hermanos Jota Logo"
-                        class="footer-logo-image"
-                    />
-                </div>
-                <div class="company-info">
-                    <p>Hermanos Jota - Casa Taller</p>
-                    <p>Av. San Juan 2847</p>
-                    <p>C1232AAB - Barrio de San Cristóbal</p>
-                    <p>Ciudad Autónoma de Buenos Aires</p>
-                    <p>Argentina</p>
-                </div>
-            </div>
+			<div class="container">
+				<div class="footer-section">
+					<div class="footer-logo">
+						<img
+							src="https://jazminshaiel.github.io/hermanos_jota/img/logo.svg"
+							alt="Hermanos Jota Logo"
+							class="footer-logo-image"
+						/>
+					</div>
+					<div class="company-info">
+						<p>Hermanos Jota - Casa Taller</p>
+						<p>Av. San Juan 2847</p>
+						<p>C1232AAB - Barrio de San Cristóbal</p>
+						<p>Ciudad Autónoma de Buenos Aires</p>
+						<p>Argentina</p>
+					</div>
+				</div>
 
-            <div class="footer-section">
-                <h4>Redes Sociales</h4>
-                <a href="https://alt-5a31a0302d72d.blackboard.com/bbcswebdav/pid-982156-dt-content-rid-14612411_1/courses/FSD.00-43441/Instagram%20copy/index.html?one_hash=E295AB743C7BDD3F85FF7A3BDE94B03A&f_hash=287792D546FCB1EFC3EA31F214FEFED0">Instagram</a>
-            </div>
+				<div class="footer-section">
+					<h4>Redes Sociales</h4>
+					<a
+						href="https://alt-5a31a0302d72d.blackboard.com/bbcswebdav/pid-982156-dt-content-rid-14612411_1/courses/FSD.00-43441/Instagram%20copy/index.html?one_hash=E295AB743C7BDD3F85FF7A3BDE94B03A&f_hash=287792D546FCB1EFC3EA31F214FEFED0"
+						>Instagram</a
+					>
+				</div>
 
-            <div class="footer-section">
-                <h4>Ayuda</h4>
-                <a href="#">Métodos de pago</a>
-                <a href="#">Cambios y devoluciones</a>
-                <a href="#">Políticas de privacidad</a>
+				<div class="footer-section">
+					<h4>Ayuda</h4>
+					<a href="#">Métodos de pago</a>
+					<a href="#">Cambios y devoluciones</a>
+					<a href="#">Políticas de privacidad</a>
 
-                <div class="newsletter">
-                    <h4>Newsletter</h4>
-                    <div class="newsletter-input">
-                        <input type="email" placeholder="Ingresá tu email" />
-                        <button onclick="alert('Esto no funciona jeje')">SUSCRIBIRSE</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+					<div class="newsletter">
+						<h4>Newsletter</h4>
+						<div class="newsletter-input">
+							<input type="email" placeholder="Ingresá tu email" />
+							<button onclick="alert('Esto no funciona jeje')">
+								SUSCRIBIRSE
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
 
-        <div class="footer-bottom">
-            <p>2025 HJ. Todos los derechos reservados.</p>
-        </div>
-    </footer>
+			<div class="footer-bottom">
+				<p>2025 HJ. Todos los derechos reservados.</p>
+			</div>
+		</footer>
 	</body>
+	<script src="js/productos-data.js"></script>
+	<script src="js/detalle-producto.js"></script>
 </html>

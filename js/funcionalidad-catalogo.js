@@ -137,7 +137,7 @@ function crearCartaProducto(producto) {
 	const lazyClass = imageObserver ? "lazy" : "";
 
 	return `
-    <a href="detalle-producto.html?id=${
+    <a href="producto.html?id=${
 			producto.id
 		}" class="carta-producto" tabindex="0">
         <img src="${imagenSrc}" 
