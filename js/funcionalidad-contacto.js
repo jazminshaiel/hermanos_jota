@@ -57,3 +57,4 @@ document.getElementById("contactoForm").addEventListener("submit", function(e) {
     }, 4000);
   }
 });
+//se manipulo el dom//
