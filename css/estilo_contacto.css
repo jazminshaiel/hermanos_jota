@@ -4,6 +4,10 @@
     padding: 0;
     
 }/*normalizar pagina*/
+body{
+     font-family: "Inter", sans-serif, Arial, Georgia;
+    background-color: #f5e6d3;
+}
 
 /* comienza el header*/
 /* Header principal */
