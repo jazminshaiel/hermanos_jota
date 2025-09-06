@@ -28,6 +28,21 @@
       ✅ ¡Formulario enviado con éxito!
       Al enviarse correctamente, el formulario se resetea automáticamente
 
+- #### Pagina Contacto
+   -se utilizo un formulario para obtener la informacion del cliente
+   -Validación del lado del cliente en tiempo de envío
+      Nombre: No puede estar vacío.
+      Correo: Debe tener un formato válido (usuario@dominio.com).
+      Comentario: Debe tener al menos 10 caracteres.
+   -Estilos de validación
+      Campos con error se muestran en rojo con un mensaje de advertencia.
+      Campos correctos se muestran en verde.
+   -Manipulación del DOM
+      Si la validación falla, aparece un mensaje en rojo:
+      ❌ Revisa los campos en rojo
+      Si la validación es exitosa, aparece un mensaje en verde:
+      ✅ ¡Formulario enviado con éxito!
+      Al enviarse correctamente, el formulario se resetea automáticament
 ### Tecnologias
  - HTML:
     -  El proyecto utiliza etiquetas semánticas para una estructura de documento limpia y legible.
