@@ -16,9 +16,11 @@ img {
 body {
 	font-family: "Inter", sans-serif, Arial, Georgia;
 	background: #f5e6d3;
-	padding: 1rem;
+	padding: 0;
+	margin: 0;
 	color: black;
 	line-height: 1.6;
+	overflow-x: hidden;
 }
 
 .container {
@@ -47,6 +49,7 @@ body {
 	justify-content: space-between;
 	align-items: center;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	margin-bottom: 30px;
 }
 
 .logo-image {
@@ -83,6 +86,7 @@ body {
 	cursor: pointer;
 	transition: color 0.3s;
 	color: white;
+	text-decoration: none;
 }
 
 .header-icons i:hover,
@@ -431,8 +435,9 @@ h1 {
 }
 
 @media (max-width: 1024px) {
-	body {
-		padding: 0.5rem;
+
+	main { 
+		padding: 40px 0.5rem; 
 	}
 
 	.contenedor-productos {
@@ -446,8 +451,8 @@ h1 {
 }
 
 @media (max-width: 768px) {
-	body {
-		padding: 0.25rem;
+	main { 
+		padding: 30px 0.25rem;
 	}
 
 	.header {
