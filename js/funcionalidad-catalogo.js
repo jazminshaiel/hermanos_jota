@@ -410,14 +410,14 @@ function manejarErrorImagen(img) {
 	console.warn(`Error al cargar imagen: ${img.dataset.src || img.src}`);
 }
 
-// unción para limpiar recursos al salir de la página
+// Función para limpiar recursos al salir de la página
 window.addEventListener("beforeunload", () => {
 	if (imageObserver) {
 		imageObserver.disconnect();
 	}
 });
 
-// Exponer funciones globalmente con mejor organización
+// Funciones globalmente
 window.aplicarBusqueda = aplicarBusqueda;
 window.limpiarBusqueda = limpiarBusqueda;
 window.limpiarTodosFiltros = limpiarTodosFiltros;
