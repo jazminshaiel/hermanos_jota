@@ -249,15 +249,21 @@ body{
 /* Responsive */
 @media (max-width: 768px) {
     .header {
-        padding: 12px 15px;
+        flex-wrap: wrap;
+        padding: 10px 15px;
     }
 
     .nav {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        margin-top: 10px;
         gap: 20px;
     }
 
     .nav-link {
         font-size: 13px;
+        padding: 5px 10px;
     }
 
     .logo-image {
@@ -272,26 +278,26 @@ body{
 
 @media (max-width: 480px) {
     .header {
-        flex-direction: column;
-        align-items: center;
-        padding: 15px;
-        gap: 15px;
-        position: static;
+        padding: 8px 10px;
     }
 
     .nav {
-        order: 2;
-        flex-wrap: wrap;
-        justify-content: center;
         gap: 15px;
+        margin-top: 8px;
+    }
+
+    .nav-link {
+        font-size: 12px;
+        padding: 4px 8px;
+    }
+
+    .logo-image {
+        height: 30px;
     }
 
     .header-icons {
-        order: 3;
-    }
-
-    .logo {
-        order: 1;
+        gap: 10px;
+        font-size: 16px;
     }
 }
 

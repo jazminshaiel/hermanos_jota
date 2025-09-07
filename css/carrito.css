@@ -94,6 +94,7 @@ body {
     justify-content: center;
     text-align: center;
     color: white;
+    padding: 20px;
 }
 
 .hero-content {
@@ -101,6 +102,8 @@ body {
     padding: 40px;
     border-radius: 10px;
     color: #333;
+    max-width: 600px;
+    width: 100%;
 }
 
 .hero-logo-image {
@@ -114,6 +117,7 @@ body {
     font-size: 36px;
     margin-bottom: 10px;
     color: #333;
+    line-height: 1.2;
 }
 
 .breadcrumb {
@@ -516,12 +520,56 @@ body {
         text-align: center;
     }
     
+    /* Header responsive */
+    .header {
+        flex-wrap: wrap;
+        padding: 10px 15px;
+    }
+    
     .nav {
-        display: none;
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        margin-top: 10px;
+        gap: 20px;
+    }
+    
+    .nav-link {
+        font-size: 13px;
+        padding: 5px 10px;
     }
     
     .header-icons {
         gap: 15px;
+    }
+    
+    .logo-image {
+        height: 35px;
+    }
+    
+    /* Hero responsive para tablets */
+    .hero {
+        height: 250px;
+        padding: 15px;
+    }
+    
+    .hero-content {
+        padding: 30px 25px;
+        max-width: 500px;
+    }
+    
+    .hero-logo-image {
+        height: 60px;
+        margin-bottom: 15px;
+    }
+    
+    .hero h1 {
+        font-size: 28px;
+        margin-bottom: 8px;
+    }
+    
+    .breadcrumb {
+        font-size: 13px;
     }
 }
 
@@ -544,5 +592,55 @@ body {
     
     .container {
         padding: 0 15px;
+    }
+    
+    /* Header para pantallas muy pequeñas */
+    .header {
+        padding: 8px 10px;
+    }
+    
+    .nav {
+        gap: 15px;
+        margin-top: 8px;
+    }
+    
+    .nav-link {
+        font-size: 12px;
+        padding: 4px 8px;
+    }
+    
+    .logo-image {
+        height: 30px;
+    }
+    
+    .header-icons {
+        gap: 10px;
+        font-size: 16px;
+    }
+    
+    /* Hero responsive para móviles */
+    .hero {
+        height: 200px;
+        padding: 10px;
+    }
+    
+    .hero-content {
+        padding: 20px 15px;
+        max-width: 100%;
+        border-radius: 8px;
+    }
+    
+    .hero-logo-image {
+        height: 50px;
+        margin-bottom: 10px;
+    }
+    
+    .hero h1 {
+        font-size: 24px;
+        margin-bottom: 6px;
+    }
+    
+    .breadcrumb {
+        font-size: 12px;
     }
 }
