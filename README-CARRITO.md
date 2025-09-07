@@ -1,112 +1,102 @@
-# Páginas del Carrito - Hermanos Jota
+# Sistema de Carrito de Compras - Hermanos Jota
 
 ## Descripción
+Sistema completo de carrito de compras implementado para la tienda de muebles Hermanos Jota. Incluye funcionalidad para añadir productos, contador en tiempo real, notificaciones y persistencia de datos.
 
-Se han creado dos nuevas páginas para el sistema de carrito de compras de Hermanos Jota:
+## Características Implementadas
 
-1. **carrito.html** - Página principal del carrito de compras
-2. **carrito-envio.html** - Página de envío y pago
+### Contador en Barra de Navegación
+- Muestra la cantidad total de productos en el carrito
+- Se actualiza automáticamente al añadir/remover productos
+- Diseño responsive y accesible
+- Animaciones suaves
 
-## Características
+### Funcionalidad de Añadir al Carrito
+- Botones "Añadir al carrito" en todas las páginas de productos
+- Funciona desde:
+  - Página de catálogo (`productos.html`)
+  - Página de detalle de producto (`producto.html`)
+  - Productos relacionados
+- Notificaciones visuales al añadir productos
+- Animaciones de confirmación
 
-### Página del Carrito (carrito.html)
-- ✅ Visualización de productos en el carrito
-- ✅ Modificación de cantidades
-- ✅ Eliminación de productos
-- ✅ Cálculo automático de subtotales y total
-- ✅ Diseño responsive
-- ✅ Integración con localStorage para persistencia de datos
+### Persistencia de Datos
+- Los productos se guardan en `localStorage`
+- El carrito persiste entre sesiones del navegador
+- Sincronización automática entre pestañas
 
-### Página de Envío (carrito-envio.html)
-- ✅ Formulario completo de datos de envío
-- ✅ Resumen del pedido
-- ✅ Selección de métodos de pago
-- ✅ Validación de formularios
-- ✅ Política de privacidad
-- ✅ Diseño responsivo
+### Convenciones de Código
+- Variables y funciones en **CamelCase**
+- Nombres descriptivos y claros
+- Código bien documentado
+- Estructura modular y mantenible
 
-## Archivos Creados
+## Ultimas modificaciones hechas 
+### Nuevos Archivos
+- `js/sistema-carrito.js` - Sistema principal del carrito
+- `css/estilos-carrito.css` - Estilos para el carrito y botones
 
-### HTML
-- `carrito.html` - Página principal del carrito
-- `carrito-envio.html` - Página de envío y pago
+### Archivos Modificados
+- `index.html` - Añadido contador y scripts
+- `producto.html` - Añadido contador y scripts
+- `productos.html` - Añadido contador y scripts
+- `js/funcionalidad-catalogo.js` - Botones de carrito en catálogo
+- `js/detalle-producto.js` - Botones de carrito en detalle
 
-### CSS
-- `css/carrito.css` - Estilos para ambas páginas del carrito
+## Funciones Principales
 
-
-## Funcionalidades Implementadas
-
-### Gestión del Carrito
-- **Visualización estática**: Productos mostrados en el carrito
-- **Diseño responsive**: Adaptable a diferentes dispositivos
-- **Interfaz limpia**: Diseño moderno y profesional
-
-### Navegación
-- **Header consistente**: Logo, navegación e íconos
-- **Breadcrumbs**: Navegación contextual
-- **Responsive**: Adaptable a móviles y tablets
-
-### Formularios
-- **Validación HTML5**: Campos requeridos y tipos específicos
-- **Métodos de pago**: Transferencia bancaria, tarjeta, efectivo
-- **Datos de envío**: Formulario completo con todos los campos necesarios
-
-### Notificaciones
-- **Diseño estático**: Sin funcionalidad JavaScript
-- **Interfaz visual**: Elementos de UI preparados para futuras funcionalidades
-
-## Uso
-
-### Para Ver las Páginas
-```html
-<!-- Enlace directo -->
-<a href="carrito.html">Ver Carrito</a>
-<a href="carrito-envio.html">Ver Página de Envío</a>
+### SistemaCarrito (Clase)
+```javascript
+// Añadir producto al carrito
+añadirProductoAlCarrito(producto, cantidad)
+// Remover producto del carrito
+removerProductoDelCarrito(idProducto)
+// Actualizar cantidad de producto
+actualizarCantidadProducto(idProducto, nuevaCantidad)
+// Obtener cantidad total
+obtenerCantidadTotalProductos()
+// Obtener precio total
+obtenerPrecioTotalCarrito(
+// Limpiar carrito
+limpiarCarrito()
 ```
 
-### Navegación Manual
-- Abrir `carrito.html` en el navegador para ver la página del carrito
-- Abrir `carrito-envio.html` en el navegador para ver la página de envío
+### Funciones Globales
+```javascript
+// Añadir al carrito (desde cualquier página)
+window.añadirAlCarrito(producto, cantidad)
+// Obtener productos del carrito
+window.obtenerCarrito()
+// Limpiar carrito
+window.limpiarCarrito()
+// Actualizar contador
+window.actualizarContadorCarrito()
+```
 
-## Estructura Visual
+## Estructura de Datos del Carrito
 
-### Página del Carrito (carrito.html)
-- Header con logo "hj" y navegación
-- Hero section con título "Carrito"
-- Lista de productos con imagen, nombre, precio, cantidad y subtotal
-- Resumen del carrito con total
-- Botón "Ir a pagar" que enlaza a carrito-envio.html
-- Sección de características
-- Footer con información de la empresa
+```javascript
+{
+  id: 1,
+  nombre: "Aparador Uspallata",
+  precio: "$XX.XXX",
+  imagen: "url_de_imagen",
+  descripcion: "Descripción del producto",
+  categoria: "aparadores",
+  cantidad: 1
+}
+```
 
-### Página de Envío (carrito-envio.html)
-- Header con logo "hj" y navegación
-- Hero section con título "Envío"
-- Formulario de datos de envío
-- Resumen del producto y total
-- Métodos de pago
-- Política de privacidad
-- Botón "Ir a pagar"
-- Sección de características
-- Footer con información de la empresa
+## Estilos CSS
 
-## Personalización
+### Clases Principales
+- `.contador-carrito` - Contador en la barra de navegación
+- `.boton-carrito` - Botones de añadir al carrito
+- `.notificacion-carrito` - Notificaciones de producto añadido
+- `.carta-producto` - Tarjetas de productos con botón
+- `.relacionado-item` - Productos relacionados
 
-### Colores
-Los colores principales se pueden modificar en `css/carrito.css`:
-- **Color principal**: `#A0522D` (marrón)
-- **Color secundario**: `#8B4513` (marrón oscuro)
-- **Color de éxito**: `#28a745` (verde)
-- **Color de error**: `#dc3545` (rojo)
-
-### Fuentes
-- **Familia principal**: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
-- **Tamaños**: Responsive con breakpoints en 768px y 480px
-
-
-## Dependencias
-
-- **Font Awesome 6.0.0**: Para íconos
-- **CSS Grid y Flexbox**: Para layouts
+### Características de Diseño
+- Colores consistentes con la marca (#a0522d)
+- Tipografías: Inter y Playfair Display
 

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Envío - Hermanos Jota</title>
     <link rel="stylesheet" href="css/carrito.css">
+    <link rel="stylesheet" href="css/estilos-carrito.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -20,10 +21,10 @@
             <a href="#" class="nav-link">Contacto</a>
         </nav>
         <div class="header-icons">
-            <i class="fas fa-user"></i>
-            <i class="fas fa-search"></i>
-            <i class="fas fa-heart"></i>
-            <a href="carrito.html"><i class="fas fa-shopping-cart"></i></a>
+            <a href="carrito.html" class="carrito-link">
+                <i class="fas fa-shopping-cart"></i>
+                <span id="contadorCarrito" class="contador-carrito">0</span>
+            </a>
         </div>
     </header>
 
@@ -104,24 +105,10 @@
 
             <!-- suma de compra + pago -->
             <div class="product-payment">
-                <h2>Producto</h2>
+                <h2>Resumen del Pedido</h2>
                 
                 <div class="order-summary">
-                    <div class="summary-item">
-                        <span>Sofá Patagonia x 1</span>
-                    </div>
-                    <div class="summary-item">
-                        <span>Subtotal</span>
-                        <span>$ 350,000.00</span>
-                    </div>
-                    <div class="summary-item">
-                        <span>Envío</span>
-                        <span>$ 0.00</span>
-                    </div>
-                    <div class="summary-item total">
-                        <span>Total</span>
-                        <span>$ 350,000.00</span>
-                    </div>
+                    <!-- Los productos se cargarán dinámicamente aquí -->
                 </div>
 
                 <div class="payment-methods">
@@ -199,10 +186,7 @@
             
             <div class="footer-section">
                 <h4>Links</h4>
-                <a href="#">Seccion 1</a>
-                <a href="#">Seccion 2</a>
-                <a href="#">Seccion 3</a>
-                <a href="#">Seccion 4</a>
+                <a href="#">Instagram</a>
             </div>
             
             <div class="footer-section">
@@ -226,6 +210,9 @@
         </div>
     </footer>
 
-    <script src="js/carrito.js"></script>
+    <!-- Scripts -->
+    <script src="js/productos-data.js"></script>
+    <script src="js/sistema-carrito.js"></script>
+    <script src="js/funcionalidad-envio.js"></script>
 </body>
 </html>

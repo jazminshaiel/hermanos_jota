@@ -9,6 +9,7 @@
       content="Explorá el catálogo completo de muebles artesanales Hermanos Jota. Diseño sustentable con materiales nobles argentinos."
     />
     <link rel="stylesheet" href="css/estilos-catalogo.css" />
+    <link rel="stylesheet" href="css/estilos-carrito.css" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Playfair+Display:wght@400;700&display=swap"
@@ -34,7 +35,10 @@
         <a href="contacto.html" class="nav-link">Contacto</a>
       </nav>
       <div class="header-icons">
-        <a href="carrito.html"><i class="fas fa-shopping-cart"></i></a>
+        <a href="carrito.html" class="carrito-link">
+          <i class="fas fa-shopping-cart"></i>
+          <span id="contadorCarrito" class="contador-carrito">0</span>
+        </a>
       </div>
     </header>
 
@@ -122,6 +126,7 @@
     </footer>
 
     <script src="js/productos-data.js"></script>
+    <script src="js/sistema-carrito.js"></script>
     <script src="js/funcionalidad-catalogo.js"></script>
   </body>
 </html>

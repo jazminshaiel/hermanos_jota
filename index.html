@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/estilos-carrito.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Playfair+Display:wght@400;700&display=swap"/>
     <title>Hermanos Jota | Inicio</title>
@@ -23,7 +24,10 @@
             <a href="contacto.html" class="nav-link">Contacto</a>
         </nav>
         <div class="header-icons">
-            <a href="carrito.html"><i class="fas fa-shopping-cart"></i></a>
+            <a href="carrito.html" class="carrito-link">
+                <i class="fas fa-shopping-cart"></i>
+                <span id="contadorCarrito" class="contador-carrito">0</span>
+            </a>
         </div>
     </header>
 
@@ -135,6 +139,7 @@
     </footer>
 
     <script src="./js/productos-data.js"></script>
+    <script src="./js/sistema-carrito.js"></script>
     <script src="./js/funcionalidad-catalogo.js"></script>
     <script src="./js/script.js"></script>
 

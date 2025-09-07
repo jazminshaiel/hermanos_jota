@@ -24,6 +24,27 @@ document.addEventListener("DOMContentLoaded", () => {
 	precio.textContent = producto.precio;
 	descripcion.textContent = producto.descripcion;
 
+	// Configurar botón de carrito
+	const botonCarrito = document.querySelector('.boton-carrito');
+	if (botonCarrito) {
+		botonCarrito.addEventListener('click', (event) => {
+			event.preventDefault();
+			
+			if (typeof window.añadirAlCarrito === 'function') {
+				window.añadirAlCarrito(producto);
+				
+				// Animación del botón
+				botonCarrito.classList.add('añadido');
+				botonCarrito.innerHTML = '<i class="fas fa-check"></i> Añadido al carrito';
+				
+				setTimeout(() => {
+					botonCarrito.classList.remove('añadido');
+					botonCarrito.innerHTML = '<i class="fas fa-shopping-cart"></i> Añadir al carrito';
+				}, 2000);
+			}
+		});
+	}
+
 	cargarRelacionados(idProducto);
 });
 
@@ -36,14 +57,39 @@ function cargarRelacionados(idActual) {
 		.slice(0, 3);
 
 	relacionados.forEach((prod) => {
-		const item = document.createElement("a");
-		item.href = `producto.html?id=${prod.id}`;
+		const item = document.createElement("div");
 		item.classList.add("relacionado-item");
 		item.innerHTML = `
-      <img src="${prod.imagen}" alt="${prod.nombre}">
-      <h3>${prod.nombre}</h3>
-      <p class="precio">${prod.precio}</p>
+      <a href="producto.html?id=${prod.id}" class="enlace-relacionado">
+        <img src="${prod.imagen}" alt="${prod.nombre}">
+        <h3>${prod.nombre}</h3>
+        <p class="precio">${prod.precio}</p>
+      </a>
+      <button class="boton-carrito" data-producto-id="${prod.id}">
+        <i class="fas fa-shopping-cart"></i>
+        Añadir al carrito
+      </button>
     `;
+		
+		// Configurar evento para el botón de carrito
+		const botonCarrito = item.querySelector('.boton-carrito');
+		if (botonCarrito) {
+			botonCarrito.addEventListener('click', (event) => {
+				event.preventDefault();
+				event.stopPropagation();
+				
+				if (typeof window.añadirAlCarrito === 'function') {
+					window.añadirAlCarrito(prod);
+					
+					// Animación del botón
+					botonCarrito.classList.add('añadido');
+					setTimeout(() => {
+						botonCarrito.classList.remove('añadido');
+					}, 600);
+				}
+			});
+		}
+		
 		contenedor.appendChild(item);
 	});
 }

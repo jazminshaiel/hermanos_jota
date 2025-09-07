@@ -137,21 +137,25 @@ function crearCartaProducto(producto) {
 	const lazyClass = imageObserver ? "lazy" : "";
 
 	return `
-    <a href="producto.html?id=${
-			producto.id
-		}" class="carta-producto" tabindex="0">
-        <img src="${imagenSrc}" 
-             ${dataSrc ? `data-src="${dataSrc}"` : ""}
-             alt="${producto.nombre}"
-             class="${lazyClass}"
-             onerror="this.src='https://jazminshaiel.github.io/hermanos_jota/img/placeholder.png'; this.onerror=null;"
-             loading="lazy">
-        <div class="info-producto">
-            <h2>${producto.nombre}</h2>
-            <p>${producto.descripcion}</p>
-            <span class="precio-producto">${producto.precio}</span>
-        </div>
-    </a>
+    <div class="carta-producto" tabindex="0">
+        <a href="producto.html?id=${producto.id}" class="enlace-producto">
+            <img src="${imagenSrc}" 
+                 ${dataSrc ? `data-src="${dataSrc}"` : ""}
+                 alt="${producto.nombre}"
+                 class="${lazyClass}"
+                 onerror="this.src='https://jazminshaiel.github.io/hermanos_jota/img/placeholder.png'; this.onerror=null;"
+                 loading="lazy">
+            <div class="info-producto">
+                <h2>${producto.nombre}</h2>
+                <p>${producto.descripcion}</p>
+                <span class="precio-producto">${producto.precio}</span>
+            </div>
+        </a>
+        <button class="boton-carrito" data-producto-id="${producto.id}">
+            <i class="fas fa-shopping-cart"></i>
+            Añadir al carrito
+        </button>
+    </div>
   `;
 }
 
@@ -208,6 +212,27 @@ function mostrarProductos(productosAMostrar) {
 			if (img && img.dataset.src) {
 				imageObserver.observe(img);
 			}
+		}
+
+		// Configurar evento para el botón de carrito
+		const botonCarrito = carta.querySelector('.boton-carrito');
+		if (botonCarrito) {
+			botonCarrito.addEventListener('click', (event) => {
+				event.preventDefault();
+				event.stopPropagation();
+				
+				// Encontrar el producto correspondiente
+				const productoEncontrado = productos.find(p => p.id === producto.id);
+				if (productoEncontrado && typeof window.añadirAlCarrito === 'function') {
+					window.añadirAlCarrito(productoEncontrado);
+					
+					// Animación del botón
+					botonCarrito.classList.add('añadido');
+					setTimeout(() => {
+						botonCarrito.classList.remove('añadido');
+					}, 600);
+				}
+			});
 		}
 	});
 
