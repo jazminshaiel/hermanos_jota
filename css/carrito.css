@@ -51,7 +51,7 @@ body {
     text-decoration: none;
     color: white;
     font-size: 14px;
-    text-transform: lowercase;
+    text-transform: none;
     transition: color 0.3s;
 }
 
