@@ -1,11 +1,13 @@
-// Funcionalidad de la página del carrito - Hermanos Jota
-// Variables y funciones en CamelCase, textos en español
+// Funcionalidad de la pagina del carrito - Hermanos Jota
+// Variables y funciones en CamelCase, textos en espanol
 
-document.addEventListener('DOMContentLoaded', function() {
-    inicializarCarrito();
-});
-
-function inicializarCarrito() {
+export function inicializarCarrito() {
+    // Esperar a que el DOM esté completamente cargado
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', inicializarCarrito);
+        return;
+    }
+    
     // Verificar si el sistema de carrito está disponible
     if (typeof window.obtenerCarrito === 'function') {
         const productosEnCarrito = window.obtenerCarrito();
@@ -26,7 +28,10 @@ function mostrarProductosCarrito(productos) {
 
     // Limpiar contenido existente excepto el header
     const header = contenedorProductos.querySelector('.cart-header');
-    contenedorProductos.innerHTML = '';
+    // Limpiar de forma segura
+    while (contenedorProductos.firstChild) {
+        contenedorProductos.removeChild(contenedorProductos.firstChild);
+    }
     if (header) {
         contenedorProductos.appendChild(header);
     }
@@ -52,34 +57,93 @@ function crearElementoProductoCarrito(producto) {
     const precioNumerico = extraerPrecioNumerico(producto.precio);
     const subtotal = precioNumerico * producto.cantidad;
     
-    elemento.innerHTML = `
-        <div class="item-producto">
-            <img src="${producto.imagen}" alt="${producto.nombre}" class="product-image">
-            <div class="product-info">
-                <span class="product-name">${producto.nombre}</span>
-                <span class="product-category">${capitalizarPrimeraLetra(producto.categoria)}</span>
-            </div>
-        </div>
-        <div class="item-precio">${producto.precio}</div>
-        <div class="item-cantidad">
-            <button class="btn-cantidad" onclick="cambiarCantidad(${producto.id}, -1)">
-                <i class="fas fa-minus"></i>
-            </button>
-            <input type="number" value="${producto.cantidad}" min="1" 
-                   class="quantity-input" 
-                   onchange="actualizarCantidad(${producto.id}, this.value)">
-            <button class="btn-cantidad" onclick="cambiarCantidad(${producto.id}, 1)">
-                <i class="fas fa-plus"></i>
-            </button>
-        </div>
-        <div class="item-subtotal">$${formatearPrecio(subtotal)}</div>
-        <div class="item-remove">
-            <button class="btn-eliminar" onclick="eliminarProducto(${producto.id})" 
-                    title="Eliminar producto">
-                <i class="fas fa-trash"></i>
-            </button>
-        </div>
-    `;
+    // Crear elementos de forma segura
+    const itemProducto = document.createElement('div');
+    itemProducto.className = 'item-producto';
+    
+    const img = document.createElement('img');
+    img.src = producto.imagen;
+    img.alt = producto.nombre;
+    img.className = 'product-image';
+    
+    const productInfo = document.createElement('div');
+    productInfo.className = 'product-info';
+    
+    const productName = document.createElement('span');
+    productName.className = 'product-name';
+    productName.textContent = producto.nombre;
+    
+    const productCategory = document.createElement('span');
+    productCategory.className = 'product-category';
+    productCategory.textContent = capitalizarPrimeraLetra(producto.categoria);
+    
+    productInfo.appendChild(productName);
+    productInfo.appendChild(productCategory);
+    
+    itemProducto.appendChild(img);
+    itemProducto.appendChild(productInfo);
+    
+    const itemPrecio = document.createElement('div');
+    itemPrecio.className = 'item-precio';
+    itemPrecio.textContent = producto.precio;
+    
+    const itemCantidad = document.createElement('div');
+    itemCantidad.className = 'item-cantidad';
+    
+    const btnMenos = document.createElement('button');
+    btnMenos.className = 'btn-cantidad';
+    btnMenos.setAttribute('data-carrito-action', 'cambiar-cantidad');
+    btnMenos.setAttribute('data-product-id', producto.id);
+    btnMenos.setAttribute('data-cambio', '-1');
+    const iconoMenos = document.createElement('i');
+    iconoMenos.className = 'fas fa-minus';
+    btnMenos.appendChild(iconoMenos);
+    
+    const inputCantidad = document.createElement('input');
+    inputCantidad.type = 'number';
+    inputCantidad.value = producto.cantidad;
+    inputCantidad.min = '1';
+    inputCantidad.className = 'quantity-input';
+    inputCantidad.setAttribute('data-carrito-action', 'actualizar-cantidad');
+    inputCantidad.setAttribute('data-product-id', producto.id);
+    
+    const btnMas = document.createElement('button');
+    btnMas.className = 'btn-cantidad';
+    btnMas.setAttribute('data-carrito-action', 'cambiar-cantidad');
+    btnMas.setAttribute('data-product-id', producto.id);
+    btnMas.setAttribute('data-cambio', '1');
+    const iconoMas = document.createElement('i');
+    iconoMas.className = 'fas fa-plus';
+    btnMas.appendChild(iconoMas);
+    
+    itemCantidad.appendChild(btnMenos);
+    itemCantidad.appendChild(inputCantidad);
+    itemCantidad.appendChild(btnMas);
+    
+    const itemSubtotal = document.createElement('div');
+    itemSubtotal.className = 'item-subtotal';
+    itemSubtotal.textContent = `$${formatearPrecio(subtotal)}`;
+    
+    const itemRemove = document.createElement('div');
+    itemRemove.className = 'item-remove';
+    
+    const btnEliminar = document.createElement('button');
+    btnEliminar.className = 'btn-eliminar';
+    btnEliminar.title = 'Eliminar producto';
+    btnEliminar.setAttribute('data-carrito-action', 'eliminar');
+    btnEliminar.setAttribute('data-product-id', producto.id);
+    const iconoEliminar = document.createElement('i');
+    iconoEliminar.className = 'fas fa-trash';
+    btnEliminar.appendChild(iconoEliminar);
+    
+    itemRemove.appendChild(btnEliminar);
+    
+    // Ensamblar el elemento completo
+    elemento.appendChild(itemProducto);
+    elemento.appendChild(itemPrecio);
+    elemento.appendChild(itemCantidad);
+    elemento.appendChild(itemSubtotal);
+    elemento.appendChild(itemRemove);
     
     return elemento;
 }
@@ -89,36 +153,80 @@ function mostrarCarritoVacio() {
     const resumenCarrito = document.querySelector('.order-summary');
     
     if (contenedorProductos) {
-        contenedorProductos.innerHTML = `
-            <div class="carrito-vacio">
-                <div class="carrito-vacio-content">
-                    <i class="fas fa-shopping-cart"></i>
-                    <h3>Tu carrito está vacío</h3>
-                    <p>No tienes productos en tu carrito de compras.</p>
-                    <a href="productos.html" class="btn-continuar-comprando">
-                        <i class="fas fa-arrow-left"></i>
-                        Continuar comprando
-                    </a>
-                </div>
-            </div>
-        `;
+        // Limpiar contenedor de forma segura
+        while (contenedorProductos.firstChild) {
+            contenedorProductos.removeChild(contenedorProductos.firstChild);
+        }
+        
+        const carritoVacio = document.createElement('div');
+        carritoVacio.className = 'carrito-vacio';
+        
+        const carritoVacioContent = document.createElement('div');
+        carritoVacioContent.className = 'carrito-vacio-content';
+        
+        const icono = document.createElement('i');
+        icono.className = 'fas fa-shopping-cart';
+        
+        const titulo = document.createElement('h3');
+        titulo.textContent = 'Tu carrito esta vacio';
+        
+        const parrafo = document.createElement('p');
+        parrafo.textContent = 'No tienes productos en tu carrito de compras.';
+        
+        const enlace = document.createElement('a');
+        enlace.href = 'productos.html';
+        enlace.className = 'btn-continuar-comprando';
+        
+        const iconoEnlace = document.createElement('i');
+        iconoEnlace.className = 'fas fa-arrow-left';
+        enlace.appendChild(iconoEnlace);
+        enlace.appendChild(document.createTextNode(' Continuar comprando'));
+        
+        carritoVacioContent.appendChild(icono);
+        carritoVacioContent.appendChild(titulo);
+        carritoVacioContent.appendChild(parrafo);
+        carritoVacioContent.appendChild(enlace);
+        
+        carritoVacio.appendChild(carritoVacioContent);
+        contenedorProductos.appendChild(carritoVacio);
     }
     
     if (resumenCarrito) {
-        resumenCarrito.innerHTML = `
-            <h3>Total de carrito</h3>
-            <div class="summary-item">
-                <span>Subtotal</span>
-                <span>$0</span>
-            </div>
-            <div class="summary-item total">
-                <span>Total</span>
-                <span>$0</span>
-            </div>
-            <button class="checkout-btn disabled" disabled>
-                Continuar
-            </button>
-        `;
+        // Limpiar resumen de forma segura
+        while (resumenCarrito.firstChild) {
+            resumenCarrito.removeChild(resumenCarrito.firstChild);
+        }
+        
+        const titulo = document.createElement('h3');
+        titulo.textContent = 'Total de carrito';
+        
+        const subtotalItem = document.createElement('div');
+        subtotalItem.className = 'summary-item';
+        const subtotalSpan1 = document.createElement('span');
+        subtotalSpan1.textContent = 'Subtotal';
+        const subtotalSpan2 = document.createElement('span');
+        subtotalSpan2.textContent = '$0';
+        subtotalItem.appendChild(subtotalSpan1);
+        subtotalItem.appendChild(subtotalSpan2);
+        
+        const totalItem = document.createElement('div');
+        totalItem.className = 'summary-item total';
+        const totalSpan1 = document.createElement('span');
+        totalSpan1.textContent = 'Total';
+        const totalSpan2 = document.createElement('span');
+        totalSpan2.textContent = '$0';
+        totalItem.appendChild(totalSpan1);
+        totalItem.appendChild(totalSpan2);
+        
+        const boton = document.createElement('button');
+        boton.className = 'checkout-btn disabled';
+        boton.disabled = true;
+        boton.textContent = 'Continuar';
+        
+        resumenCarrito.appendChild(titulo);
+        resumenCarrito.appendChild(subtotalItem);
+        resumenCarrito.appendChild(totalItem);
+        resumenCarrito.appendChild(boton);
     }
 }
 
@@ -132,63 +240,46 @@ function actualizarResumenCarrito(productos) {
         return total + (precioNumerico * producto.cantidad);
     }, 0);
     
-    const total = subtotal; // Por ahora sin impuestos ni envío
+    const total = subtotal; // Por ahora sin impuestos ni envio
     
-    resumenCarrito.innerHTML = `
-        <h3>Total de carrito</h3>
-        <div class="summary-item">
-            <span>Subtotal</span>
-            <span>$${formatearPrecio(subtotal)}</span>
-        </div>
-        <div class="summary-item total">
-            <span>Total</span>
-            <span>$${formatearPrecio(total)}</span>
-        </div>
-        <button class="checkout-btn" onclick="procederAlCheckout()">
-            Continuar
-        </button>
-    `;
+    // Limpiar resumen de forma segura
+    while (resumenCarrito.firstChild) {
+        resumenCarrito.removeChild(resumenCarrito.firstChild);
+    }
+    
+    const titulo = document.createElement('h3');
+    titulo.textContent = 'Total de carrito';
+    
+    const subtotalItem = document.createElement('div');
+    subtotalItem.className = 'summary-item';
+    const subtotalSpan1 = document.createElement('span');
+    subtotalSpan1.textContent = 'Subtotal';
+    const subtotalSpan2 = document.createElement('span');
+    subtotalSpan2.textContent = `$${formatearPrecio(subtotal)}`;
+    subtotalItem.appendChild(subtotalSpan1);
+    subtotalItem.appendChild(subtotalSpan2);
+    
+    const totalItem = document.createElement('div');
+    totalItem.className = 'summary-item total';
+    const totalSpan1 = document.createElement('span');
+    totalSpan1.textContent = 'Total';
+    const totalSpan2 = document.createElement('span');
+    totalSpan2.textContent = `$${formatearPrecio(total)}`;
+    totalItem.appendChild(totalSpan1);
+    totalItem.appendChild(totalSpan2);
+    
+    const boton = document.createElement('button');
+    boton.className = 'checkout-btn';
+    boton.setAttribute('data-carrito-action', 'proceder-checkout');
+    boton.textContent = 'Continuar';
+    
+    resumenCarrito.appendChild(titulo);
+    resumenCarrito.appendChild(subtotalItem);
+    resumenCarrito.appendChild(totalItem);
+    resumenCarrito.appendChild(boton);
 }
 
 // Funciones para manejar cambios en el carrito
-function cambiarCantidad(idProducto, cambio) {
-    if (typeof window.obtenerCarrito === 'function') {
-        const productos = window.obtenerCarrito();
-        const producto = productos.find(p => p.id === idProducto);
-        
-        if (producto) {
-            const nuevaCantidad = producto.cantidad + cambio;
-            if (nuevaCantidad > 0) {
-                // Usar el sistema de carrito para actualizar
-                if (typeof sistemaCarrito !== 'undefined') {
-                    sistemaCarrito.actualizarCantidadProducto(idProducto, nuevaCantidad);
-                    recargarCarrito();
-                }
-            }
-        }
-    }
-}
-
-function actualizarCantidad(idProducto, nuevaCantidad) {
-    const cantidad = parseInt(nuevaCantidad);
-    
-    if (cantidad > 0 && typeof sistemaCarrito !== 'undefined') {
-        sistemaCarrito.actualizarCantidadProducto(idProducto, cantidad);
-        recargarCarrito();
-    } else if (cantidad <= 0) {
-        eliminarProducto(idProducto);
-    }
-}
-
-function eliminarProducto(idProducto) {
-    if (confirm('¿Estás seguro de que quieres eliminar este producto del carrito?')) {
-        if (typeof sistemaCarrito !== 'undefined') {
-            sistemaCarrito.removerProductoDelCarrito(idProducto);
-            recargarCarrito();
-        }
-    }
-}
-
 function recargarCarrito() {
     // Pequeño delay para asegurar que el localStorage se haya actualizado
     setTimeout(() => {
@@ -196,21 +287,16 @@ function recargarCarrito() {
     }, 100);
 }
 
-function procederAlCheckout() {
-    const productos = window.obtenerCarrito();
-    
-    if (productos.length === 0) {
-        alert('Tu carrito está vacío. Añade algunos productos antes de continuar.');
-        return;
-    }
-    
-    // Redirigir a la página de envío
-    window.location.href = 'carrito-envio.html';
-}
+// Configurar event listeners para actualizar la vista cuando cambie el carrito
+document.addEventListener('DOMContentLoaded', () => {
+    // Escuchar eventos personalizados del sistema de carrito
+    document.addEventListener('carrito:actualizado', recargarCarrito);
+    document.addEventListener('carrito:producto-eliminado', recargarCarrito);
+});
 
 // Funciones auxiliares
 function extraerPrecioNumerico(precioString) {
-    // Remover "$" y convertir a número
+    // Remover "$" y convertir a numero
     const precioLimpio = precioString.replace(/[$,.]/g, '');
     return parseInt(precioLimpio) || 0;
 }
@@ -224,8 +310,4 @@ function capitalizarPrimeraLetra(texto) {
     return texto.charAt(0).toUpperCase() + texto.slice(1);
 }
 
-// Exponer funciones globalmente
-window.cambiarCantidad = cambiarCantidad;
-window.actualizarCantidad = actualizarCantidad;
-window.eliminarProducto = eliminarProducto;
-window.procederAlCheckout = procederAlCheckout;
+// Nota: la funcion inicializarCarrito ya esta exportada en la linea 4

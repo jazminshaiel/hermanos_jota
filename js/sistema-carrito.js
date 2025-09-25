@@ -1,7 +1,7 @@
 // Sistema de Carrito de Compras - Hermanos Jota
-// Variables y funciones en CamelCase, textos en español
+// Variables y funciones en CamelCase, textos en espanol
 
-class SistemaCarrito {
+export class SistemaCarrito {
     constructor() {
         this.productosEnCarrito = this.obtenerCarritoDesdeLocalStorage();
         this.actualizarContadorCarrito();
@@ -28,8 +28,8 @@ class SistemaCarrito {
         }
     }
 
-    // Añadir producto al carrito
-    añadirProductoAlCarrito(producto, cantidad = 1) {
+    // Aniadir producto al carrito
+    aniadirProductoAlCarrito(producto, cantidad = 1) {
         const productoExistente = this.productosEnCarrito.find(item => item.id === producto.id);
         
         if (productoExistente) {
@@ -48,7 +48,10 @@ class SistemaCarrito {
         
         this.guardarCarritoEnLocalStorage();
         this.actualizarContadorCarrito();
-        this.mostrarNotificacionAñadido(producto.nombre);
+        this.mostrarNotificacionAniadido(producto.nombre);
+        
+        // Emitir evento de actualización
+        document.dispatchEvent(new CustomEvent('carrito:actualizado'));
     }
 
     // Remover producto del carrito
@@ -56,6 +59,9 @@ class SistemaCarrito {
         this.productosEnCarrito = this.productosEnCarrito.filter(item => item.id !== idProducto);
         this.guardarCarritoEnLocalStorage();
         this.actualizarContadorCarrito();
+        
+        // Emitir evento de producto eliminado
+        document.dispatchEvent(new CustomEvent('carrito:producto-eliminado'));
     }
 
     // Actualizar cantidad de producto en carrito
@@ -68,6 +74,9 @@ class SistemaCarrito {
                 producto.cantidad = nuevaCantidad;
                 this.guardarCarritoEnLocalStorage();
                 this.actualizarContadorCarrito();
+                
+                // Emitir evento de actualización
+                document.dispatchEvent(new CustomEvent('carrito:actualizado'));
             }
         }
     }
@@ -80,20 +89,20 @@ class SistemaCarrito {
     // Obtener precio total del carrito
     obtenerPrecioTotalCarrito() {
         return this.productosEnCarrito.reduce((total, item) => {
-            // Extraer número del precio (asumiendo formato "$XX.XXX")
+            // Extraer numero del precio (asumiendo formato "$XX.XXX")
             const precioNumerico = this.extraerPrecioNumerico(item.precio);
             return total + (precioNumerico * item.cantidad);
         }, 0);
     }
 
-    // Extraer precio numérico del string de precio
+    // Extraer precio numerico del string de precio
     extraerPrecioNumerico(precioString) {
-        // Remover "$" y convertir a número
+        // Remover "$" y convertir a numero
         const precioLimpio = precioString.replace(/[$,.]/g, '');
         return parseInt(precioLimpio) || 0;
     }
 
-    // Actualizar contador en la barra de navegación
+    // Actualizar contador en la barra de navegacion
     actualizarContadorCarrito() {
         const contadorCarrito = document.getElementById('contadorCarrito');
         const cantidadTotal = this.obtenerCantidadTotalProductos();
@@ -104,19 +113,28 @@ class SistemaCarrito {
         }
     }
 
-    // Mostrar notificación de producto añadido
-    mostrarNotificacionAñadido(nombreProducto) {
-        // Crear notificación temporal
+    // Mostrar notificacion de producto aniadido
+    mostrarNotificacionAniadido(nombreProducto) {
+        console.log('Mostrando notificación para:', nombreProducto);
+        // Crear notificacion temporal
         const notificacion = document.createElement('div');
         notificacion.className = 'notificacion-carrito';
-        notificacion.innerHTML = `
-            <div class="notificacion-contenido">
-                <i class="fas fa-check-circle"></i>
-                <span>${nombreProducto} añadido al carrito</span>
-            </div>
-        `;
         
-        // Estilos para la notificación
+        // Crear contenido de la notificacion de forma segura
+        const contenido = document.createElement('div');
+        contenido.className = 'notificacion-contenido';
+        
+        const icono = document.createElement('i');
+        icono.className = 'fas fa-check-circle';
+        
+        const texto = document.createElement('span');
+        texto.textContent = `${nombreProducto} aniadido al carrito`;
+        
+        contenido.appendChild(icono);
+        contenido.appendChild(texto);
+        notificacion.appendChild(contenido);
+        
+        // Estilos para la notificacion
         notificacion.style.cssText = `
             position: fixed;
             top: 20px;
@@ -140,7 +158,7 @@ class SistemaCarrito {
             notificacion.style.transform = 'translateX(0)';
         }, 100);
         
-        // Remover después de 3 segundos
+        // Remover despues de 3 segundos
         setTimeout(() => {
             notificacion.style.transform = 'translateX(100%)';
             setTimeout(() => {
@@ -153,38 +171,38 @@ class SistemaCarrito {
 
     // Configurar eventos globales
     configurarEventos() {
-        // Evento para botones de "Añadir al carrito"
+        // Evento para botones de "Aniadir al carrito"
         document.addEventListener('click', (event) => {
             if (event.target.classList.contains('boton-carrito') || 
                 event.target.closest('.boton-carrito')) {
                 event.preventDefault();
-                this.manejarClickAñadirCarrito(event);
+                this.manejarClickAniadirCarrito(event);
             }
         });
     }
 
-    // Manejar click en botón añadir al carrito
-    manejarClickAñadirCarrito(event) {
+    // Manejar click en boton aniadir al carrito
+    manejarClickAniadirCarrito(event) {
         const boton = event.target.classList.contains('boton-carrito') ? 
                      event.target : event.target.closest('.boton-carrito');
         
-        // Obtener información del producto desde el contexto
+        // Obtener informacion del producto desde el contexto
         const producto = this.obtenerInformacionProductoDesdeContexto(boton);
         
         if (producto) {
-            this.añadirProductoAlCarrito(producto);
+            this.aniadirProductoAlCarrito(producto);
         } else {
-            console.error('No se pudo obtener información del producto');
-            alert('Error: No se pudo añadir el producto al carrito');
+            console.error('No se pudo obtener informacion del producto');
+                alert('Error: No se pudo aniadir el producto al carrito');
         }
     }
 
-    // Obtener información del producto desde el contexto del botón
+    // Obtener informacion del producto desde el contexto del boton
     obtenerInformacionProductoDesdeContexto(boton) {
-        // Buscar en diferentes contextos según la página
+        // Buscar en diferentes contextos segun la pagina
         let producto = null;
         
-        // Contexto de página de producto individual
+        // Contexto de pagina de producto individual
         const tituloProducto = document.querySelector('.producto-info h1');
         const precioProducto = document.querySelector('.producto-info .precio');
         const imagenProducto = document.querySelector('.producto-imagen img');
@@ -200,7 +218,7 @@ class SistemaCarrito {
             }
         }
         
-        // Contexto de catálogo de productos
+        // Contexto de catalogo de productos
         if (!producto) {
             const cartaProducto = boton.closest('.carta-producto');
             if (cartaProducto) {
@@ -228,34 +246,17 @@ class SistemaCarrito {
         this.actualizarContadorCarrito();
     }
 
-    // Verificar si un producto está en el carrito
+    // Verificar si un producto esta en el carrito
     estaProductoEnCarrito(idProducto) {
         return this.productosEnCarrito.some(item => item.id === idProducto);
     }
 
-    // Obtener cantidad de un producto específico en el carrito
+    // Obtener cantidad de un producto especifico en el carrito
     obtenerCantidadProductoEnCarrito(idProducto) {
         const producto = this.productosEnCarrito.find(item => item.id === idProducto);
         return producto ? producto.cantidad : 0;
     }
 }
 
-// Crear instancia global del sistema de carrito
-const sistemaCarrito = new SistemaCarrito();
-
-// Exponer funciones globalmente para uso en otras páginas
-window.añadirAlCarrito = (producto, cantidad = 1) => {
-    sistemaCarrito.añadirProductoAlCarrito(producto, cantidad);
-};
-
-window.obtenerCarrito = () => {
-    return sistemaCarrito.obtenerProductosCarrito();
-};
-
-window.limpiarCarrito = () => {
-    sistemaCarrito.limpiarCarrito();
-};
-
-window.actualizarContadorCarrito = () => {
-    sistemaCarrito.actualizarContadorCarrito();
-};
+// Nota: La instancia global ahora se crea en main.js
+// para mantener la compatibilidad con el codigo existente
