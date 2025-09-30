@@ -10,16 +10,18 @@ async function cargarProductosDesdeAPI() {
   const contenedor = document.getElementById("contenedorProductos");
   contenedor.innerHTML = `
 	<div class="cargando" style="grid-column: 1/-1; text-align: center; padding: 3rem;">
-		<p>Cargando productos...</p>
+	<p>Cargando productos...</p>
 	</div>
 	`;
 
   try {
     const response = await fetch("/api/productos");
-    if (!response.ok) {
-      throw new Error("Error en la respuesta del servidor");
-    }
 
+    if (!response.ok) {
+      throw new Error(
+        `Error ${response.status}: Error en la respuesta del servidor`
+      );
+    }
     const data = await response.json();
 
     // Normalizar productos (fallback de imagen y texto)
@@ -31,12 +33,14 @@ async function cargarProductosDesdeAPI() {
       nombre: producto.nombre?.trim() || "Producto sin nombre",
       descripcion: producto.descripcion?.trim() || "Sin descripción disponible",
       categoria: producto.categoria?.toLowerCase()?.trim() || "sin-categoria",
+      id: parseInt(producto.id),
     }));
 
+	generarOpcionesCategorias(); // Genera las categorías en el select
+    aplicarFiltrosYMostrar();    // Muestra todos los productos inicialmente
     productosFiltrados = [...productos];
 
-    generarOpcionesCategorias();
-    mostrarProductos(productos);
+    mostrarProductos(productosFiltrados);
   } catch (error) {
     console.error("Error al cargar productos:", error);
     mostrarErrorCarga();
@@ -47,58 +51,24 @@ async function cargarProductosDesdeAPI() {
 function mostrarErrorCarga() {
   const contenedor = document.getElementById("contenedorProductos");
   contenedor.innerHTML = `
-    <div class="error-carga" style="grid-column: 1/-1; text-align: center; padding: 3rem; color: #d32f2f;">
-      <div style="margin-bottom: 1rem;">
-        <i class="fas fa-exclamation-triangle" style="font-size: 3rem;"></i>
-      </div>
-      <h3>Error al cargar productos</h3>
-      <p style="margin: 1rem 0; color: #666;">
-        No se pudo conectar con el servidor. Asegúrate de que esté corriendo.
-      </p>
-      <button onclick="location.reload()" 
-              style="padding: 10px 20px; background: #a0522d; color: white; 
-                     border: none; border-radius: 4px; cursor: pointer;">
-        Reintentar
-      </button>
+    <div class="error-carga" style="grid-column: 1/-1; text-align: center; padding: 3rem; color: #a0522d;">
+        <p>⚠️ Error al cargar los productos. Por favor, intente más tarde.</p>
+        <p>Detalle: ${error.message}</p>
     </div>
   `;
 }
 
 function mostrarProductos(lista) {
-  const contenedor = document.getElementById("contenedorProductos");
-  contenedor.innerHTML = "";
+   const contenedor = document.getElementById("contenedorProductos");
 
   if (!lista || lista.length === 0) {
-    contenedor.innerHTML = `
-      <div class="no-results" style="grid-column: 1/-1; text-align: center; padding: 3rem;">
-        <i class="fas fa-search" style="font-size: 3rem; color: #ccc;"></i>
-        <h3>No se encontraron productos</h3>
-        ${terminoBuscado ? `<p>Para: "${terminoBuscado}"</p>` : ''}
-        ${categoriaSeleccionada !== 'todos' ? 
-          `<p>En categoría: "${categoriaSeleccionada}"</p>` : ''}
-        <button onclick="limpiarFiltros()" 
-                style="margin-top: 1rem; padding: 8px 16px; background: #a0522d; 
-                       color: white; border: none; border-radius: 4px; cursor: pointer;">
-          Limpiar filtros
-        </button>
-      </div>
-    `;
+    contenedor.innerHTML =
+      '<div class="no-results" style="grid-column: 1/-1; text-align: center; padding: 2rem;">No se encontraron productos con esos filtros.</div>';
     return;
   }
 
-  lista.forEach((producto) => {
-    const card = document.createElement("div");
-    card.classList.add("producto");
-
-    card.innerHTML = `
-      <img class="lazy" data-src="${producto.imagen}" alt="${producto.nombre}">
-      <h3>${producto.nombre}</h3>
-      <p>${producto.descripcion}</p>
-      <p><strong>$${producto.precio}</strong></p>
-    `;
-
-    contenedor.appendChild(card);
-  });
+  const html = lista.map(producto => crearCartaProducto(producto)).join('');
+  contenedor.innerHTML = html;
 
   inicializarLazyLoading();
 }
@@ -122,26 +92,24 @@ function inicializarLazyLoading() {
 
 // Función para generar opciones de categoría dinámicamente
 function generarOpcionesCategorias() {
-  const filtroCategoria = document.getElementById("filtroCategoria");
-
-  if (!selectCategoria) return;
-
-  const categoriasUnicas = [
-    ...new Set(productos.map((p) => p.categoria)),
-  ].sort();
-
-  selectCategoria.innerHTML =
-    '<option value="todos">Todas las categorías</option>';
-
-  categoriasUnicas.forEach((categoria) => {
-    if (categoria && categoria !== "sin-categoria") {
-      const option = document.createElement("option");
-      option.value = categoria;
-      option.textContent =
-        categoria.charAt(0).toUpperCase() + categoria.slice(1);
-      selectCategoria.appendChild(option);
+ const categoriaSelect = document.getElementById("filtro-categoria");
+    if (!categoriaSelect) {
+        console.warn("Elemento #filtro-categoria no encontrado.");
+        return;
     }
-  });
+
+    // Obtener categorías únicas
+    const categoriasUnicas = ["todos", ...new Set(productos.map(p => p.categoria.toLowerCase()))];
+
+    // Llenar el select
+    categoriaSelect.innerHTML = "";
+    categoriasUnicas.forEach(categoria => {
+        const nombreMostrar = categoria === "todos" ? "Todas las Categorías" : categoria.charAt(0).toUpperCase() + categoria.slice(1);
+        const option = document.createElement("option");
+        option.value = categoria;
+        option.textContent = nombreMostrar;
+        categoriaSelect.appendChild(option);
+    });
 }
 
 // Función para configurar filtro de categoría
@@ -158,16 +126,28 @@ function configurarFiltroCategoria() {
 }
 
 function configurarEventosBusqueda() {
-  const inputBusqueda = document.getElementById("busqueda");
-  inputBusqueda.addEventListener("input", (e) => {
-    const termino = e.target.value.toLowerCase();
-    productosFiltrados = productos.filter(
-      (p) =>
-        p.nombre.toLowerCase().includes(termino) ||
-        p.descripcion.toLowerCase().includes(termino)
-    );
-    mostrarProductos(productosFiltrados);
-  });
+  const categoriaSelect = document.getElementById("filtro-categoria");
+    const busquedaInput = document.getElementById("busquedaInput");
+    
+    // Evento de Búsqueda
+    if (busquedaInput) {
+        busquedaInput.addEventListener("input", (event) => {
+            clearTimeout(busquedaInput.searchTimeout);
+            terminoBuscado = event.target.value.toLowerCase().trim();
+
+            busquedaInput.searchTimeout = setTimeout(() => {
+                aplicarFiltrosYMostrar(); // Llama a la función unificada
+            }, 300);
+        });
+    }
+
+    // Evento de Filtro por Categoría
+    if (categoriaSelect) {
+        categoriaSelect.addEventListener("change", (event) => {
+            categoriaSeleccionada = event.target.value;
+            aplicarFiltrosYMostrar(); // Llama a la función unificada
+        });
+    }
 }
 
 // Función para mostrar información de resultados
@@ -257,9 +237,29 @@ function aplicarFiltros() {
   }
 }
 
-function aplicarBusqueda(termino) {
-  terminoBuscado = termino.toLowerCase().trim();
-  aplicarFiltros();
+function aplicarFiltrosYMostrar() {
+  let productosAFiltrar = [...productos]; // Empieza con todos los productos
+
+    // A) FILTRAR POR TÉRMINO DE BÚSQUEDA
+    if (terminoBuscado) {
+        const termino = terminoBuscado.toLowerCase();
+        productosAFiltrar = productosAFiltrar.filter(
+            (producto) =>
+                producto.nombre.toLowerCase().includes(termino) ||
+                producto.descripcion.toLowerCase().includes(termino)
+        );
+    }
+
+    // B) FILTRAR POR CATEGORÍA
+    if (categoriaSeleccionada !== "todos") {
+        productosAFiltrar = productosAFiltrar.filter(
+            (producto) => producto.categoria === categoriaSeleccionada
+        );
+    }
+
+    // Mostrar el resultado filtrado
+    productosFiltrados = productosAFiltrar;
+    mostrarProductos(productosFiltrados);
 }
 
 // Función para filtro por categoría
@@ -298,8 +298,7 @@ function limpiarBusqueda() {
 // Inicialización
 document.addEventListener("DOMContentLoaded", () => {
   cargarProductosDesdeAPI();
-  configurarEventosBusqueda();
-  configurarFiltroCategoria();
+    configurarEventosBusqueda();
 });
 
 // Función para manejar errores de imágenes de forma global
