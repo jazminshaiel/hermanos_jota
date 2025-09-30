@@ -58,6 +58,36 @@ function mostrarErrorCarga() {
   `;
 }
 
+function mostrarProductos(lista) {
+	const contenedor = document.getElementById("contenedorProductos");
+  contenedor.innerHTML = "";
+
+  if (!lista || lista.length === 0) {
+    contenedor.innerHTML = `
+      <div style="grid-column: 1/-1; text-align: center; padding: 3rem;">
+        <p>No se encontraron productos para mostrar.</p>
+      </div>
+    `;
+    return;
+  }
+
+  lista.forEach((producto) => {
+    const card = document.createElement("div");
+    card.classList.add("producto");
+
+    card.innerHTML = `
+      <img class="lazy" data-src="${producto.imagen}" alt="${producto.nombre}">
+      <h3>${producto.nombre}</h3>
+      <p>${producto.descripcion}</p>
+      <p><strong>$${producto.precio}</strong></p>
+    `;
+
+    contenedor.appendChild(card);
+  });
+
+  inicializarLazyLoading();
+}
+
 // Función para inicializar Intersection Observer
 function inicializarLazyLoading() {
 	if ("IntersectionObserver" in window) {
@@ -162,86 +192,7 @@ function crearCartaProducto(producto) {
   `;
 }
 
-function mostrarProductos(productosAMostrar) {
-	const contenedor = document.getElementById("contenedorProductos");
 
-	if (!contenedor) {
-		console.error("Contenedor de productos no encontrado");
-		return;
-	}
-
-	// Limpiamos contenido anterior
-	contenedor.innerHTML = "";
-
-	if (productosAMostrar.length === 0) {
-		contenedor.innerHTML = `
-      <div class="no-results">
-        <div style="margin-bottom: 1rem;">
-          <i class="fas fa-search" style="font-size: 3rem; color: #ccc;"></i>
-        </div>
-        <h3 style="margin-bottom: 1rem; color: #333;">No se encontraron productos</h3>
-        ${
-					terminoBuscado
-						? `<p style="margin-bottom: 0.5rem; color: #666;">No hay resultados para "<strong style="color: #a0522d;">${terminoBuscado}</strong>"</p>`
-						: ""
-				}
-        ${
-					categoriaSeleccionada !== "todos"
-						? `<p style="margin-bottom: 0.5rem; color: #666;">En la categoría: "<strong style="color: #a0522d;">${categoriaSeleccionada}</strong>"</p>`
-						: ""
-				}
-        <p style="color: #888; font-size: 0.9rem;">Intenta con otros términos como "mesa", "silla", "sofá" o el nombre de una región</p>
-        <button onclick="limpiarTodosFiltros();" 
-                style="margin-top: 1rem; padding: 8px 16px; background: #a0522d; color: white; border: none; border-radius: 4px; cursor: pointer;">
-          Mostrar todos los productos
-        </button>
-      </div>
-    `;
-		actualizarInfoResultados(0, productos.length);
-		return;
-	}
-	// Crear fragmento para mejorar performance
-	const fragment = document.createDocumentFragment();
-
-	productosAMostrar.forEach((producto) => {
-		const div = document.createElement("div");
-		div.innerHTML = crearCartaProducto(producto);
-		const carta = div.firstElementChild;
-		fragment.appendChild(carta);
-
-		// Aplicar lazy loading si está disponible
-		if (imageObserver) {
-			const img = carta.querySelector("img");
-			if (img && img.dataset.src) {
-				imageObserver.observe(img);
-			}
-		}
-
-		// Configurar evento para el botón de carrito
-		const botonCarrito = carta.querySelector('.boton-carrito');
-		if (botonCarrito) {
-			botonCarrito.addEventListener('click', (event) => {
-				event.preventDefault();
-				event.stopPropagation();
-				
-				// Encontrar el producto correspondiente
-				const productoEncontrado = productos.find(p => p.id === producto.id);
-				if (productoEncontrado && typeof window.añadirAlCarrito === 'function') {
-					window.añadirAlCarrito(productoEncontrado);
-					
-					// Animación del botón
-					botonCarrito.classList.add('añadido');
-					setTimeout(() => {
-						botonCarrito.classList.remove('añadido');
-					}, 600);
-				}
-			});
-		}
-	});
-
-	contenedor.appendChild(fragment);
-	actualizarInfoResultados(productosAMostrar.length, productos.length);
-}
 
 
 function aplicarFiltros() {
