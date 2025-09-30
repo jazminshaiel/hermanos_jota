@@ -70,8 +70,17 @@ function mostrarProductos(lista) {
 
   if (!lista || lista.length === 0) {
     contenedor.innerHTML = `
-      <div style="grid-column: 1/-1; text-align: center; padding: 3rem;">
-        <p>No se encontraron productos para mostrar.</p>
+      <div class="no-results" style="grid-column: 1/-1; text-align: center; padding: 3rem;">
+        <i class="fas fa-search" style="font-size: 3rem; color: #ccc;"></i>
+        <h3>No se encontraron productos</h3>
+        ${terminoBuscado ? `<p>Para: "${terminoBuscado}"</p>` : ''}
+        ${categoriaSeleccionada !== 'todos' ? 
+          `<p>En categoría: "${categoriaSeleccionada}"</p>` : ''}
+        <button onclick="limpiarFiltros()" 
+                style="margin-top: 1rem; padding: 8px 16px; background: #a0522d; 
+                       color: white; border: none; border-radius: 4px; cursor: pointer;">
+          Limpiar filtros
+        </button>
       </div>
     `;
     return;
