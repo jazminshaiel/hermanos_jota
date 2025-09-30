@@ -272,12 +272,11 @@ function limpiarBusqueda() {
 }
 
 //Eventos de "escucha"
+// Inicialización
 document.addEventListener("DOMContentLoaded", () => {
-	// Inicializar lazy loading
-	inicializarLazyLoading();
-	// Configurar eventos de búsqueda y filtros
-	configurarEventosBusqueda();
-	configurarFiltroCategoria();
+  cargarProductosDesdeAPI();
+  configurarEventosBusqueda();
+  configurarFiltroCategoria();
 });
 
 // Función para manejar errores de imágenes de forma global
