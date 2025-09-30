@@ -58,18 +58,27 @@ function mostrarErrorCarga() {
 }
 
 function mostrarProductos(lista) {
-   const contenedor = document.getElementById("contenedorProductos");
+  const contenedor = document.getElementById("contenedorProductos");
+  const infoResultados = document.getElementById("resultados-info");
 
   if (!lista || lista.length === 0) {
     contenedor.innerHTML =
-      '<div class="no-results" style="grid-column: 1/-1; text-align: center; padding: 2rem;">No se encontraron productos con esos filtros.</div>';
-    return;
+      '<div class="no-results">No se encontraron productos con esos filtros.</div>';
+    
+    if (infoResultados) {
+      infoResultados.classList.add("oculto");
+    }
+      return;
   }
 
   const html = lista.map(producto => crearCartaProducto(producto)).join('');
   contenedor.innerHTML = html;
 
   inicializarLazyLoading();
+
+  if (infoResultados) {
+    actualizarInfoResultados(lista.length, productos.length);
+  }
 }
 
 // Lazy loading de imagenes
