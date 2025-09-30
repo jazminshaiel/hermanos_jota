@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
-const productos = require('./productos-data.js');
+const productos = require('./public/js/productos-data.js');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -32,11 +32,12 @@ app.get('/contacto', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'contacto.html'));
 });
 
+// Devuelve todos los productos
 app.get('/api/productos', (req, res) => {
-    // Aquí puedes servir datos desde una base de datos
     res.json(productos);
 });
 
+// Devuelve un producto específico
 app.get('/api/productos/:id' , (req,res) => {
     const id = parseInt(req.params.id);
     const producto = productos.find(p => p.id === id);
