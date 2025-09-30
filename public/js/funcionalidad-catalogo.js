@@ -1,5 +1,4 @@
 let productos = [];
-let busquedaActiva = false;
 let productosFiltrados = [];
 let terminoBuscado = "";
 let categoriaSeleccionada = "todos"; //  Variable para filtro de categoría
@@ -112,19 +111,6 @@ function generarOpcionesCategorias() {
     });
 }
 
-// Función para configurar filtro de categoría
-function configurarFiltroCategoria() {
-  const filtroCategoria = document.getElementById("filtroCategoria");
-  filtroCategoria.addEventListener("change", (e) => {
-    const categoria = e.target.value;
-    productosFiltrados =
-      categoria === "todas"
-        ? [...productos]
-        : productos.filter((p) => p.categoria === categoria);
-    mostrarProductos(productosFiltrados);
-  });
-}
-
 function configurarEventosBusqueda() {
   const categoriaSelect = document.getElementById("filtro-categoria");
     const busquedaInput = document.getElementById("busquedaInput");
@@ -204,39 +190,6 @@ function crearCartaProducto(producto) {
   `;
 }
 
-function aplicarFiltros() {
-  let productosTemp = [...productos];
-
-  // Filtrar por categoría
-  if (categoriaSeleccionada && categoriaSeleccionada !== "todos") {
-    productosTemp = productosTemp.filter(
-      (producto) => producto.categoria === categoriaSeleccionada
-    );
-  }
-
-  // Filtrar por búsqueda
-  if (terminoBuscado) {
-    productosTemp = productosTemp.filter(
-      (producto) =>
-        producto.nombre.toLowerCase().includes(terminoBuscado) ||
-        producto.descripcion.toLowerCase().includes(terminoBuscado) ||
-        (producto.categoria &&
-          producto.categoria.toLowerCase().includes(terminoBuscado))
-    );
-  }
-
-  productosFiltrados = productosTemp;
-  busquedaActiva = false;
-  mostrarProductos(productosFiltrados);
-
-  // Estadísticas
-  if (terminoBuscado || categoriaSeleccionada !== "todos") {
-    console.log(
-      `Filtros aplicados - Búsqueda: "${terminoBuscado}", Categoría: "${categoriaSeleccionada}" - ${productosFiltrados.length} de ${productos.length} productos encontrados`
-    );
-  }
-}
-
 function aplicarFiltrosYMostrar() {
   let productosAFiltrar = [...productos]; // Empieza con todos los productos
 
@@ -260,12 +213,6 @@ function aplicarFiltrosYMostrar() {
     // Mostrar el resultado filtrado
     productosFiltrados = productosAFiltrar;
     mostrarProductos(productosFiltrados);
-}
-
-// Función para filtro por categoría
-function aplicarFiltroPorCategoria(categoria) {
-  categoriaSeleccionada = categoria;
-  aplicarFiltros();
 }
 
 function limpiarTodosFiltros() {
@@ -316,8 +263,6 @@ window.addEventListener("beforeunload", () => {
 });
 
 // Funciones globalmente
-window.aplicarBusqueda = aplicarBusqueda;
 window.limpiarBusqueda = limpiarBusqueda;
 window.limpiarTodosFiltros = limpiarTodosFiltros;
-window.aplicarFiltroPorCategoria = aplicarFiltroPorCategoria;
 window.manejarErrorImagen = manejarErrorImagen;
