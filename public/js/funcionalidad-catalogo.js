@@ -7,44 +7,45 @@ let imageObserver; // Intersection Observer para lazy loading de imágenes
 
 // Función principal: cargar productos desde el backend
 async function cargarProductosDesdeAPI() {
-	const contenedor = document.getElementById("contenedorProductos");
-	contenedor.innerHTML = `
+  const contenedor = document.getElementById("contenedorProductos");
+  contenedor.innerHTML = `
 	<div class="cargando" style="grid-column: 1/-1; text-align: center; padding: 3rem;">
 		<p>Cargando productos...</p>
 	</div>
 	`;
-	
-	try {
-		const response = await fetch("/api/productos");
-		if (!response.ok) {
-			throw new Error("Error en la respuesta del servidor");
-		}
 
-		const data = await response.json();
-		
-		// Normalizar productos (fallback de imagen y texto)
-		productos = data.map((producto) => ({
-			...producto,
-			imagen: producto.imagen?.trim() || "https://jazminshaiel.github.io/hermanos_jota/img/placeholder.png",
-			nombre: producto.nombre?.trim() || "Producto sin nombre",
-			descripcion: producto.descripcion?.trim() || "Sin descripción disponible",
-			categoria: producto.categoria?.toLowerCase()?.trim() || "sin-categoria",
-		}));
-		
-		productosFiltrados = [...productos];
-		
-		generarOpcionesCategorias();
-		mostrarProductos(productos);
-		
-	} catch (error) {
-		console.error("Error al cargar productos:", error);
-		mostrarErrorCarga();
-	}
+  try {
+    const response = await fetch("/api/productos");
+    if (!response.ok) {
+      throw new Error("Error en la respuesta del servidor");
+    }
+
+    const data = await response.json();
+
+    // Normalizar productos (fallback de imagen y texto)
+    productos = data.map((producto) => ({
+      ...producto,
+      imagen:
+        producto.imagen?.trim() ||
+        "https://jazminshaiel.github.io/hermanos_jota/img/placeholder.png",
+      nombre: producto.nombre?.trim() || "Producto sin nombre",
+      descripcion: producto.descripcion?.trim() || "Sin descripción disponible",
+      categoria: producto.categoria?.toLowerCase()?.trim() || "sin-categoria",
+    }));
+
+    productosFiltrados = [...productos];
+
+    generarOpcionesCategorias();
+    mostrarProductos(productos);
+  } catch (error) {
+    console.error("Error al cargar productos:", error);
+    mostrarErrorCarga();
+  }
 }
 
 // Función para mostrar error de carga
 function mostrarErrorCarga() {
-	const contenedor = document.getElementById("contenedorProductos");
+  const contenedor = document.getElementById("contenedorProductos");
   contenedor.innerHTML = `
     <div class="error-carga" style="grid-column: 1/-1; text-align: center; padding: 3rem; color: #d32f2f;">
       <div style="margin-bottom: 1rem;">
@@ -64,7 +65,7 @@ function mostrarErrorCarga() {
 }
 
 function mostrarProductos(lista) {
-	const contenedor = document.getElementById("contenedorProductos");
+  const contenedor = document.getElementById("contenedorProductos");
   contenedor.innerHTML = "";
 
   if (!lista || lista.length === 0) {
@@ -95,7 +96,7 @@ function mostrarProductos(lista) {
 
 // Lazy loading de imagenes
 function inicializarLazyLoading() {
-	const lazyImages = document.querySelectorAll("img.lazy");
+  const lazyImages = document.querySelectorAll("img.lazy");
   const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
@@ -112,21 +113,31 @@ function inicializarLazyLoading() {
 
 // Función para generar opciones de categoría dinámicamente
 function generarOpcionesCategorias() {
-	const filtroCategoria = document.getElementById("filtroCategoria");
-  const categorias = [...new Set(productos.map((p) => p.categoria))];
+  const filtroCategoria = document.getElementById("filtroCategoria");
 
-  filtroCategoria.innerHTML = `<option value="todas">Todas</option>`;
-  categorias.forEach((cat) => {
-    const option = document.createElement("option");
-    option.value = cat;
-    option.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
-    filtroCategoria.appendChild(option);
+  if (!selectCategoria) return;
+
+  const categoriasUnicas = [
+    ...new Set(productos.map((p) => p.categoria)),
+  ].sort();
+
+  selectCategoria.innerHTML =
+    '<option value="todos">Todas las categorías</option>';
+
+  categoriasUnicas.forEach((categoria) => {
+    if (categoria && categoria !== "sin-categoria") {
+      const option = document.createElement("option");
+      option.value = categoria;
+      option.textContent =
+        categoria.charAt(0).toUpperCase() + categoria.slice(1);
+      selectCategoria.appendChild(option);
+    }
   });
 }
 
 // Función para configurar filtro de categoría
 function configurarFiltroCategoria() {
-	const filtroCategoria = document.getElementById("filtroCategoria");
+  const filtroCategoria = document.getElementById("filtroCategoria");
   filtroCategoria.addEventListener("change", (e) => {
     const categoria = e.target.value;
     productosFiltrados =
@@ -138,7 +149,7 @@ function configurarFiltroCategoria() {
 }
 
 function configurarEventosBusqueda() {
-	const inputBusqueda = document.getElementById("busqueda");
+  const inputBusqueda = document.getElementById("busqueda");
   inputBusqueda.addEventListener("input", (e) => {
     const termino = e.target.value.toLowerCase();
     productosFiltrados = productos.filter(
@@ -150,39 +161,38 @@ function configurarEventosBusqueda() {
   });
 }
 
-
 // Función para mostrar información de resultados
 function actualizarInfoResultados(encontrados, total) {
-	const infoElement = document.getElementById("resultados-info");
-	if (!infoElement) return;
+  const infoElement = document.getElementById("resultados-info");
+  if (!infoElement) return;
 
-	if (terminoBuscado || categoriaSeleccionada !== "todos") {
-		let mensaje = `Mostrando ${encontrados} de ${total} productos`;
+  if (terminoBuscado || categoriaSeleccionada !== "todos") {
+    let mensaje = `Mostrando ${encontrados} de ${total} productos`;
 
-		if (terminoBuscado && categoriaSeleccionada !== "todos") {
-			mensaje += ` para "${terminoBuscado}" en categoría "${categoriaSeleccionada}"`;
-		} else if (terminoBuscado) {
-			mensaje += ` para "${terminoBuscado}"`;
-		} else if (categoriaSeleccionada !== "todos") {
-			mensaje += ` en categoría "${categoriaSeleccionada}"`;
-		}
+    if (terminoBuscado && categoriaSeleccionada !== "todos") {
+      mensaje += ` para "${terminoBuscado}" en categoría "${categoriaSeleccionada}"`;
+    } else if (terminoBuscado) {
+      mensaje += ` para "${terminoBuscado}"`;
+    } else if (categoriaSeleccionada !== "todos") {
+      mensaje += ` en categoría "${categoriaSeleccionada}"`;
+    }
 
-		infoElement.textContent = mensaje;
-		infoElement.classList.remove("oculto");
-	} else {
-		infoElement.classList.add("oculto");
-	}
+    infoElement.textContent = mensaje;
+    infoElement.classList.remove("oculto");
+  } else {
+    infoElement.classList.add("oculto");
+  }
 }
 
 function crearCartaProducto(producto) {
-	// Usar data-src para lazy loading
-	const imagenSrc = imageObserver
-		? "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjUwIiBoZWlnaHQ9IjI1MCIgdmlld0JveD0iMCAwIDI1MCAyNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjI1MCIgaGVpZ2h0PSIyNTAiIGZpbGw9IiNmNWU2ZDMiLz48L3N2Zz4="
-		: producto.imagen;
-	const dataSrc = imageObserver ? producto.imagen || "" : "";
-	const lazyClass = imageObserver ? "lazy" : "";
+  // Usar data-src para lazy loading
+  const imagenSrc = imageObserver
+    ? "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjUwIiBoZWlnaHQ9IjI1MCIgdmlld0JveD0iMCAwIDI1MCAyNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjI1MCIgaGVpZ2h0PSIyNTAiIGZpbGw9IiNmNWU2ZDMiLz48L3N2Zz4="
+    : producto.imagen;
+  const dataSrc = imageObserver ? producto.imagen || "" : "";
+  const lazyClass = imageObserver ? "lazy" : "";
 
-	return `
+  return `
     <div class="carta-producto" tabindex="0">
         <a href="producto.html?id=${producto.id}" class="enlace-producto">
             <img src="${imagenSrc}" 
@@ -205,75 +215,74 @@ function crearCartaProducto(producto) {
   `;
 }
 
-
 function aplicarFiltros() {
-	let productosTemp = [...productos];
+  let productosTemp = [...productos];
 
-	// Filtrar por categoría
-	if (categoriaSeleccionada && categoriaSeleccionada !== "todos") {
-		productosTemp = productosTemp.filter(
-			(producto) => producto.categoria === categoriaSeleccionada
-		);
-	}
+  // Filtrar por categoría
+  if (categoriaSeleccionada && categoriaSeleccionada !== "todos") {
+    productosTemp = productosTemp.filter(
+      (producto) => producto.categoria === categoriaSeleccionada
+    );
+  }
 
-	// Filtrar por búsqueda
-	if (terminoBuscado) {
-		productosTemp = productosTemp.filter(
-			(producto) =>
-				producto.nombre.toLowerCase().includes(terminoBuscado) ||
-				producto.descripcion.toLowerCase().includes(terminoBuscado) ||
-				(producto.categoria &&
-					producto.categoria.toLowerCase().includes(terminoBuscado))
-		);
-	}
+  // Filtrar por búsqueda
+  if (terminoBuscado) {
+    productosTemp = productosTemp.filter(
+      (producto) =>
+        producto.nombre.toLowerCase().includes(terminoBuscado) ||
+        producto.descripcion.toLowerCase().includes(terminoBuscado) ||
+        (producto.categoria &&
+          producto.categoria.toLowerCase().includes(terminoBuscado))
+    );
+  }
 
-	productosFiltrados = productosTemp;
-	busquedaActiva = false;
-	mostrarProductos(productosFiltrados);
+  productosFiltrados = productosTemp;
+  busquedaActiva = false;
+  mostrarProductos(productosFiltrados);
 
-	// Estadísticas
-	if (terminoBuscado || categoriaSeleccionada !== "todos") {
-		console.log(
-			`Filtros aplicados - Búsqueda: "${terminoBuscado}", Categoría: "${categoriaSeleccionada}" - ${productosFiltrados.length} de ${productos.length} productos encontrados`
-		);
-	}
+  // Estadísticas
+  if (terminoBuscado || categoriaSeleccionada !== "todos") {
+    console.log(
+      `Filtros aplicados - Búsqueda: "${terminoBuscado}", Categoría: "${categoriaSeleccionada}" - ${productosFiltrados.length} de ${productos.length} productos encontrados`
+    );
+  }
 }
 
 function aplicarBusqueda(termino) {
-	terminoBuscado = termino.toLowerCase().trim();
-	aplicarFiltros();
+  terminoBuscado = termino.toLowerCase().trim();
+  aplicarFiltros();
 }
 
 // Función para filtro por categoría
 function aplicarFiltroPorCategoria(categoria) {
-	categoriaSeleccionada = categoria;
-	aplicarFiltros();
+  categoriaSeleccionada = categoria;
+  aplicarFiltros();
 }
 
 function limpiarTodosFiltros() {
-	const busquedaInput = document.getElementById("busquedaInput");
-	const filtroCategoria = document.getElementById("filtro-categoria");
+  const busquedaInput = document.getElementById("busquedaInput");
+  const filtroCategoria = document.getElementById("filtro-categoria");
 
-	if (busquedaInput) {
-		busquedaInput.value = "";
-	}
+  if (busquedaInput) {
+    busquedaInput.value = "";
+  }
 
-	if (filtroCategoria) {
-		filtroCategoria.value = "todos";
-	}
+  if (filtroCategoria) {
+    filtroCategoria.value = "todos";
+  }
 
-	terminoBuscado = "";
-	categoriaSeleccionada = "todos";
-	aplicarFiltros();
+  terminoBuscado = "";
+  categoriaSeleccionada = "todos";
+  aplicarFiltros();
 
-	if (busquedaInput) {
-		busquedaInput.focus();
-	}
+  if (busquedaInput) {
+    busquedaInput.focus();
+  }
 }
 
 // Función para limpiar búsqueda
 function limpiarBusqueda() {
-	limpiarTodosFiltros();
+  limpiarTodosFiltros();
 }
 
 //Eventos de "escucha"
@@ -286,16 +295,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Función para manejar errores de imágenes de forma global
 function manejarErrorImagen(img) {
-	img.src = "https://jazminshaiel.github.io/hermanos_jota/img/placeholder.png";
-	img.onerror = null; // Evitar bucle infinito
-	console.warn(`Error al cargar imagen: ${img.dataset.src || img.src}`);
+  img.src = "https://jazminshaiel.github.io/hermanos_jota/img/placeholder.png";
+  img.onerror = null; // Evitar bucle infinito
+  console.warn(`Error al cargar imagen: ${img.dataset.src || img.src}`);
 }
 
 // Función para limpiar recursos al salir de la página
 window.addEventListener("beforeunload", () => {
-	if (imageObserver) {
-		imageObserver.disconnect();
-	}
+  if (imageObserver) {
+    imageObserver.disconnect();
+  }
 });
 
 // Funciones globalmente
