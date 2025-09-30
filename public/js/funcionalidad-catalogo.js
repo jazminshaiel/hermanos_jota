@@ -46,8 +46,19 @@ async function cargarProductosDesdeAPI() {
 function mostrarErrorCarga() {
 	const contenedor = document.getElementById("contenedorProductos");
   contenedor.innerHTML = `
-    <div class="error" style="grid-column: 1/-1; text-align: center; padding: 3rem; color: red;">
-      <p>Error al cargar los productos. Intenta nuevamente más tarde.</p>
+    <div class="error-carga" style="grid-column: 1/-1; text-align: center; padding: 3rem; color: #d32f2f;">
+      <div style="margin-bottom: 1rem;">
+        <i class="fas fa-exclamation-triangle" style="font-size: 3rem;"></i>
+      </div>
+      <h3>Error al cargar productos</h3>
+      <p style="margin: 1rem 0; color: #666;">
+        No se pudo conectar con el servidor. Asegúrate de que esté corriendo.
+      </p>
+      <button onclick="location.reload()" 
+              style="padding: 10px 20px; background: #a0522d; color: white; 
+                     border: none; border-radius: 4px; cursor: pointer;">
+        Reintentar
+      </button>
     </div>
   `;
 }
