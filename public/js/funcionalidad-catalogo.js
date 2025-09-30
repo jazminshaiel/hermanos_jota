@@ -88,27 +88,21 @@ function mostrarProductos(lista) {
   inicializarLazyLoading();
 }
 
-// Función para inicializar Intersection Observer
+// Lazy loading de imagenes
 function inicializarLazyLoading() {
-	if ("IntersectionObserver" in window) {
-		imageObserver = new IntersectionObserver(
-			(entries) => {
-				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
-						const img = entry.target;
-						img.src = img.dataset.src;
-						img.classList.remove("lazy");
-						img.classList.add("loaded");
-						imageObserver.unobserve(img);
-					}
-				});
-			},
-			{
-				rootMargin: "50px 0px", // Cargar imagen 50px antes de que sea visible
-				threshold: 0.01,
-			}
-		);
-	}
+	const lazyImages = document.querySelectorAll("img.lazy");
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const img = entry.target;
+        img.src = img.dataset.src;
+        img.classList.remove("lazy");
+        obs.unobserve(img);
+      }
+    });
+  });
+
+  lazyImages.forEach((img) => observer.observe(img));
 }
 
 // Función para generar opciones de categoría dinámicamente
