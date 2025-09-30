@@ -10,7 +10,7 @@ async function cargarProductosDesdeAPI() {
 	const contenedor = document.getElementById("contenedorProductos");
 	contenedor.innerHTML = `
 	<div class="cargando" style="grid-column: 1/-1; text-align: center; padding: 3rem;">
-	<p>Cargando productos...</p>
+		<p>Cargando productos...</p>
 	</div>
 	`;
 	
@@ -19,6 +19,7 @@ async function cargarProductosDesdeAPI() {
 		if (!response.ok) {
 			throw new Error("Error en la respuesta del servidor");
 		}
+
 		const data = await response.json();
 		
 		// Normalizar productos (fallback de imagen y texto)
@@ -34,18 +35,11 @@ async function cargarProductosDesdeAPI() {
 		
 		generarOpcionesCategorias();
 		mostrarProductos(productos);
+		
 	} catch (error) {
 		console.error("Error al cargar productos:", error);
 		mostrarErrorCarga();
 	}
-	
-	// Ejecutar al cargar la página
-	document.addEventListener("DOMContentLoaded", () => {
-		inicializarLazyLoading();
-		cargarProductosDesdeAPI();  // Ahora usamos la API real
-		configurarEventosBusqueda();
-		configurarFiltroCategoria();
-	});
 }
 
 // Función para mostrar error de carga
