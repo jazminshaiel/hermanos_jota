@@ -132,6 +132,19 @@ function configurarFiltroCategoria() {
   });
 }
 
+function configurarEventosBusqueda() {
+	const inputBusqueda = document.getElementById("busqueda");
+  inputBusqueda.addEventListener("input", (e) => {
+    const termino = e.target.value.toLowerCase();
+    productosFiltrados = productos.filter(
+      (p) =>
+        p.nombre.toLowerCase().includes(termino) ||
+        p.descripcion.toLowerCase().includes(termino)
+    );
+    mostrarProductos(productosFiltrados);
+  });
+}
+
 
 // Función para mostrar información de resultados
 function actualizarInfoResultados(encontrados, total) {
@@ -186,8 +199,6 @@ function crearCartaProducto(producto) {
     </div>
   `;
 }
-
-
 
 
 function aplicarFiltros() {
@@ -258,63 +269,6 @@ function limpiarTodosFiltros() {
 // Función para limpiar búsqueda
 function limpiarBusqueda() {
 	limpiarTodosFiltros();
-}
-
-
-
-function configurarEventosBusqueda() {
-	const busquedaInput = document.getElementById("busquedaInput");
-	const busquedaButton = document.querySelector(".btn-busqueda");
-
-	if (busquedaButton) {
-		busquedaButton.addEventListener("click", (event) => {
-			event.preventDefault();
-			const termino = busquedaInput
-				? busquedaInput.value.toLowerCase().trim()
-				: "";
-			aplicarBusqueda(termino);
-		});
-
-		if (busquedaInput) {
-			let timeoutId;
-
-			busquedaInput.addEventListener("input", (event) => {
-				const termino = busquedaInput.value.toLowerCase().trim();
-				clearTimeout(timeoutId);
-
-				if (busquedaActiva) return;
-
-				timeoutId = setTimeout(() => {
-					aplicarBusqueda(termino);
-				}, 300); // Aumentado a 300ms para mejor performance
-			});
-
-			busquedaInput.addEventListener("keydown", (event) => {
-				switch (event.key) {
-					case "Enter":
-						event.preventDefault();
-						clearTimeout(timeoutId);
-						const termino = busquedaInput.value.toLowerCase().trim();
-						aplicarBusqueda(termino);
-						break;
-
-					case "Escape":
-						event.preventDefault();
-						limpiarTodosFiltros();
-						break;
-				}
-			});
-
-			// Mejorar accesibilidad
-			busquedaInput.addEventListener("focus", () => {
-				busquedaInput.setAttribute("aria-expanded", "true");
-			});
-
-			busquedaInput.addEventListener("blur", () => {
-				busquedaInput.setAttribute("aria-expanded", "false");
-			});
-		}
-	}
 }
 
 //Eventos de "escucha"
