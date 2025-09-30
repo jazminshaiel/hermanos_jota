@@ -119,6 +119,19 @@ function generarOpcionesCategorias() {
   });
 }
 
+// Función para configurar filtro de categoría
+function configurarFiltroCategoria() {
+	const filtroCategoria = document.getElementById("filtroCategoria");
+  filtroCategoria.addEventListener("change", (e) => {
+    const categoria = e.target.value;
+    productosFiltrados =
+      categoria === "todas"
+        ? [...productos]
+        : productos.filter((p) => p.categoria === categoria);
+    mostrarProductos(productosFiltrados);
+  });
+}
+
 
 // Función para mostrar información de resultados
 function actualizarInfoResultados(encontrados, total) {
@@ -247,17 +260,7 @@ function limpiarBusqueda() {
 	limpiarTodosFiltros();
 }
 
-// Función para configurar filtro de categoría
-function configurarFiltroCategoria() {
-	const filtroCategoria = document.getElementById("filtro-categoria");
 
-	if (filtroCategoria) {
-		filtroCategoria.addEventListener("change", (event) => {
-			const categoria = event.target.value;
-			aplicarFiltroPorCategoria(categoria);
-		});
-	}
-}
 
 function configurarEventosBusqueda() {
 	const busquedaInput = document.getElementById("busquedaInput");
