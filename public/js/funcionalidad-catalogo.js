@@ -55,36 +55,6 @@ function generarOpcionesCategorias() {
 	});
 }
 
-// Cargar datos desde el archivo externo
-function inicializarProductos() {
-	try {
-		if (typeof productosData !== "undefined" && Array.isArray(productosData)) {
-			// fallback para imágenes y mejor limpieza de datos
-			productos = productosData.map((producto) => ({
-				...producto,
-				imagen:
-					producto.imagen?.trim() ||
-					"https://jazminshaiel.github.io/hermanos_jota/img/placeholder.png",
-				nombre: producto.nombre?.trim() || "Producto sin nombre",
-				descripcion:
-					producto.descripcion?.trim() || "Sin descripción disponible",
-				categoria: producto.categoria?.toLowerCase()?.trim() || "sin-categoria",
-			}));
-			productosFiltrados = [...productos];
-
-			generarOpcionesCategorias();
-
-			return true;
-		} else {
-			throw new Error("Datos de productos no encontrados o formato incorrecto");
-		}
-	} catch (error) {
-		console.error("Error al inicializar productos:", error);
-		mostrarErrorCarga();
-		return false;
-	}
-}
-
 // Función para mostrar error de carga
 function mostrarErrorCarga() {
 	const contenedor = document.getElementById("contenedorProductos");
