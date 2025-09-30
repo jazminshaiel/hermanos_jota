@@ -107,28 +107,16 @@ function inicializarLazyLoading() {
 
 // Función para generar opciones de categoría dinámicamente
 function generarOpcionesCategorias() {
-	const selectCategoria = document.getElementById("filtro-categoria");
-	if (!selectCategoria) return;
+	const filtroCategoria = document.getElementById("filtroCategoria");
+  const categorias = [...new Set(productos.map((p) => p.categoria))];
 
-	// Obtener categorías únicas de los productos
-	const categoriasUnicas = [
-		...new Set(productos.map((p) => p.categoria)),
-	].sort();
-
-	// Limpiar opciones existentes (mantener solo "todos")
-	selectCategoria.innerHTML =
-		'<option value="todos">Todas las categorías</option>';
-
-	// Agregar opciones dinámicamente
-	categoriasUnicas.forEach((categoria) => {
-		if (categoria && categoria !== "sin-categoria") {
-			const option = document.createElement("option");
-			option.value = categoria;
-			option.textContent =
-				categoria.charAt(0).toUpperCase() + categoria.slice(1);
-			selectCategoria.appendChild(option);
-		}
-	});
+  filtroCategoria.innerHTML = `<option value="todas">Todas</option>`;
+  categorias.forEach((cat) => {
+    const option = document.createElement("option");
+    option.value = cat;
+    option.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
+    filtroCategoria.appendChild(option);
+  });
 }
 
 
