@@ -6,6 +6,58 @@ let categoriaSeleccionada = "todos"; //  Variable para filtro de categoría
 // Intersection Observer para lazy loading de imágenes
 let imageObserver;
 
+async function cargarProductosDesdeAPI() {
+	const contenedor = document.getElementById("contenedorProductos");
+	contenedor.innerHTML = `
+	<div class="cargando" style="grid-column: 1/-1; text-align: center; padding: 3rem;">
+	<p>Cargando productos...</p>
+	</div>
+	`;
+	
+	try {
+		const response = await fetch("/api/productos");
+		if (!response.ok) {
+			throw new Error("Error en la respuesta del servidor");
+		}
+		const data = await response.json();
+		
+		// Normalizar productos (fallback de imagen y texto)
+		productos = data.map((producto) => ({
+			...producto,
+			imagen: producto.imagen?.trim() || "https://jazminshaiel.github.io/hermanos_jota/img/placeholder.png",
+			nombre: producto.nombre?.trim() || "Producto sin nombre",
+			descripcion: producto.descripcion?.trim() || "Sin descripción disponible",
+			categoria: producto.categoria?.toLowerCase()?.trim() || "sin-categoria",
+		}));
+		
+		productosFiltrados = [...productos];
+		
+		generarOpcionesCategorias();
+		mostrarProductos(productos);
+	} catch (error) {
+		console.error("Error al cargar productos:", error);
+		mostrarErrorCarga();
+	}
+	
+	// Ejecutar al cargar la página
+	document.addEventListener("DOMContentLoaded", () => {
+		inicializarLazyLoading();
+		cargarProductosDesdeAPI();  // Ahora usamos la API real
+		configurarEventosBusqueda();
+		configurarFiltroCategoria();
+	});
+}
+
+// Función para mostrar error de carga
+function mostrarErrorCarga() {
+	const contenedor = document.getElementById("contenedorProductos");
+  contenedor.innerHTML = `
+    <div class="error" style="grid-column: 1/-1; text-align: center; padding: 3rem; color: red;">
+      <p>Error al cargar los productos. Intenta nuevamente más tarde.</p>
+    </div>
+  `;
+}
+
 // Función para inicializar Intersection Observer
 function inicializarLazyLoading() {
 	if ("IntersectionObserver" in window) {
@@ -55,25 +107,6 @@ function generarOpcionesCategorias() {
 	});
 }
 
-// Función para mostrar error de carga
-function mostrarErrorCarga() {
-	const contenedor = document.getElementById("contenedorProductos");
-	if (contenedor) {
-		contenedor.innerHTML = `
-      <div class="error-carga" style="grid-column: 1/-1; text-align: center; padding: 3rem; color: #d32f2f;">
-        <div style="margin-bottom: 1rem;">
-          <i class="fas fa-exclamation-triangle" style="font-size: 3rem;"></i>
-        </div>
-        <h3>Error al cargar productos</h3>
-        <p style="margin: 1rem 0; color: #666;">No se pudieron cargar los productos. Por favor, recarga la página.</p>
-        <button onclick="location.reload()" 
-                style="padding: 10px 20px; background: #a0522d; color: white; border: none; border-radius: 4px; cursor: pointer;">
-          Recargar página
-        </button>
-      </div>
-    `;
-	}
-}
 
 // Función para mostrar información de resultados
 function actualizarInfoResultados(encontrados, total) {
@@ -210,47 +243,6 @@ function mostrarProductos(productosAMostrar) {
 	actualizarInfoResultados(productosAMostrar.length, productos.length);
 }
 
-async function cargarProductosDesdeAPI() {
-	const contenedor = document.getElementById("contenedorProductos");
-  contenedor.innerHTML = `
-    <div class="cargando" style="grid-column: 1/-1; text-align: center; padding: 3rem;">
-      <p>Cargando productos...</p>
-    </div>
-  `;
-
-  try {
-    const response = await fetch("/api/productos");
-    if (!response.ok) {
-      throw new Error("Error en la respuesta del servidor");
-    }
-    const data = await response.json();
-
-    // Normalizar productos (fallback de imagen y texto)
-    productos = data.map((producto) => ({
-      ...producto,
-      imagen: producto.imagen?.trim() || "https://jazminshaiel.github.io/hermanos_jota/img/placeholder.png",
-      nombre: producto.nombre?.trim() || "Producto sin nombre",
-      descripcion: producto.descripcion?.trim() || "Sin descripción disponible",
-      categoria: producto.categoria?.toLowerCase()?.trim() || "sin-categoria",
-    }));
-
-    productosFiltrados = [...productos];
-
-    generarOpcionesCategorias();
-    mostrarProductos(productos);
-  } catch (error) {
-    console.error("Error al cargar productos:", error);
-    mostrarErrorCarga();
-}
-
-// Ejecutar al cargar la página
-document.addEventListener("DOMContentLoaded", () => {
-  inicializarLazyLoading();
-  cargarProductosDesdeAPI();  // Ahora usamos la API real
-  configurarEventosBusqueda();
-  configurarFiltroCategoria();
-	});
-}
 
 function aplicarFiltros() {
 	let productosTemp = [...productos];
@@ -393,23 +385,6 @@ function configurarEventosBusqueda() {
 document.addEventListener("DOMContentLoaded", () => {
 	// Inicializar lazy loading
 	inicializarLazyLoading();
-
-	// Inicializar productos con mejor manejo de errores
-	const productosInicializados = inicializarProductos();
-
-	if (productosInicializados && productos.length > 0) {
-		cargarProductosAsync()
-			.then((data) => {
-				mostrarProductos(data);
-			})
-			.catch((error) => {
-				console.error("Error al cargar productos:", error);
-				mostrarErrorCarga();
-			});
-	} else {
-		mostrarErrorCarga();
-	}
-
 	// Configurar eventos de búsqueda y filtros
 	configurarEventosBusqueda();
 	configurarFiltroCategoria();
