@@ -1,4 +1,3 @@
-let productos = [];
 let productosFiltrados = [];
 let terminoBuscado = "";
 let categoriaSeleccionada = "todos"; //  Variable para filtro de categoría
