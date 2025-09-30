@@ -210,28 +210,45 @@ function mostrarProductos(productosAMostrar) {
 	actualizarInfoResultados(productosAMostrar.length, productos.length);
 }
 
-// Función para simular la carga asíncrona de datos con una Promesa
-function cargarProductosAsync() {
+async function cargarProductosDesdeAPI() {
 	const contenedor = document.getElementById("contenedorProductos");
-	if (contenedor) {
-		contenedor.innerHTML = `
-      <div class="cargando" style="grid-column: 1/-1; text-align: center; padding: 3rem;">
-        <p>Cargando productos...</p>
-      </div>
-    `;
-	}
+  contenedor.innerHTML = `
+    <div class="cargando" style="grid-column: 1/-1; text-align: center; padding: 3rem;">
+      <p>Cargando productos...</p>
+    </div>
+  `;
 
-	return new Promise((resolve, reject) => {
-		// Simular carga de red más realista
-		const tiempoCarga = Math.random() * 1000 + 500; // Entre 500ms y 1.5s
+  try {
+    const response = await fetch("/api/productos");
+    if (!response.ok) {
+      throw new Error("Error en la respuesta del servidor");
+    }
+    const data = await response.json();
 
-		setTimeout(() => {
-			if (productos.length > 0) {
-				resolve(productos);
-			} else {
-				reject(new Error("No se pudieron cargar los productos"));
-			}
-		}, tiempoCarga);
+    // Normalizar productos (fallback de imagen y texto)
+    productos = data.map((producto) => ({
+      ...producto,
+      imagen: producto.imagen?.trim() || "https://jazminshaiel.github.io/hermanos_jota/img/placeholder.png",
+      nombre: producto.nombre?.trim() || "Producto sin nombre",
+      descripcion: producto.descripcion?.trim() || "Sin descripción disponible",
+      categoria: producto.categoria?.toLowerCase()?.trim() || "sin-categoria",
+    }));
+
+    productosFiltrados = [...productos];
+
+    generarOpcionesCategorias();
+    mostrarProductos(productos);
+  } catch (error) {
+    console.error("Error al cargar productos:", error);
+    mostrarErrorCarga();
+}
+
+// Ejecutar al cargar la página
+document.addEventListener("DOMContentLoaded", () => {
+  inicializarLazyLoading();
+  cargarProductosDesdeAPI();  // Ahora usamos la API real
+  configurarEventosBusqueda();
+  configurarFiltroCategoria();
 	});
 }
 
