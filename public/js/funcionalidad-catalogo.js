@@ -3,9 +3,9 @@ let busquedaActiva = false;
 let productosFiltrados = [];
 let terminoBuscado = "";
 let categoriaSeleccionada = "todos"; //  Variable para filtro de categoría
-// Intersection Observer para lazy loading de imágenes
-let imageObserver;
+let imageObserver; // Intersection Observer para lazy loading de imágenes
 
+// Función principal: cargar productos desde el backend
 async function cargarProductosDesdeAPI() {
 	const contenedor = document.getElementById("contenedorProductos");
 	contenedor.innerHTML = `
