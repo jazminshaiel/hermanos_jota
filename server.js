@@ -34,7 +34,7 @@ app.get('/contacto', (req, res) => {
 // API endpoints (opcional)
 app.get('/api/productos', (req, res) => {
     // Aquí puedes servir datos desde una base de datos
-    res.json({ productos: [] });
+    res.json(productos);
 });
 
 // Iniciar servidor
