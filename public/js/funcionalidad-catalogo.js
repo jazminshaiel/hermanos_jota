@@ -41,12 +41,12 @@ async function cargarProductosDesdeAPI() {
     mostrarProductos(productosFiltrados);
   } catch (error) {
     console.error("Error al cargar productos:", error);
-    mostrarErrorCarga();
+    mostrarErrorCarga(error);
   }
 }
 
 // Función para mostrar error de carga
-function mostrarErrorCarga() {
+function mostrarErrorCarga(error) {
   const contenedor = document.getElementById("contenedorProductos");
   contenedor.innerHTML = `
     <div class="error-carga" style="grid-column: 1/-1; text-align: center; padding: 3rem; color: #a0522d;">
@@ -227,6 +227,9 @@ function aplicarFiltrosYMostrar() {
   // Mostrar el resultado filtrado
   productosFiltrados = productosAFiltrar;
   mostrarProductos(productosFiltrados);
+
+  // Actualizar info resultados
+  actualizarInfoResultados(productosFiltrados.length, productos.length);
 }
 
 function limpiarTodosFiltros() {
