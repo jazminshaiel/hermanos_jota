@@ -34,8 +34,8 @@ async function cargarProductosDesdeAPI() {
       id: parseInt(producto.id),
     }));
 
-	generarOpcionesCategorias(); // Genera las categorías en el select
-    aplicarFiltrosYMostrar();    // Muestra todos los productos inicialmente
+    generarOpcionesCategorias(); // Genera las categorías en el select
+    aplicarFiltrosYMostrar(); // Muestra todos los productos inicialmente
     productosFiltrados = [...productos];
 
     mostrarProductos(productosFiltrados);
@@ -63,14 +63,14 @@ function mostrarProductos(lista) {
   if (!lista || lista.length === 0) {
     contenedor.innerHTML =
       '<div class="no-results">No se encontraron productos con esos filtros.</div>';
-    
+
     if (infoResultados) {
       infoResultados.classList.add("oculto");
     }
-      return;
+    return;
   }
 
-  const html = lista.map(producto => crearCartaProducto(producto)).join('');
+  const html = lista.map((producto) => crearCartaProducto(producto)).join("");
   contenedor.innerHTML = html;
 
   inicializarLazyLoading();
@@ -99,49 +99,55 @@ function inicializarLazyLoading() {
 
 // Función para generar opciones de categoría dinámicamente
 function generarOpcionesCategorias() {
- const categoriaSelect = document.getElementById("filtro-categoria");
-    if (!categoriaSelect) {
-        console.warn("Elemento #filtro-categoria no encontrado.");
-        return;
-    }
+  const categoriaSelect = document.getElementById("filtro-categoria");
+  if (!categoriaSelect) {
+    console.warn("Elemento #filtro-categoria no encontrado.");
+    return;
+  }
 
-    // Obtener categorías únicas
-    const categoriasUnicas = ["todos", ...new Set(productos.map(p => p.categoria.toLowerCase()))];
+  // Obtener categorías únicas
+  const categoriasUnicas = [
+    "todos",
+    ...new Set(productos.map((p) => p.categoria.toLowerCase())),
+  ];
 
-    // Llenar el select
-    categoriaSelect.innerHTML = "";
-    categoriasUnicas.forEach(categoria => {
-        const nombreMostrar = categoria === "todos" ? "Todas las Categorías" : categoria.charAt(0).toUpperCase() + categoria.slice(1);
-        const option = document.createElement("option");
-        option.value = categoria;
-        option.textContent = nombreMostrar;
-        categoriaSelect.appendChild(option);
-    });
+  // Llenar el select
+  categoriaSelect.innerHTML = "";
+  categoriasUnicas.forEach((categoria) => {
+    const nombreMostrar =
+      categoria === "todos"
+        ? "Todas las Categorías"
+        : categoria.charAt(0).toUpperCase() + categoria.slice(1);
+    const option = document.createElement("option");
+    option.value = categoria;
+    option.textContent = nombreMostrar;
+    categoriaSelect.appendChild(option);
+  });
 }
 
 function configurarEventosBusqueda() {
   const categoriaSelect = document.getElementById("filtro-categoria");
-    const busquedaInput = document.getElementById("busquedaInput");
-    
-    // Evento de Búsqueda
-    if (busquedaInput) {
-        busquedaInput.addEventListener("input", (event) => {
-            clearTimeout(busquedaInput.searchTimeout);
-            terminoBuscado = event.target.value.toLowerCase().trim();
+  const busquedaInput = document.getElementById("busquedaInput");
 
-            busquedaInput.searchTimeout = setTimeout(() => {
-                aplicarFiltrosYMostrar(); // Llama a la función unificada
-            }, 300);
-        });
-    }
+  // Evento de Búsqueda
+  if (busquedaInput) {
+    busquedaInput.addEventListener("input", (event) => {
+      clearTimeout(busquedaInput.searchTimeout);
+      terminoBuscado = event.target.value.toLowerCase().trim();
 
-    // Evento de Filtro por Categoría
-    if (categoriaSelect) {
-        categoriaSelect.addEventListener("change", (event) => {
-            categoriaSeleccionada = event.target.value;
-            aplicarFiltrosYMostrar(); // Llama a la función unificada
-        });
-    }
+      busquedaInput.searchTimeout = setTimeout(() => {
+        aplicarFiltrosYMostrar(); // Llama a la función unificada
+      }, 300);
+    });
+  }
+
+  // Evento de Filtro por Categoría
+  if (categoriaSelect) {
+    categoriaSelect.addEventListener("change", (event) => {
+      categoriaSeleccionada = event.target.value;
+      aplicarFiltrosYMostrar(); // Llama a la función unificada
+    });
+  }
 }
 
 // Función para mostrar información de resultados
@@ -199,28 +205,28 @@ function crearCartaProducto(producto) {
 }
 
 function aplicarFiltrosYMostrar() {
-  let productosAFiltrar = [...productos]; // Empieza con todos los productos
+  let productosAFiltrar = [...productos]; // Todos los productos
 
-    // A) FILTRAR POR TÉRMINO DE BÚSQUEDA
-    if (terminoBuscado) {
-        const termino = terminoBuscado.toLowerCase();
-        productosAFiltrar = productosAFiltrar.filter(
-            (producto) =>
-                producto.nombre.toLowerCase().includes(termino) ||
-                producto.descripcion.toLowerCase().includes(termino)
-        );
-    }
+  // A) FILTRAR POR TÉRMINO DE BÚSQUEDA
+  if (terminoBuscado) {
+    const termino = terminoBuscado.toLowerCase();
+    productosAFiltrar = productosAFiltrar.filter(
+      (producto) =>
+        producto.nombre.toLowerCase().includes(termino) ||
+        producto.descripcion.toLowerCase().includes(termino)
+    );
+  }
 
-    // B) FILTRAR POR CATEGORÍA
-    if (categoriaSeleccionada !== "todos") {
-        productosAFiltrar = productosAFiltrar.filter(
-            (producto) => producto.categoria === categoriaSeleccionada
-        );
-    }
+  // B) FILTRAR POR CATEGORÍA
+  if (categoriaSeleccionada !== "todos") {
+    productosAFiltrar = productosAFiltrar.filter(
+      (producto) => producto.categoria === categoriaSeleccionada
+    );
+  }
 
-    // Mostrar el resultado filtrado
-    productosFiltrados = productosAFiltrar;
-    mostrarProductos(productosFiltrados);
+  // Mostrar el resultado filtrado
+  productosFiltrados = productosAFiltrar;
+  mostrarProductos(productosFiltrados);
 }
 
 function limpiarTodosFiltros() {
@@ -253,7 +259,7 @@ function limpiarBusqueda() {
 // Inicialización
 document.addEventListener("DOMContentLoaded", () => {
   cargarProductosDesdeAPI();
-    configurarEventosBusqueda();
+  configurarEventosBusqueda();
 });
 
 // Función para manejar errores de imágenes de forma global
