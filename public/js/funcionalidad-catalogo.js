@@ -51,7 +51,7 @@ function mostrarErrorCarga() {
   contenedor.innerHTML = `
     <div class="error-carga" style="grid-column: 1/-1; text-align: center; padding: 3rem; color: #a0522d;">
         <p>⚠️ Error al cargar los productos. Por favor, intente más tarde.</p>
-        <p>Detalle: ${error.message}</p>
+        <p>Detalle: ${error?.message || "Error desconocido"}</p>
     </div>
   `;
 }
