@@ -1,0 +1,30 @@
+{
+  "name": "hermanos_jota",
+  "version": "1.0.0",
+  "description": "- Srdos Gorosito Silvana\r  - Roman Ezequiel Zorrilla\r  - Jazmín Shaiel Nieto\r  - Moreno Iñaki\r  - Torres Lell Pablo A.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jazminshaiel/hermanos_jota.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/jazminshaiel/hermanos_jota/issues"
+  },
+  "homepage": "https://github.com/jazminshaiel/hermanos_jota#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

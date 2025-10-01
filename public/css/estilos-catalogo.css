@@ -303,7 +303,7 @@ h1 {
 	text-align: center;
 	padding: 3rem;
 	color: #333;
-	font-family: italic;
+	font-style: italic;
 	grid-column: 1/-1;
 }
 
