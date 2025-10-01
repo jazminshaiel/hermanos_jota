@@ -119,3 +119,5 @@ const productosData = [
     categoria: "sillas",
   },
 ];
+
+module.exports = productosData;
