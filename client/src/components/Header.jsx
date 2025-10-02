@@ -18,7 +18,6 @@ const Header = () => {
           {/* Rutas de navegación */}
           <Link to="/">Inicio</Link>
           <Link to="/catalogo">Productos</Link>
-          <Link to="/nosotros">Nosotros</Link>
           <Link to="/contacto">Contacto</Link>
         </nav>
 

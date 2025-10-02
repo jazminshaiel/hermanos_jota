@@ -90,7 +90,7 @@ main{
     flex-direction: column;
     text-align: center;
     color:#ffffff;
-backdrop-filter: blur(3px);
+    /* backdrop-filter: blur(3px); */
 }
 .formulario-contenedor{
    flex: 1; 
