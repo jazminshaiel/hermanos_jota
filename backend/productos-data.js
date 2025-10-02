@@ -28,7 +28,8 @@ const productosData = [
       "Butaca de diseño contemporáneo tapizada en cuero genuino. Estructura de madera maciza con detalles metálicos que brindan comodidad y estilo a cualquier ambiente.",
     precio: "$XX.XXX",
     imagen:
-      "https://jazminshaiel.github.io/hermanos_jota/img/butacaMendoza.png",
+      "/img/butacaMendoza.png",
+      // "https://jazminshaiel.github.io/hermanos_jota/img/butacaMendoza.png",
     categoria: "sillones",
   },
   {
@@ -38,7 +39,8 @@ const productosData = [
       "Sillón de tres cuerpos con tapizado en tela premium y estructura de madera. Diseño moderno que combina confort y elegancia para tu sala de estar.",
     precio: "$XX.XXX",
     imagen:
-      "https://jazminshaiel.github.io/hermanos_jota/img/sillónCopacabana.png",
+      "/img/sillonCopacabana.png",
+      // "https://jazminshaiel.github.io/hermanos_jota/img/sillónCopacabana.png",
     categoria: "sillones",
   },
   {
@@ -48,7 +50,8 @@ const productosData = [
       "Mesa de centro fabricada en madera de araucaria con terminaciones en aceite natural. Diseño minimalista que se adapta a diferentes estilos decorativos.",
     precio: "$XX.XXX",
     imagen:
-      "https://jazminshaiel.github.io/hermanos_jota/img/mesadeCentroAraucaria.png",
+      "/img/mesadeCentroAraucaria.png",
+      // "https://jazminshaiel.github.io/hermanos_jota/img/mesadeCentroAraucaria.png",
     categoria: "mesas",
   },
   {
@@ -58,7 +61,8 @@ const productosData = [
       "Mesa de noche con cajón y espacio abierto. Fabricada en madera maciza con herrajes de calidad premium que garantizan durabilidad y funcionalidad.",
     precio: "$XX.XXX",
     imagen:
-      "https://jazminshaiel.github.io/hermanos_jota/img/mesadeNocheAconcagua.png",
+      "/img/mesadeNocheAconcagua.png",
+      // "https://jazminshaiel.github.io/hermanos_jota/img/mesadeNocheAconcagua.png",
     categoria: "mesas",
   },
   {
@@ -67,7 +71,9 @@ const productosData = [
     descripcion:
       "Cama matrimonial con cabecero tapizado en cuero sintético. Estructura de madera sólida que brinda estabilidad y durabilidad por años.",
     precio: "$XX.XXX",
-    imagen: "https://jazminshaiel.github.io/hermanos_jota/img/camaNeuquén.png",
+    imagen: 
+      "/img/camaNeuquen.png",
+    // "https://jazminshaiel.github.io/hermanos_jota/img/camaNeuquén.png",
     categoria: "camas",
   },
   {
@@ -77,7 +83,8 @@ const productosData = [
       "Sofá de diseño escandinavo con tapizado removible. Estructura de madera de pino y relleno de espuma de alta densidad para máximo confort.",
     precio: "$XX.XXX",
     imagen:
-      "https://jazminshaiel.github.io/hermanos_jota/img/sofáPatagonia.png",
+      "/img/sofaPatagonia.png",
+      // "https://jazminshaiel.github.io/hermanos_jota/img/sofáPatagonia.png",
     categoria: "sillones",
   },
   {
@@ -87,7 +94,8 @@ const productosData = [
       "Mesa de comedor para 6 personas fabricada en madera de eucalipto. Diseño clásico con terminaciones naturales que resaltan la belleza de la madera.",
     precio: "$XX.XXX",
     imagen:
-      "https://jazminshaiel.github.io/hermanos_jota/img/mesaComedorPampa.png",
+      "/img/mesaComedorPampa.png",
+      // "https://jazminshaiel.github.io/hermanos_jota/img/mesaComedorPampa.png",
     categoria: "mesas",
   },
   {
@@ -97,7 +105,8 @@ const productosData = [
       "Set de sillas de comedor con respaldo ergonómico. Estructura de madera maciza con asiento tapizado en cuero ecológico para mayor comodidad.",
     precio: "$XX.XXX",
     imagen:
-      "https://jazminshaiel.github.io/hermanos_jota/img/sillasCórdoba.png",
+      "/img/sillasCordoba.png",
+      // "https://jazminshaiel.github.io/hermanos_jota/img/sillasCórdoba.png",
     categoria: "sillas",
   },
   {
@@ -107,7 +116,8 @@ const productosData = [
       "Escritorio de trabajo con cajones laterales y superficie amplia. Fabricado en MDF con enchapado de nogal y herrajes metálicos de calidad.",
     precio: "$XX.XXX",
     imagen:
-      "https://jazminshaiel.github.io/hermanos_jota/img/escritorioCosta.png",
+      "/img/escritorioCosta.png",
+      // "https://jazminshaiel.github.io/hermanos_jota/img/escritorioCosta.png",
     categoria: "escritorios",
   },
   {
@@ -117,7 +127,8 @@ const productosData = [
       "Silla de oficina ergonómica con respaldo regulable y base giratoria. Tapizado en material transpirable con soporte lumbar ajustable.",
     precio: "$XX.XXX",
     imagen:
-      "https://jazminshaiel.github.io/hermanos_jota/img/silladeTrabajoBelgrano.png",
+      "/img/silladeTrabajoBelgrano.png",
+      // "https://jazminshaiel.github.io/hermanos_jota/img/silladeTrabajoBelgrano.png",
     categoria: "sillas",
   },
 ];
