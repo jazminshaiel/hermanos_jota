@@ -1,5 +1,13 @@
 import { useState, useEffect } from "react";
 import "../styles/estilos-catalogo.css";
+import "../styles/estilos-globales.css";
+
+
+// Header Y Footer
+import Header from "../components/Header"; 
+import Footer from "../components/Footer"; 
+
+// COMPONENTES
 import ProductCard from "../components/ProductCard";
 import SearchBar from "../components/SearchBar";
 import Filters from "../components/Filters";
@@ -53,6 +61,7 @@ function Catalog() {
 
   return (
     <div className="catalogo-container">
+      <Header />
       <h1 className="titulo-catalogo">Nuestro Catálogo</h1>
 
       {/* Barra de búsqueda */}
@@ -78,6 +87,7 @@ function Catalog() {
 
       {/* Lista de productos */}
       <ProductList productos={filteredProductos} />
+      <Footer />
     </div>
   );
 }
