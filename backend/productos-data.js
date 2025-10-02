@@ -4,7 +4,7 @@ const productosData = [
     nombre: "Aparador Uspallata",
     descripcion:
       "Aparador de seis puertas fabricado en nogal sostenible con tiradores metálicos en acabado latón. Su silueta minimalista realza el veteado natural de la madera, creando una pieza que combina funcionalidad y elegancia atemporal para espacios contemporáneos.",
-    precio: "$XX.XXX",
+    precio: 150000,
     imagen:
       "/img/aparadorUspallata.png",
       // "https://jazminshaiel.github.io/hermanos_jota/img/aparadorUspallata.png"
@@ -15,7 +15,7 @@ const productosData = [
     nombre: "Biblioteca Recoleta",
     descripcion:
       "Biblioteca elegante fabricada en madera de nogal con acabados de primera calidad. Diseño funcional con múltiples compartimentos para organizar libros y objetos decorativos.",
-    precio: "$XX.XXX",
+    precio: 120000,
     imagen:
       "/img/bibliotecaRecoleta.png",
       // "https://jazminshaiel.github.io/hermanos_jota/img/bibliotecaRecoleta.png",
@@ -26,7 +26,7 @@ const productosData = [
     nombre: "Butaca Mendoza",
     descripcion:
       "Butaca de diseño contemporáneo tapizada en cuero genuino. Estructura de madera maciza con detalles metálicos que brindan comodidad y estilo a cualquier ambiente.",
-    precio: "$XX.XXX",
+    precio: 85000,
     imagen:
       "/img/butacaMendoza.png",
       // "https://jazminshaiel.github.io/hermanos_jota/img/butacaMendoza.png",
@@ -37,7 +37,7 @@ const productosData = [
     nombre: "Sillón Copacabana",
     descripcion:
       "Sillón de tres cuerpos con tapizado en tela premium y estructura de madera. Diseño moderno que combina confort y elegancia para tu sala de estar.",
-    precio: "$XX.XXX",
+    precio: 200000,
     imagen:
       "/img/sillonCopacabana.png",
       // "https://jazminshaiel.github.io/hermanos_jota/img/sillónCopacabana.png",
@@ -48,7 +48,7 @@ const productosData = [
     nombre: "Mesa de Centro Araucaria",
     descripcion:
       "Mesa de centro fabricada en madera de araucaria con terminaciones en aceite natural. Diseño minimalista que se adapta a diferentes estilos decorativos.",
-    precio: "$XX.XXX",
+    precio: 60000,
     imagen:
       "/img/mesadeCentroAraucaria.png",
       // "https://jazminshaiel.github.io/hermanos_jota/img/mesadeCentroAraucaria.png",
@@ -59,7 +59,7 @@ const productosData = [
     nombre: "Mesa de Noche Aconcagua",
     descripcion:
       "Mesa de noche con cajón y espacio abierto. Fabricada en madera maciza con herrajes de calidad premium que garantizan durabilidad y funcionalidad.",
-    precio: "$XX.XXX",
+    precio: 70000,
     imagen:
       "/img/mesadeNocheAconcagua.png",
       // "https://jazminshaiel.github.io/hermanos_jota/img/mesadeNocheAconcagua.png",
@@ -70,7 +70,7 @@ const productosData = [
     nombre: "Cama Neuquén",
     descripcion:
       "Cama matrimonial con cabecero tapizado en cuero sintético. Estructura de madera sólida que brinda estabilidad y durabilidad por años.",
-    precio: "$XX.XXX",
+    precio: 300000,
     imagen: 
       "/img/camaNeuquen.png",
     // "https://jazminshaiel.github.io/hermanos_jota/img/camaNeuquén.png",
@@ -81,7 +81,7 @@ const productosData = [
     nombre: "Sofá Patagonia",
     descripcion:
       "Sofá de diseño escandinavo con tapizado removible. Estructura de madera de pino y relleno de espuma de alta densidad para máximo confort.",
-    precio: "$XX.XXX",
+    precio: 170000,
     imagen:
       "/img/sofaPatagonia.png",
       // "https://jazminshaiel.github.io/hermanos_jota/img/sofáPatagonia.png",
@@ -92,7 +92,7 @@ const productosData = [
     nombre: "Mesa Comedor Pampa",
     descripcion:
       "Mesa de comedor para 6 personas fabricada en madera de eucalipto. Diseño clásico con terminaciones naturales que resaltan la belleza de la madera.",
-    precio: "$XX.XXX",
+    precio: 100000,
     imagen:
       "/img/mesaComedorPampa.png",
       // "https://jazminshaiel.github.io/hermanos_jota/img/mesaComedorPampa.png",
@@ -103,7 +103,7 @@ const productosData = [
     nombre: "Sillas Córdoba",
     descripcion:
       "Set de sillas de comedor con respaldo ergonómico. Estructura de madera maciza con asiento tapizado en cuero ecológico para mayor comodidad.",
-    precio: "$XX.XXX",
+    precio: 120000,
     imagen:
       "/img/sillasCordoba.png",
       // "https://jazminshaiel.github.io/hermanos_jota/img/sillasCórdoba.png",
@@ -114,7 +114,7 @@ const productosData = [
     nombre: "Escritorio Costa",
     descripcion:
       "Escritorio de trabajo con cajones laterales y superficie amplia. Fabricado en MDF con enchapado de nogal y herrajes metálicos de calidad.",
-    precio: "$XX.XXX",
+    precio: 500000,
     imagen:
       "/img/escritorioCosta.png",
       // "https://jazminshaiel.github.io/hermanos_jota/img/escritorioCosta.png",
@@ -125,7 +125,7 @@ const productosData = [
     nombre: "Silla de Trabajo Belgrano",
     descripcion:
       "Silla de oficina ergonómica con respaldo regulable y base giratoria. Tapizado en material transpirable con soporte lumbar ajustable.",
-    precio: "$XX.XXX",
+    precio: 10000000,
     imagen:
       "/img/silladeTrabajoBelgrano.png",
       // "https://jazminshaiel.github.io/hermanos_jota/img/silladeTrabajoBelgrano.png",
