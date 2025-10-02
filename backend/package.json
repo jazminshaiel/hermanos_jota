@@ -1,5 +1,6 @@
 {
   "name": "hermanos_jota",
+  "proxy": "http://localhost:3001",
   "version": "1.0.0",
   "description": "- Srdos Gorosito Silvana\r  - Roman Ezequiel Zorrilla\r  - Jazmín Shaiel Nieto\r  - Moreno Iñaki\r  - Torres Lell Pablo A.",
   "main": "index.js",
