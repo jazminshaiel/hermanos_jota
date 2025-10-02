@@ -1,21 +1,26 @@
-import React from "react";
-
-export default function Filters({ productos, categoria, setCategoria }) {
-  const categorias = ["todos", ...new Set(productos.map(p => p.categoria))];
+function Filters({ productos, selectedCategory, setSelectedCategory }) {
+  // Extraer categorías únicas desde los productos
+  const categorias = ["todos", ...new Set(productos.map((p) => p.categoria))];
 
   return (
     <div className="contenedor-filtros">
-      <label className="label-filtro" htmlFor="filtro-categoria">Filtrar por categoría:</label>
+      <label htmlFor="filtro-categoria" className="label-filtro">
+        Filtrar por categoría:
+      </label>
       <select
         id="filtro-categoria"
         className="select-filtro"
-        value={categoria}
-        onChange={(e) => setCategoria(e.target.value)}
+        value={selectedCategory}
+        onChange={(e) => setSelectedCategory(e.target.value)}
       >
-        {categorias.map(cat => (
-          <option key={cat} value={cat}>{cat === "todos" ? "Todas las categorías" : cat}</option>
+        {categorias.map((cat) => (
+          <option key={cat} value={cat}>
+            {cat.charAt(0).toUpperCase() + cat.slice(1)}
+          </option>
         ))}
       </select>
     </div>
   );
 }
+
+export default Filters;

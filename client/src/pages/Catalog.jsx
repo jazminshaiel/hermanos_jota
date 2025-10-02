@@ -1,8 +1,15 @@
 import { useState, useEffect } from "react";
-import ProductCard from "./ProductCard";
+import "../styles/estilos-catalogo.css";
+import ProductCard from "../components/ProductCard";
+import SearchBar from "../components/SearchBar";
+import Filters from "../components/Filters";
+import ProductList from "../components/ProductList";
 
 function Catalog() {
   const [productos, setProductos] = useState([]);
+  const [filteredProductos, setFilteredProductos] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("todos");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -14,6 +21,7 @@ function Catalog() {
       })
       .then((data) => {
         setProductos(data);
+        setFilteredProductos(data);
         setLoading(false);
       })
       .catch((err) => {
@@ -22,14 +30,54 @@ function Catalog() {
       });
   }, []);
 
+  // Filtrar productos cuando cambien búsqueda o categoría
+  useEffect(() => {
+    let resultados = productos;
+
+    if (searchTerm) {
+      resultados = resultados.filter((p) =>
+        p.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        p.descripcion.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    if (selectedCategory !== "todos") {
+      resultados = resultados.filter((p) => p.categoria === selectedCategory);
+    }
+
+    setFilteredProductos(resultados);
+  }, [searchTerm, selectedCategory, productos]);
+
   if (loading) return <p>Cargando productos...</p>;
   if (error) return <p style={{ color: "red" }}>{error}</p>;
 
   return (
-    <div className="contenedor-productos">
-      {productos.map((producto) => (
-        <ProductCard key={producto.id} producto={producto} />
-      ))}
+    <div className="catalogo-container">
+      <h1 className="titulo-catalogo">Nuestro Catálogo</h1>
+
+      {/* Barra de búsqueda */}
+      <SearchBar setSearchTerm={setSearchTerm} />
+
+      {/* Filtros */}
+      <Filters
+        productos={productos}
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
+      />
+
+      {/* Info resultados */}
+      <div className="resultados-info">
+        {filteredProductos.length > 0 ? (
+          <p>
+            Mostrando {filteredProductos.length} de {productos.length} productos
+          </p>
+        ) : (
+          <p className="no-results">No se encontraron productos.</p>
+        )}
+      </div>
+
+      {/* Lista de productos */}
+      <ProductList productos={filteredProductos} />
     </div>
   );
 }

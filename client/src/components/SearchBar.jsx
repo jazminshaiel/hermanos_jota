@@ -1,19 +1,19 @@
-import React from "react";
-
-export default function SearchBar({ termino, setTermino }) {
+function SearchBar({ setSearchTerm }) {
   return (
-    <div className="contenedor-busqueda">
-      <input
-        id="busquedaInput"
-        className="input-busqueda"
-        value={termino}
-        onChange={(e) => setTermino(e.target.value)}
-        placeholder="Buscar productos por nombre o descripción..."
-        aria-label="Buscar productos"
-      />
-      <button className="btn-busqueda" onClick={() => { /* opcional */ }}>
-        <i className="fas fa-search"></i> Buscar
-      </button>
+    <div className="seccion-busqueda">
+      <div className="contenedor-busqueda">
+        <input
+          type="text"
+          className="input-busqueda"
+          placeholder="Buscar productos..."
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <button className="btn-busqueda" type="button">
+          Buscar
+        </button>
+      </div>
     </div>
   );
 }
+
+export default SearchBar;
