@@ -25,7 +25,9 @@ const Footer = () => {
             <p>Ciudad Autónoma de Buenos Aires</p>
             <p>Argentina</p>
             <p>+54 11 4567-8901</p>
+            <p>info@hermanosjota.com.ar</p>
             <p>contacto@hermanosjota.com</p>
+            <p>ventas@hermanosjota.com.ar</p>
             </div>
           </div>
 
