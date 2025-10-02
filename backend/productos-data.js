@@ -6,7 +6,8 @@ const productosData = [
       "Aparador de seis puertas fabricado en nogal sostenible con tiradores metálicos en acabado latón. Su silueta minimalista realza el veteado natural de la madera, creando una pieza que combina funcionalidad y elegancia atemporal para espacios contemporáneos.",
     precio: "$XX.XXX",
     imagen:
-      "/img/aparadorUspallata.png", //link estatico
+      "/img/aparadorUspallata.png",
+      // "https://jazminshaiel.github.io/hermanos_jota/img/aparadorUspallata.png"
     categoria: "aparadores",
   },
   {
@@ -16,7 +17,8 @@ const productosData = [
       "Biblioteca elegante fabricada en madera de nogal con acabados de primera calidad. Diseño funcional con múltiples compartimentos para organizar libros y objetos decorativos.",
     precio: "$XX.XXX",
     imagen:
-      "/img/bibliotecaRecoleta.png", //link estatico
+      "/img/bibliotecaRecoleta.png",
+      // "https://jazminshaiel.github.io/hermanos_jota/img/bibliotecaRecoleta.png",
     categoria: "bibliotecas",
   },
   {

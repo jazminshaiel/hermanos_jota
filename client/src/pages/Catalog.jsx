@@ -8,7 +8,6 @@ import Header from "../components/Header";
 import Footer from "../components/Footer"; 
 
 // COMPONENTES
-import ProductCard from "../components/ProductCard";
 import SearchBar from "../components/SearchBar";
 import Filters from "../components/Filters";
 import ProductList from "../components/ProductList";
