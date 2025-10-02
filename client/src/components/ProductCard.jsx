@@ -1,7 +1,11 @@
 function ProductCard({ producto }) {
+  const precioFormateado = new Intl.NumberFormat("es-AR", {
+    style: "currency",
+    currency: "ARS",
+    minimumFractionDigits: 0,
+  }).format(producto.precio);
   return (
     <div className="carta-producto">
-      <div className="imagen-contenedor">
       <img
         src={producto.imagen}
         alt={producto.nombre}
@@ -10,11 +14,10 @@ function ProductCard({ producto }) {
             "https://jazminshaiel.github.io/hermanos_jota/img/placeholder.png")
         }
       />
-       </div>
       <div className="info-producto">
         <h2>{producto.nombre}</h2>
         <p>{producto.descripcion}</p>
-        <span className="precio-producto">{producto.precio}</span>
+        <span className="precio-producto">{precioFormateado}</span>
       </div>
     </div>
   );
