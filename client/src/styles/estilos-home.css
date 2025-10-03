@@ -1,0 +1,59 @@
+/* -------------------------------------------------------------------------- */
+/* ESTILOS ESPECÍFICOS DE HOME (Banner) */
+/* -------------------------------------------------------------------------- */
+
+.banner {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 50px;
+    width: 100%;
+    height: 100vh;
+    background-color: #F5E6D3; 
+}
+
+.banner .contenido {
+    max-width: 450px;
+}
+
+.banner .contenido h1 {
+    font-family: "Playfair Display", Georgia;
+    text-transform: uppercase;
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.banner .contenido h2 {
+    font-family: "Inter", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin: 0;
+}
+
+.banner .imagen img {
+    display: block;
+    width: 600px;
+    height: auto;
+    margin: 0 auto;
+}
+
+.banner .contenido a {
+    text-decoration: none;
+}
+
+.banner .contenido button {
+    background-color: #A0522D;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 25px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+.banner .contenido button:hover {
+    background-color: #8c4524;
+}

@@ -49,3 +49,6 @@ coverage/
 # Archivos de backup
 *.bak
 *.backup
+
+# Otros
+.old-p/
