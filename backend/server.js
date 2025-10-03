@@ -27,6 +27,18 @@ app.get('/api/productos/:id' , (req,res) => {
     res.json(producto);
 });
 
+// Ruta raíz (informativa)
+app.get('/', (req, res) => {
+    res.json({ 
+        message: "API de Hermanos Jota",
+        version: "1.0.0",
+        endpoints: {
+            productos: "/api/productos",
+            productoById: "/api/productos/:id"
+        }
+    });
+});
+
 // Iniciar servidor
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
