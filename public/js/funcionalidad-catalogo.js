@@ -27,7 +27,7 @@ async function cargarProductosDesdeAPI() {
       ...producto,
       imagen:
         producto.imagen?.trim() ||
-        "https://jazminshaiel.github.io/hermanos_jota/img/placeholder.png",
+        "/img/logo.svg",
       nombre: producto.nombre?.trim() || "Producto sin nombre",
       descripcion: producto.descripcion?.trim() || "Sin descripción disponible",
       categoria: producto.categoria?.toLowerCase()?.trim() || "sin-categoria",
@@ -188,7 +188,7 @@ function crearCartaProducto(producto) {
                  ${dataSrc ? `data-src="${dataSrc}"` : ""}
                  alt="${producto.nombre}"
                  class="${lazyClass}"
-                 onerror="this.src='https://jazminshaiel.github.io/hermanos_jota/img/placeholder.png'; this.onerror=null;"
+                 onerror="this.src='/img/logo.svg'; this.onerror=null;"
                  loading="lazy">
             <div class="info-producto">
                 <h2>${producto.nombre}</h2>
@@ -267,7 +267,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Función para manejar errores de imágenes de forma global
 function manejarErrorImagen(img) {
-  img.src = "https://jazminshaiel.github.io/hermanos_jota/img/placeholder.png";
+  img.src = "/img/logo.svg";
   img.onerror = null; // Evitar bucle infinito
   console.warn(`Error al cargar imagen: ${img.dataset.src || img.src}`);
 }
