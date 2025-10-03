@@ -23,9 +23,9 @@ const Footer = () => {
               <p>Ciudad Autónoma de Buenos Aires</p>
               <p>Argentina</p>
               <p>+54 11 4567-8901</p>
-              <p>email General: info@hermanosjota.com.ar</p>
-              <p>email Contacto: contacto@hermanosjota.com</p>
-              <p>email Ventas: ventas@hermanosjota.com.ar</p>
+              <p>General: info@hermanosjota.com.ar</p>
+              <p>Contacto: contacto@hermanosjota.com</p>
+              <p>Ventas: ventas@hermanosjota.com.ar</p>
             </div>
           </div>
 
