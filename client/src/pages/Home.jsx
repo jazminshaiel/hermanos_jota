@@ -6,10 +6,10 @@ import "../styles/estilos-home.css";
 import Header from "../components/Header"; 
 import Footer from "../components/Footer"; 
 
-function Home() {
+function Home({ cantidadCarrito }) {
     return (
         <>
-            <Header />
+            <Header cantidadCarrito={cantidadCarrito} />
             <main>
                 <section className="banner">
                     <div className="contenido">
@@ -24,8 +24,8 @@ function Home() {
                     </div>
                     <div className="imagen">
                         <img
-                            src="https://jazminshaiel.github.io/hermanos_jota/img/banner.png"
-                            alt="Mesa de centro y butaca"
+                            src="/img/aparadorUspallata.png"
+                            alt="Aparador Uspallata - Muebles con estilo"
                         />
                     </div>
                 </section>

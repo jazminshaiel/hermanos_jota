@@ -1,11 +1,16 @@
-function ProductCard({ producto }) {
+function ProductCard({ producto, onClick }) {
   const precioFormateado = new Intl.NumberFormat("es-AR", {
     style: "currency",
     currency: "ARS",
     minimumFractionDigits: 0,
   }).format(producto.precio);
+  
   return (
-    <div className="carta-producto">
+    <div 
+      className="carta-producto" 
+      onClick={() => onClick(producto)}
+      style={{ cursor: 'pointer' }}
+    >
       <img
         src={producto.imagen}
         alt={producto.nombre}

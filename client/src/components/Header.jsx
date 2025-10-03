@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ cantidadCarrito = 0 }) => {
   return (
     // Clase 'header'
     <header className="header">
@@ -22,11 +22,11 @@ const Header = () => {
         </nav>
 
         <div className="header-icons">
-          <Link to="/login" className="icon-link">
-            <i className="fa-solid fa-user"></i>
-          </Link>
-          <Link to="/carrito" className="icon-link">
+          <Link to="/carrito" className="icon-link carrito-icon">
             <i className="fa-solid fa-shopping-cart"></i>
+            {cantidadCarrito > 0 && (
+              <span className="carrito-badge">{cantidadCarrito}</span>
+            )}
           </Link>
         </div>
       </div>
