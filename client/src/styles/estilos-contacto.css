@@ -141,6 +141,30 @@ label {
     transform: translateY(1px);
 }
 
+
+.campo.input-error {
+  border: 2px solid red;
+}
+
+.campo.input-success {
+  border: 2px solid green;
+}
+
+.lista-errores {
+  color: red;
+  text-align: left;
+  list-style-type: disc;
+  padding-left: 20px;
+  margin-bottom: 1rem;
+}
+
+
+.mensaje-exito {
+  color: green;
+  font-weight: bold;
+  margin-top: 1rem;
+  
+};
 /* Responsive */
 @media (max-width: 768px) {
     #palabras-banner h1 {
