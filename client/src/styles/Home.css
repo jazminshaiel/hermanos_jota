@@ -1,0 +1,236 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Playfair+Display:wght@400;700&display=swap');
+
+.banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4rem 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  gap: 3rem;
+}
+
+.banner .contenido {
+  flex: 1;
+  max-width: 600px;
+}
+
+.banner .contenido h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem;
+  color: #2c1810;
+  margin-bottom: 1rem;
+}
+
+.banner .contenido h2 {
+  font-size: 1.8rem;
+  color: #a0522d;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.banner .contenido p {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.banner .contenido button {
+  background-color: #a0522d;
+  color: white;
+  border: none;
+  padding: 1rem 2.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.banner .contenido button:hover {
+  background-color: #8b4513;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(160, 82, 45, 0.3);
+}
+
+.banner .imagen {
+  flex: 1;
+  max-width: 600px;
+}
+
+.banner .imagen img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* Sección de productos destacados */
+.destacados {
+  background-color: #f9f6f2;
+  padding: 4rem 2rem;
+}
+
+.destacados > div {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.destacados h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  text-align: center;
+  color: #2c1810;
+  margin-bottom: 3rem;
+}
+
+/* Estados de carga y error */
+.cargando,
+.error-carga {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.1rem;
+}
+
+.cargando p {
+  color: #666;
+}
+
+.error-carga {
+  color: #a0522d;
+}
+
+.error-carga button {
+  margin-top: 1rem;
+  background-color: #a0522d;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.error-carga button:hover {
+  background-color: #8b4513;
+}
+
+/* Grid de tarjetas de productos */
+.tarjetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.tarjeta {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.tarjeta:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.tarjeta .imagen {
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+  background-color: #f5e6d3;
+}
+
+.tarjeta .imagen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.tarjeta:hover .imagen img {
+  transform: scale(1.05);
+}
+
+.tarjeta .texto {
+  padding: 1.5rem;
+}
+
+.tarjeta .texto h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  color: #2c1810;
+  margin-bottom: 0.75rem;
+}
+
+.tarjeta .texto p {
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Sección Sobre Nosotros */
+#nosotros {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+#nosotros h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  color: #2c1810;
+  margin-bottom: 2rem;
+}
+
+#nosotros p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #555;
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+  .banner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .banner .contenido h1 {
+    font-size: 2.5rem;
+  }
+
+  .tarjetas {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .banner .contenido h1 {
+    font-size: 2rem;
+  }
+
+  .banner .contenido h2 {
+    font-size: 1.4rem;
+  }
+
+  .destacados h2,
+  #nosotros h2 {
+    font-size: 2rem;
+  }
+
+  .tarjetas {
+    grid-template-columns: 1fr;
+  }
+}
