@@ -6,7 +6,7 @@ import "../styles/Footer.css";
 import Header from "../components/Header"; 
 import Footer from "../components/Footer"; 
 
-function Contacto() {
+function Contacto({ carritoItems = 0 }) {
   
   const [formData, setFormData] = useState({
     nombre: "",
@@ -86,7 +86,7 @@ function Contacto() {
 
   return (
     <>
-      <Header />
+      <Header carritoItems={carritoItems} />
       <main>
         <div id="mini_banner">
           <div id="palabras-banner">

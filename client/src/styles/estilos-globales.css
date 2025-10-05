@@ -57,7 +57,8 @@ body {
 .header {
     background-color: #a0522d;
     padding: 15px 0;
-    width: 100%;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -73,6 +74,9 @@ body {
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 .logo img {
@@ -100,6 +104,7 @@ body {
 /* Iconos de cabecera (Usuario y Carrito) */
 .header-icons {
 	display: flex;
+	align-items: center;
 	gap: 20px;
 }
 
@@ -107,9 +112,23 @@ body {
 	color: white;
 	font-size: 1.3rem;
 	transition: color 0.2s ease;
+	position: relative;
+	display: flex;
+	align-items: center;
 }
 
 .header-icons a:hover {
+	color: #ffcc99;
+}
+
+.carrito-icon {
+	width: 24px;
+	height: 24px;
+	color: white;
+	transition: color 0.2s ease;
+}
+
+.icon-link:hover .carrito-icon {
 	color: #ffcc99;
 }
 

@@ -6,7 +6,7 @@ import "../styles/estilos-globales.css";
 import "../styles/Home.css";
 import "../styles/Footer.css";
 
-function Home() {
+function Home({ carritoItems = 0, añadirAlCarrito }) {
     const [productos, setProductos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -18,7 +18,7 @@ function Home() {
     const fetchProductos = async () => {
         try {
             setLoading(true);
-            const response = await fetch('/api/productos');
+            const response = await fetch('http://localhost:3001/api/productos');
             
             if (!response.ok) {
                 throw new Error('Error al cargar productos');
@@ -38,7 +38,7 @@ function Home() {
 
     return (
         <>
-            <Header />
+            <Header carritoItems={carritoItems} />
             
             <main>
                 <section className="hero">
@@ -68,18 +68,30 @@ function Home() {
                     {!loading && !error && (
                         <div className="grid-productos">
                             {productos.map((p) => (
-                                <Link key={p.id} to={`/producto/${p.id}`} className="card">
-                                    <div className="card-img">
-                                        <img 
-                                            src={p.imagen} 
-                                            alt={p.nombre}
-                                            onError={(e) => e.target.src = '/img/logo.svg'}
-                                        />
-                                    </div>
-                                    <h3>{p.nombre}</h3>
-                                    <p>{p.descripcion}</p>
-                                    <span className="precio">{p.precio}</span>
-                                </Link>
+                                <div key={p.id} className="card">
+                                    <Link to={`/producto/${p.id}`} className="card-link">
+                                        <div className="card-img">
+                                            <img 
+                                                src={p.imagen} 
+                                                alt={p.nombre}
+                                                onError={(e) => e.target.src = '/img/logo.svg'}
+                                            />
+                                        </div>
+                                        <h3>{p.nombre}</h3>
+                                        <p>{p.descripcion}</p>
+                                        <span className="precio">{p.precio}</span>
+                                    </Link>
+                                    <button 
+                                        className="boton-carrito" 
+                                        onClick={() => {
+                                            if (añadirAlCarrito) {
+                                                añadirAlCarrito(p);
+                                            }
+                                        }}
+                                    >
+                                        Añadir al carrito
+                                    </button>
+                                </div>
                             ))}
                         </div>
                     )}

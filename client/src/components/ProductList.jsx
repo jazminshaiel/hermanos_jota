@@ -1,6 +1,6 @@
 import ProductCard from "./ProductCard";
 
-function ProductList({ productos, onProductClick }) {
+function ProductList({ productos, onProductClick, añadirAlCarrito }) {
 	return (
 		<div className="contenedor-productos">
 			{productos.map((producto) => (
@@ -8,6 +8,7 @@ function ProductList({ productos, onProductClick }) {
 					key={producto.id}
 					producto={producto}
 					onClick={onProductClick}
+					añadirAlCarrito={añadirAlCarrito}
 				/>
 			))}
 		</div>
