@@ -1,6 +1,7 @@
 import React from 'react';
 import "../styles/estilos-globales.css"; 
-import "../styles/estilos-contacto.css"; 
+import "../styles/estilos-contacto.css";
+import "../styles/Footer.css";
 
 import Header from "../components/Header"; 
 import Footer from "../components/Footer"; 

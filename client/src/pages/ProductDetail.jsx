@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import { RelatedProducts } from "../components/RelatedProducts";
 import "../styles/estilos-globales.css";
 import "../styles/estilos-producto.css";
+import "../styles/Footer.css";
 
 function ProductDetail() {
 	const params = useParams();

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/estilos-catalogo.css";
 import "../styles/estilos-globales.css";
+import "../styles/Footer.css";
 
 // Header Y Footer
 import Footer from "../components/Footer";

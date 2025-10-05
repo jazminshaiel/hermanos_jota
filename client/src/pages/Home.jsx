@@ -1,118 +1,91 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import "../styles/estilos-globales.css"; 
-import "../styles/estilos-home.css"; 
-
-import Header from "../components/Header"; 
-import Footer from "../components/Footer"; 
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import "../styles/estilos-globales.css";
+import "../styles/Home.css";
+import "../styles/Footer.css";
 
 function Home() {
-    const [productosDestacados, setProductosDestacados] = useState([]);
-    const [cargando, setCargando] = useState(true);
+    const [productos, setProductos] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        cargarProductosDestacados();
+        fetchProductos();
     }, []);
 
-    const cargarProductosDestacados = async () => {
+    const fetchProductos = async () => {
         try {
-            setCargando(true);
-            setError(null);
-            
+            setLoading(true);
             const response = await fetch('/api/productos');
             
             if (!response.ok) {
-                throw new Error(`Error ${response.status}: Error al cargar productos`);
+                throw new Error('Error al cargar productos');
             }
             
-            const productos = await response.json();
+            const data = await response.json();
+            const randomProducts = data.sort(() => 0.5 - Math.random()).slice(0, 4);
             
-            // Seleccionar 4 productos aleatorios para destacados
-            const destacados = [...productos]
-                .sort(() => 0.5 - Math.random())
-                .slice(0, 4);
-            
-            setProductosDestacados(destacados);
+            setProductos(randomProducts);
+            setError(null);
         } catch (err) {
-            console.error('Error al cargar productos destacados:', err);
             setError(err.message);
         } finally {
-            setCargando(false);
+            setLoading(false);
         }
     };
 
     return (
         <>
             <Header />
+            
             <main>
-                <section className="banner">
-                    <div className="contenido">
+                <section className="hero">
+                    <div className="hero-content">
                         <h1>Hermanos Jota</h1>
                         <h2>Muebles que crean historias</h2>
                         <p>Piezas únicas que combinan artesanía y diseño moderno.</p>
-                        <Link to="#nosotros">
-                            <button>Conocer más</button>
-                        </Link>
+                        <Link to="#about">Conocer más</Link>
                     </div>
-                    <div className="imagen">
-                        <img 
-                            src="/img/aparadorUspallata.png" 
-                            alt="Aparador Uspallata"
-                        />
+                    <div className="hero-image">
+                        <img src="/img/aparadorUspallata.png" alt="Aparador Uspallata" />
                     </div>
                 </section>
 
                 <section className="destacados">
-                    <div>
-                        <h2>Productos destacados</h2>
-
-                        {/* Estado de carga */}
-                        {cargando && (
-                            <div className="cargando">
-                                <p>Cargando productos destacados...</p>
-                            </div>
-                        )}
-
-                        {/* Estado de error */}
-                        {error && (
-                            <div className="error-carga">
-                                <p>⚠️ Error al cargar productos: {error}</p>
-                                <button onClick={cargarProductosDestacados}>
-                                    Reintentar
-                                </button>
-                            </div>
-                        )}
-
-                        {/* Productos destacados */}
-                        {!cargando && !error && (
-                            <div className="tarjetas">
-                                {productosDestacados.map((producto) => (
-                                    <div key={producto.id} className="tarjeta">
-                                        <Link to={`/producto/${producto.id}`} className="tarjeta-link">
-                                            <div className="imagen">
-                                                <img 
-                                                    src={producto.imagen} 
-                                                    alt={producto.nombre}
-                                                    onError={(e) => {
-                                                        e.target.src = '/img/logo.svg';
-                                                    }}
-                                                />
-                                            </div>
-                                            <div className="texto">
-                                                <h3>{producto.nombre}</h3>
-                                                <p>{producto.descripcion}</p>
-                                                <span className="precio">{producto.precio}</span>
-                                            </div>
-                                        </Link>
+                    <h2>Productos destacados</h2>
+                    
+                    {loading && <div className="mensaje"><p>Cargando productos...</p></div>}
+                    
+                    {error && (
+                        <div className="error">
+                            <p>⚠️ {error}</p>
+                            <button onClick={fetchProductos}>Reintentar</button>
+                        </div>
+                    )}
+                    
+                    {!loading && !error && (
+                        <div className="grid-productos">
+                            {productos.map((p) => (
+                                <Link key={p.id} to={`/producto/${p.id}`} className="card">
+                                    <div className="card-img">
+                                        <img 
+                                            src={p.imagen} 
+                                            alt={p.nombre}
+                                            onError={(e) => e.target.src = '/img/logo.svg'}
+                                        />
                                     </div>
-                                ))}
-                            </div>
-                        )}
-                    </div>
+                                    <h3>{p.nombre}</h3>
+                                    <p>{p.descripcion}</p>
+                                    <span className="precio">{p.precio}</span>
+                                </Link>
+                            ))}
+                        </div>
+                    )}
                 </section>
 
-                <section id="nosotros">
+                <section className="nosotros" id="about">
                     <h2>Sobre Nosotros</h2>
                     <p>
                         Hermanos Jota es el redescubrimiento de un arte olvidado: crear
@@ -124,6 +97,7 @@ function Home() {
                     </p>
                 </section>
             </main>
+            
             <Footer />
         </>
     );
