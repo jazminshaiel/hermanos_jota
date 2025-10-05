@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const productos = require('./productos-data.js');
+const routes = require("./routes-productos.js");
 const logger = require('./middlewares/logger.js');
 
 const app = express();
@@ -16,6 +17,7 @@ app.use(logger);
 app.get('/api/productos', (req, res) => {
     res.json(productos);
 });
+app.use("/api", routes);
 
 // Devuelve un producto específico
 app.get('/api/productos/:id' , (req,res) => {
@@ -51,6 +53,7 @@ app.use((err, req, res, next) => {
     console.error('Error:', err.stack);
     res.status(500).json({ error: "Error interno del servidor" });
 });
+
 // Iniciar servidor
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
