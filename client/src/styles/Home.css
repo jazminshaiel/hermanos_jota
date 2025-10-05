@@ -1,236 +1,197 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Playfair+Display:wght@400;700&display=swap');
 
-.banner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 4rem 2rem;
-  max-width: 1400px;
-  margin: 0 auto;
-  gap: 3rem;
+body{
+    margin:0;
+    padding: 0;
+    font-family: sans-serif;
 }
 
-.banner .contenido {
-  flex: 1;
-  max-width: 600px;
+.banner{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 50px;
+    width: 100%;
+    height: 100vh;
+    background-color: #F5E6D3;
 }
 
-.banner .contenido h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 3.5rem;
-  color: #2c1810;
-  margin-bottom: 1rem;
+.banner .contenido{
+    max-width: 450px;
 }
 
-.banner .contenido h2 {
-  font-size: 1.8rem;
-  color: #a0522d;
-  margin-bottom: 1rem;
-  font-weight: 500;
+.banner .contenido h1{
+    font-family: Playfair Display, Georgia;
+    text-transform: uppercase;
+    font-size: 3rem;
+    font-weight: 700;
+    margin:0;
 }
 
-.banner .contenido p {
-  font-size: 1.1rem;
-  color: #666;
-  margin-bottom: 2rem;
-  line-height: 1.6;
+.banner .contenido h2{
+    font-family: Georgia;
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin:0;
 }
 
-.banner .contenido button {
-  background-color: #a0522d;
-  color: white;
-  border: none;
-  padding: 1rem 2.5rem;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: all 0.3s ease;
+.banner .imagen img{
+    display: block;
+    width: 600px;
+    height: auto;
+    margin: 0 auto;
 }
 
-.banner .contenido button:hover {
-  background-color: #8b4513;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(160, 82, 45, 0.3);
+.banner .contenido a{
+    text-decoration: none;
 }
 
-.banner .imagen {
-  flex: 1;
-  max-width: 600px;
+.banner .contenido button{
+    background-color: #A0522D;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    cursor: pointer;
 }
 
-.banner .imagen img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+.destacados{
+    padding: 10%;
 }
 
-/* Sección de productos destacados */
-.destacados {
-  background-color: #f9f6f2;
-  padding: 4rem 2rem;
+.destacados h2{
+    font-family: Playfair Display, Georgia;
+    font-size: 2.5rem;
+    text-align: center;
 }
 
-.destacados > div {
-  max-width: 1400px;
-  margin: 0 auto;
+.tarjetas{
+    display: flex;
+    justify-content: center;
+    gap: 30px;
 }
 
-.destacados h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.5rem;
-  text-align: center;
-  color: #2c1810;
-  margin-bottom: 3rem;
+.tarjetas .tarjeta{
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    text-align: center;
 }
 
-/* Estados de carga y error */
-.cargando,
-.error-carga {
-  text-align: center;
-  padding: 3rem;
-  font-size: 1.1rem;
+.tarjetas .tarjeta img{
+    width: 100%;
+    height: auto;
 }
 
-.cargando p {
-  color: #666;
+#nosotros{
+    padding: 0 10% 10% 10%;
 }
 
-.error-carga {
-  color: #a0522d;
+#nosotros h2{
+    font-family: Playfair Display, Georgia;
+    font-size: 2.5rem;
 }
 
-.error-carga button {
-  margin-top: 1rem;
-  background-color: #a0522d;
-  color: white;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
-}
-
-.error-carga button:hover {
-  background-color: #8b4513;
-}
-
-/* Grid de tarjetas de productos */
-.tarjetas {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  padding: 1rem;
-}
-
-.tarjeta {
-  background: white;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.tarjeta:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-}
-
-.tarjeta .imagen {
-  width: 100%;
-  height: 280px;
-  overflow: hidden;
-  background-color: #f5e6d3;
-}
-
-.tarjeta .imagen img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.tarjeta:hover .imagen img {
-  transform: scale(1.05);
+#nosotros p{
+    font-size: 1.2rem;
+    text-align: justify;
 }
 
 .tarjeta .texto {
-  padding: 1.5rem;
+  text-align: justify;
 }
 
-.tarjeta .texto h3 {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.4rem;
-  color: #2c1810;
-  margin-bottom: 0.75rem;
+@media (max-width: 768px) {
+    .banner {
+        flex-direction: column;
+        height: auto;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .banner .contenido h1 {
+        margin-top:40px;
+        font-size: 2rem;
+    }
+
+    .banner .contenido h2 {
+        font-size: 1.2rem;
+    }
+
+    .banner .imagen img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .tarjetas {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .tarjetas .tarjeta {
+        width: 100%;
+        max-width: 300px;
+    }
 }
 
-.tarjeta .texto p {
-  color: #666;
-  font-size: 0.95rem;
-  line-height: 1.5;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+@media (max-width: 480px) {
+    .banner .contenido h1 {
+        margin-top:40px;
+        font-size: 1.5rem;
+    }
+
+    .banner .contenido p {
+        font-size: 1rem;
+    }
+
+    .banner .contenido button {
+        font-size: 1rem;
+        padding: 8px 16px;
+    }
+
+    #nosotros p {
+        font-size: 1rem;
+    }
 }
 
-/* Sección Sobre Nosotros */
-#nosotros {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 4rem 2rem;
-  text-align: center;
-}
+@media (max-width: 1000px) {
+    .banner {
+        flex-direction: column;
+        height: auto;
+        gap: 30px;
+        text-align: center;
+        padding: 40px 20px;
+    }
 
-#nosotros h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.5rem;
-  color: #2c1810;
-  margin-bottom: 2rem;
-}
+    .banner .contenido h1 {
+        font-size: 2.2rem;
+    }
 
-#nosotros p {
-  font-size: 1.1rem;
-  line-height: 1.8;
-  color: #555;
-}
+    .banner .contenido h2 {
+        font-size: 1.3rem;
+    }
 
-/* Responsive */
-@media (max-width: 968px) {
-  .banner {
-    flex-direction: column;
-    text-align: center;
-  }
+    .banner .imagen img {
+        max-width: 80%;
+        height: auto;
+    }
 
-  .banner .contenido h1 {
-    font-size: 2.5rem;
-  }
+    .tarjetas {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
 
-  .tarjetas {
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1.5rem;
-  }
-}
+    .tarjetas .tarjeta {
+        max-width: 350px;
+    }
 
-@media (max-width: 640px) {
-  .banner .contenido h1 {
-    font-size: 2rem;
-  }
+    #nosotros {
+        padding: 5%;
+    }
 
-  .banner .contenido h2 {
-    font-size: 1.4rem;
-  }
-
-  .destacados h2,
-  #nosotros h2 {
-    font-size: 2rem;
-  }
-
-  .tarjetas {
-    grid-template-columns: 1fr;
-  }
+    #nosotros p {
+        font-size: 1.1rem;
+    }
 }
