@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const productos = require('./productos-data.js');
+const routes = require("./routes-productos.js");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -14,6 +15,7 @@ app.use(express.json());
 app.get('/api/productos', (req, res) => {
     res.json(productos);
 });
+app.use("/api", routes);
 
 // Devuelve un producto específico
 app.get('/api/productos/:id' , (req,res) => {
@@ -26,6 +28,17 @@ app.get('/api/productos/:id' , (req,res) => {
 
     res.json(producto);
 });
+
+app.use((req, res, next) => {
+  res.status(404).json({ error: "Ruta no encontrada" });
+});
+
+
+app.use((err, req, res, next) => {
+  console.error("Error en el servidor:", err.stack);
+  res.status(500).json({ error: "Error interno del servidor" });
+});
+//ya esta?
 
 // Iniciar servidor
 app.listen(PORT, () => {
