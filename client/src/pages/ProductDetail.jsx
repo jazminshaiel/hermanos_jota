@@ -23,7 +23,7 @@ function ProductDetail() {
 			return;
 		}
 
-		fetch(`http://localhost:3001/api/productos/${id}`)
+		fetch(`/api/productos/${id}`)
 			.then((res) => {
 				console.log("Response status:", res.status);
 				if (!res.ok) throw new Error("Producto no encontrado");
