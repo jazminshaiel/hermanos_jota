@@ -1,3 +1,11 @@
+﻿# Proyecto: E-Commerce Hermanos Jota
+### Integrantes
+ - Srdos Gorosito Silvana
+ - Roman Ezequiel Zorrilla
+ - Jazmín Shaiel Nieto
+ - Moreno Iñaki
+ - Torres Lell Pablo A.
+ 
 # Catálogo - Mueblería Hermanos Jota
 
 Este módulo corresponde al **Catálogo de Productos** de Hermanos Jota, migrado a **React + Node/Express**.  
