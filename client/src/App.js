@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import ProductDetail from "./pages/ProductDetail";
 import Cart from "./pages/Cart";
 import ModalCarrito from "./components/ModalCarrito";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
 	// Estado global del carrito
@@ -69,6 +70,7 @@ function App() {
 
 	return (
 		<BrowserRouter>
+			<ScrollToTop />
 			<Routes>
 				{/* Página de home */}
 				<Route 
