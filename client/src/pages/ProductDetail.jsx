@@ -6,8 +6,9 @@ import Header from "../components/Header";
 import { RelatedProducts } from "../components/RelatedProducts";
 import "../styles/estilos-globales.css";
 import "../styles/estilos-producto.css";
+import "../styles/Footer.css";
 
-function ProductDetail() {
+function ProductDetail({ carritoItems = 0, añadirAlCarrito }) {
 	const params = useParams();
 	const { id } = params;
 	const navigate = useNavigate();
@@ -23,7 +24,7 @@ function ProductDetail() {
 			return;
 		}
 
-		fetch(`/api/productos/${id}`)
+		fetch(`http://localhost:3001/api/productos/${id}`)
 			.then((res) => {
 				console.log("Response status:", res.status);
 				if (!res.ok) throw new Error("Producto no encontrado");
@@ -75,7 +76,7 @@ function ProductDetail() {
 
 	return (
 		<>
-			<Header />
+			<Header carritoItems={carritoItems} />
 			<div className="productDetail-div">
 				<button
 					className="backToCatalogButton"
@@ -87,7 +88,7 @@ function ProductDetail() {
 				</button>
 			</div>
 			<div>
-				<DetailedProduct producto={producto} />
+				<DetailedProduct producto={producto} añadirAlCarrito={añadirAlCarrito} />
 				<RelatedProducts
 					productoActual={producto}
 					onProductClick={handleProductClick}

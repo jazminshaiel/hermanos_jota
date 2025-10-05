@@ -1,79 +1,7 @@
-*{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    
-}/*normalizar pagina*/
-body{
-     font-family: "Inter", sans-serif, Arial, Georgia;
-    background-color: #f5e6d3;
-}
+/* Estilos para la página de contacto */
 
-/* comienza el header*/
-/* Header principal */
- .header {
-            background-color: #a0522d;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .logo-image {
-            height: 40px;
-            width: auto;
-            filter: brightness(0) invert(1);
-        }
-
-        .nav {
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-link {
-            text-decoration: none;
-            color: white;
-            font-size: 14px;
-            transition: color 0.3s;
-        }
-
-        .nav-link:hover {
-            color: #d4a574;
-        }
-
-        .header-icons {
-            display: flex;
-            gap: 20px;
-            font-size: 18px;
-            color: white;
-        }
-
-        .header-icons i,
-        .header-icons a {
-            cursor: pointer;
-            transition: color 0.3s;
-            color: white;
-            text-decoration: none;
-        }
-
-        .header-icons i:hover,
-        .header-icons a:hover {
-            color: #d4a574;
-        }
-
-/*fin del css del header*/
- /*comienzo del css del body*/
-body{
-     font-family: georgia;
-    background-color: #f5e6d3;
-}
-main{
-    width: 100%;
-    height: 100vh;
-}
-
-#mini_banner{
+/* Banner de contacto */
+#mini_banner {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -81,123 +9,137 @@ main{
     justify-content: center;
     align-items: center;
     background-size: cover;
-    background-image: url(/img/banner_contacto.jpg);
+    background-image: url(../../public/img/banner_contacto.jpg);
     background-position: center center;
     background-repeat: no-repeat;
 }
-#palabras-banner{
+
+#palabras-banner {
     font-family: georgia;
     flex-direction: column;
     text-align: center;
-    color:#ffffff;
-    /* backdrop-filter: blur(3px); */
+    color: #ffffff;
 }
-.formulario-contenedor{
-   flex: 1; 
-  display: flex;
-  align-items: center;   
-  justify-content: center; 
-  padding: 2rem 0;
-}
-#mensajes{
-text-align: center;
 
+#palabras-banner h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
 }
-form{
+
+#palabras-banner h4 {
+    font-size: 1.2rem;
+    font-weight: normal;
+}
+
+/* Contenedor del formulario */
+.formulario-contenedor {
+    flex: 1;
     display: flex;
-  flex-direction: column;
-  text-align: center;
-  gap: 1rem; 
-    
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0;
 }
-.campo{
-  width: 70vw;
-  max-width: 500px;
-  border: none;
-  resize: none;
-  padding: 0.8rem;
-  border-radius: 8px;
-}
-.boton{
- display: flex;
- justify-content: center;
- border: none;
 
+/* Formulario */
+form {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+    width: 100%;
+    max-width: 600px;
+    padding: 0 1rem;
 }
-#Enviar{
-      background-color: #a0522d;
-  color: #fff;
-  padding: 0.8rem 2rem;
-  border-radius: 12px;
-  border: none;
-  cursor: pointer;
-  transition: background 0.3s ease;
+
+/* Campos del formulario */
+.campo {
+    width: 100%;
+    max-width: 500px;
+    border: 2px solid #ddd;
+    resize: none;
+    padding: 0.8rem;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
 }
+
+.campo:focus {
+    outline: none;
+    border-color: #a0522d;
+}
+
+/* Estados de validación */
+.input-error {
+    border-color: #dc3545 !important;
+    background-color: #f8d7da;
+}
+
+.input-success {
+    border-color: #28a745 !important;
+    background-color: #d4edda;
+}
+
+/* Mensajes de error y éxito */
+#mensajes {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.lista-errores {
+    list-style: none;
+    color: #dc3545;
+    background-color: #f8d7da;
+    padding: 0.75rem;
+    border-radius: 8px;
+    border: 1px solid #f5c6cb;
+    margin-bottom: 1rem;
+}
+
+.mensaje-exito {
+    color: #155724;
+    background-color: #d4edda;
+    padding: 0.75rem;
+    border-radius: 8px;
+    border: 1px solid #c3e6cb;
+    margin-bottom: 1rem;
+}
+
+/* Labels */
+label {
+    display: block;
+    text-align: left;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #333;
+}
+
+/* Botón */
+.boton {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+#Enviar {
+    background-color: #a0522d;
+    color: #fff;
+    padding: 0.8rem 2rem;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background 0.3s ease;
+}
+
 #Enviar:hover {
-  background-color: #8b4513;
+    background-color: #8b4513;
 }
-        /* Responsive */
-       @media (max-width: 768px) {
-            .header {
-                padding: 12px 15px;
-            }
 
-            .nav {
-                gap: 20px;
-            }
-
-            .nav-link {
-                font-size: 13px;
-            }
-
-            .logo-image {
-                height: 35px;
-            }
-
-            .header-icons {
-                gap: 15px;
-                font-size: 16px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .header {
-                flex-direction: column;
-                align-items: center;
-                padding: 15px;
-                gap: 15px;
-                position: static;
-            }
-
-            .nav {
-                order: 2;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 15px;
-            }
-
-            .header-icons {
-                order: 3;
-            }
-
-            .logo {
-                order: 1;
-            }
-        }
-        /* @media (max-width: 768px) {
-            
-        } */
-
-        @media (max-width: 480px) {
-
-            .newsletter-input {
-                flex-direction: column;
-            }
-
-            .newsletter-input button {
-                width: 100%;
-            }
-        }
+#Enviar:active {
+    transform: translateY(1px);
+}
 
 
 .campo.input-error {
@@ -223,3 +165,32 @@ form{
   margin-top: 1rem;
   
 };
+/* Responsive */
+@media (max-width: 768px) {
+    #palabras-banner h1 {
+        font-size: 2rem;
+    }
+    
+    #palabras-banner h4 {
+        font-size: 1rem;
+    }
+    
+    .campo {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .formulario-contenedor {
+        padding: 1rem 0;
+    }
+    
+    form {
+        padding: 0 0.5rem;
+    }
+    
+    #Enviar {
+        width: 100%;
+        padding: 1rem;
+    }
+}

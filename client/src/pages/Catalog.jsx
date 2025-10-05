@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/estilos-catalogo.css";
 import "../styles/estilos-globales.css";
+import "../styles/Footer.css";
 
 // Header Y Footer
 import Footer from "../components/Footer";
@@ -11,7 +12,7 @@ import Header from "../components/Header";
 import Filters from "../components/Filters";
 import ProductList from "../components/ProductList";
 import SearchBar from "../components/SearchBar";
-function Catalog() {
+function Catalog({ carritoItems = 0, añadirAlCarrito }) {
 	const navigate = useNavigate();
 	const [productos, setProductos] = useState([]);
 	const [filteredProductos, setFilteredProductos] = useState([]);
@@ -65,7 +66,7 @@ function Catalog() {
 
 	return (
 		<div className="catalogo-container">
-			<Header />
+			<Header carritoItems={carritoItems} />
 			<h1 className="titulo-catalogo">Nuestro Catálogo</h1>
 
 			{/* Barra de búsqueda */}
@@ -93,6 +94,7 @@ function Catalog() {
 			<ProductList
 				productos={filteredProductos}
 				onProductClick={handleProductClick}
+				añadirAlCarrito={añadirAlCarrito}
 			/>
 			<Footer />
 		</div>
