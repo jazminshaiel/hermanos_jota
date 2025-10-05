@@ -48,22 +48,21 @@ function Home() {
             <main>
                 <section className="banner">
                     <div className="contenido">
-                        <h1>Muebles con historia y alma</h1>
-                        <h2>
-                            Diseñamos y fabricamos piezas con conciencia, uniendo la herencia
-                            del pasado con la mirada sustentable del futuro.
-                        </h2>
-                        <Link to="/catalogo">
-                            <button>EXPLORAR CATÁLOGO</button>
+                        <h1>Hermanos Jota</h1>
+                        <h2>Muebles que crean historias</h2>
+                        <p>Piezas únicas que combinan artesanía y diseño moderno.</p>
+                        <Link to="#nosotros">
+                            <button>Conocer más</button>
                         </Link>
                     </div>
                     <div className="imagen">
-                        <img
-                            src="https://jazminshaiel.github.io/hermanos_jota/img/banner.png"
-                            alt="Mesa de centro y butaca"
+                        <img 
+                            src="/img/aparadorUspallata.png" 
+                            alt="Aparador Uspallata"
                         />
                     </div>
                 </section>
+
                 <section className="destacados">
                     <div>
                         <h2>Productos destacados</h2>
@@ -85,6 +84,7 @@ function Home() {
                             </div>
                         )}
 
+                        {/* Productos destacados */}
                         {!cargando && !error && (
                             <div className="tarjetas">
                                 {productosDestacados.map((producto) => (
@@ -111,6 +111,7 @@ function Home() {
                         )}
                     </div>
                 </section>
+
                 <section id="nosotros">
                     <h2>Sobre Nosotros</h2>
                     <p>
