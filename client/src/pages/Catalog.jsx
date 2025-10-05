@@ -1,94 +1,102 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/estilos-catalogo.css";
 import "../styles/estilos-globales.css";
 
-
 // Header Y Footer
-import Header from "../components/Header"; 
-import Footer from "../components/Footer"; 
+import Footer from "../components/Footer";
+import Header from "../components/Header";
 
 // COMPONENTES
-import SearchBar from "../components/SearchBar";
 import Filters from "../components/Filters";
 import ProductList from "../components/ProductList";
-
+import SearchBar from "../components/SearchBar";
 function Catalog() {
-  const [productos, setProductos] = useState([]);
-  const [filteredProductos, setFilteredProductos] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("todos");
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+	const navigate = useNavigate();
+	const [productos, setProductos] = useState([]);
+	const [filteredProductos, setFilteredProductos] = useState([]);
+	const [searchTerm, setSearchTerm] = useState("");
+	const [selectedCategory, setSelectedCategory] = useState("todos");
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(null);
 
-  useEffect(() => {
-    fetch("http://localhost:3001/api/productos")
-      .then((res) => {
-        if (!res.ok) throw new Error("Error al cargar productos");
-        return res.json();
-      })
-      .then((data) => {
-        setProductos(data);
-        setFilteredProductos(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError(err.message);
-        setLoading(false);
-      });
-  }, []);
+	useEffect(() => {
+		fetch("http://localhost:3001/api/productos")
+			.then((res) => {
+				if (!res.ok) throw new Error("Error al cargar productos");
+				return res.json();
+			})
+			.then((data) => {
+				setProductos(data);
+				setFilteredProductos(data);
+				setLoading(false);
+			})
+			.catch((err) => {
+				setError(err.message);
+				setLoading(false);
+			});
+	}, []);
 
-  // Filtrar productos cuando cambien búsqueda o categoría
-  useEffect(() => {
-    let resultados = productos;
+	// Filtrar productos cuando cambien búsqueda o categoría
+	useEffect(() => {
+		let resultados = productos;
 
-    if (searchTerm) {
-      resultados = resultados.filter((p) =>
-        p.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        p.descripcion.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    }
+		if (searchTerm) {
+			resultados = resultados.filter(
+				(p) =>
+					p.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+					p.descripcion.toLowerCase().includes(searchTerm.toLowerCase())
+			);
+		}
 
-    if (selectedCategory !== "todos") {
-      resultados = resultados.filter((p) => p.categoria === selectedCategory);
-    }
+		if (selectedCategory !== "todos") {
+			resultados = resultados.filter((p) => p.categoria === selectedCategory);
+		}
 
-    setFilteredProductos(resultados);
-  }, [searchTerm, selectedCategory, productos]);
+		setFilteredProductos(resultados);
+	}, [searchTerm, selectedCategory, productos]);
 
-  if (loading) return <p>Cargando productos...</p>;
-  if (error) return <p style={{ color: "red" }}>{error}</p>;
+	if (loading) return <p>Cargando productos...</p>;
+	if (error) return <p style={{ color: "red" }}>{error}</p>;
 
-  return (
-    <div className="catalogo-container">
-      <Header />
-      <h1 className="titulo-catalogo">Nuestro Catálogo</h1>
+	const handleProductClick = (producto) => {
+		navigate(`/producto/${producto.id}`);
+	};
 
-      {/* Barra de búsqueda */}
-      <SearchBar setSearchTerm={setSearchTerm} />
+	return (
+		<div className="catalogo-container">
+			<Header />
+			<h1 className="titulo-catalogo">Nuestro Catálogo</h1>
 
-      {/* Filtros */}
-      <Filters
-        productos={productos}
-        selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
-      />
+			{/* Barra de búsqueda */}
+			<SearchBar setSearchTerm={setSearchTerm} />
 
-      {/* Info resultados */}
-      <div className="resultados-info">
-        {filteredProductos.length > 0 ? (
-          <p>
-            Mostrando {filteredProductos.length} de {productos.length} productos
-          </p>
-        ) : (
-          <p className="no-results">No se encontraron productos.</p>
-        )}
-      </div>
+			{/* Filtros */}
+			<Filters
+				productos={productos}
+				selectedCategory={selectedCategory}
+				setSelectedCategory={setSelectedCategory}
+			/>
 
-      {/* Lista de productos */}
-      <ProductList productos={filteredProductos} />
-      <Footer />
-    </div>
-  );
+			{/* Info resultados */}
+			<div className="resultados-info">
+				{filteredProductos.length > 0 ? (
+					<p>
+						Mostrando {filteredProductos.length} de {productos.length} productos
+					</p>
+				) : (
+					<p className="no-results">No se encontraron productos.</p>
+				)}
+			</div>
+
+			{/* Lista de productos */}
+			<ProductList
+				productos={filteredProductos}
+				onProductClick={handleProductClick}
+			/>
+			<Footer />
+		</div>
+	);
 }
 
 export default Catalog;

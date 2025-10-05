@@ -1,25 +1,26 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Catalog from "./pages/Catalog";
-import Home from "./pages/Home";
 import Contacto from "./pages/Contacto";
+import Home from "./pages/Home";
+import ProductDetail from "./pages/ProductDetail";
 
 function App() {
-  return (
-     <BrowserRouter>
-      <Routes>
-        
-        {/* Página de home */}
-        <Route path="/" element={<Home />} />
+	return (
+		<BrowserRouter>
+			<Routes>
+				{/* Página de home */}
+				<Route path="/" element={<Home />} />
 
-        {/* Página de catálogo */}
-        <Route path="/catalogo" element={<Catalog />} />
+				{/* Página de catálogo */}
+				<Route path="/catalogo" element={<Catalog />} />
 
-        {/* Página de contacto */}
-        <Route path="/contacto" element={<Contacto />} />
+				{/* Página de contacto */}
+				<Route path="/contacto" element={<Contacto />} />
 
-      </Routes>
-    </BrowserRouter>
-  );
+				<Route path="/producto/:id" element={<ProductDetail />} />
+			</Routes>
+		</BrowserRouter>
+	);
 }
 
 export default App;
