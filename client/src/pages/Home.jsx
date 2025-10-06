@@ -77,20 +77,30 @@ function Home({ carritoItems = 0, añadirAlCarrito }) {
                                                 onError={(e) => e.target.src = '/img/logo.svg'}
                                             />
                                         </div>
-                                        <h3>{p.nombre}</h3>
-                                        <p>{p.descripcion}</p>
-                                        <span className="precio">{p.precio}</span>
+                                        <div className="card-content">
+                                            <h3>{p.nombre}</h3>
+                                            <p>{p.descripcion}</p>
+                                            <span className="precio">
+                                                {new Intl.NumberFormat("es-AR", {
+                                                    style: "currency",
+                                                    currency: "ARS",
+                                                    minimumFractionDigits: 0,
+                                                }).format(p.precio)}
+                                            </span>
+                                        </div>
                                     </Link>
-                                    <button 
-                                        className="boton-carrito" 
-                                        onClick={() => {
-                                            if (añadirAlCarrito) {
-                                                añadirAlCarrito(p);
-                                            }
-                                        }}
-                                    >
-                                        Añadir al carrito
-                                    </button>
+                                    <div className="card-actions">
+                                        <button 
+                                            className="boton-carrito" 
+                                            onClick={() => {
+                                                if (añadirAlCarrito) {
+                                                    añadirAlCarrito(p);
+                                                }
+                                            }}
+                                        >
+                                            Añadir al carrito
+                                        </button>
+                                    </div>
                                 </div>
                             ))}
                         </div>
