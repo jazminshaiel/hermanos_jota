@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const productos = require("./productos-data");
+let productos = require("./productos-data");
 
 // Todos los productos
 router.get("/productos", (req, res) => {
@@ -25,7 +25,7 @@ router.post ("/productos", (req,res) => {
   }
 
   const nuevoProducto = {
-    id: productos.lenght > 0 ? procutos[productos.lenght-1].id + 1:1,
+    id: productos.length > 0 ? productos[productos.length-1].id + 1:1,
     nombre,
     descripcion: descripcion || "",
     precio,
@@ -34,7 +34,7 @@ router.post ("/productos", (req,res) => {
   };
 
   productos.push(nuevoProducto);
-  res.status(201).json(nuevoProcuto);
+  res.status(201).json(nuevoProducto);
 })
 
 // Actualizar un producto existente
