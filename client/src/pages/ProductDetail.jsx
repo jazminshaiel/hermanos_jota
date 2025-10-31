@@ -15,6 +15,8 @@ function ProductDetail({ carritoItems = 0, añadirAlCarrito }) {
 	const [producto, setProducto] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
+	const [isDeleting, setIsDeleting] = useState(false);
+	const [deleteError, setDeleteError] = useState(null);
 
 	useEffect(() => {
 		if (!id) {
@@ -32,6 +34,7 @@ function ProductDetail({ carritoItems = 0, añadirAlCarrito }) {
 			.then((data) => {
 				setProducto(data);
 				setLoading(false);
+				setDeleteError(null);
 				window.scrollTo(0, 0);
 			})
 			.catch((err) => {
@@ -47,6 +50,40 @@ function ProductDetail({ carritoItems = 0, añadirAlCarrito }) {
 
 	const handleBackToCatalog = () => {
 		navigate("/catalogo");
+	};
+
+	const handleDeleteProduct = async () => {
+		if (!producto?.id) return;
+
+		const confirmar = window.confirm(
+			`¿Estás seguro de que querés eliminar "${producto.nombre}"?`
+		);
+
+		if (!confirmar) return;
+
+		try {
+			setIsDeleting(true);
+			setDeleteError(null);
+
+			const response = await fetch(
+				`http://localhost:3001/api/productos/${producto.id}`,
+				{
+					method: "DELETE",
+				},
+			);
+
+			if (!response.ok) {
+				const body = await response.json().catch(() => ({}));
+				throw new Error(body.error || "No se pudo eliminar el producto");
+			}
+
+			navigate("/catalogo");
+		} catch (err) {
+			console.error("Error al eliminar producto:", err);
+			setDeleteError(err.message);
+		} finally {
+			setIsDeleting(false);
+		}
 	};
 
 	if (loading)
@@ -82,7 +119,15 @@ function ProductDetail({ carritoItems = 0, añadirAlCarrito }) {
 				</button>
 			</div>
 			<div>
-				<DetailedProduct producto={producto} añadirAlCarrito={añadirAlCarrito} />
+				<DetailedProduct
+					producto={producto}
+					añadirAlCarrito={añadirAlCarrito}
+					onEliminar={handleDeleteProduct}
+					eliminando={isDeleting}
+				/>
+				{deleteError && (
+					<p className="mensaje-error-eliminar">{deleteError}</p>
+				)}
 				<RelatedProducts
 					productoActual={producto}
 					onProductClick={handleProductClick}

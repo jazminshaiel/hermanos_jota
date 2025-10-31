@@ -1,4 +1,4 @@
-export function DetailedProduct({ producto, añadirAlCarrito }) {
+export function DetailedProduct({ producto, añadirAlCarrito, onEliminar, eliminando = false }) {
 	const precioFormateado = new Intl.NumberFormat("es-AR", {
 		style: "currency",
 		currency: "ARS",
@@ -20,12 +20,23 @@ export function DetailedProduct({ producto, añadirAlCarrito }) {
 				<h1>{producto.nombre}</h1>
 				<p className="precio">{precioFormateado}</p>
 				<p className="descripcion">{producto.descripcion}</p>
-				<button 
-					className="boton-carrito" 
-					onClick={handleAñadirAlCarrito}
-				>
-					Añadir al carrito
-				</button>
+				<div className="producto-acciones">
+					<button
+						className="boton-carrito"
+						onClick={handleAñadirAlCarrito}
+					>
+						Añadir al carrito
+					</button>
+					{onEliminar && (
+						<button
+							className="boton-eliminar"
+							onClick={onEliminar}
+							disabled={eliminando}
+						>
+							{eliminando ? "Eliminando..." : "Eliminar"}
+						</button>
+					)}
+				</div>
 			</div>
 		</section>
 	);

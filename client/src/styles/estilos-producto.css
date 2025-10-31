@@ -146,6 +146,14 @@ body {
 	padding: 10px;
 }
 
+.producto-acciones {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	width: 100%;
+	max-width: 350px;
+}
+
 .producto-info h1 {
 	font-size: 2.2rem;
 	font-weight: 700;
@@ -200,6 +208,37 @@ body {
 .boton-carrito:hover {
 	background-color: #8b4513;
 	transform: scale(1.02);
+}
+
+.boton-eliminar {
+	font-size: 1rem;
+	padding: 12px;
+	width: 100%;
+	border-radius: 12px;
+	background-color: #c62828;
+	color: white;
+	border: none;
+	cursor: pointer;
+	font-weight: 600;
+	transition: background-color 0.3s, transform 0.2s;
+	font-family: "Inter", sans-serif;
+}
+
+.boton-eliminar:hover {
+	background-color: #a12020;
+	transform: scale(1.01);
+}
+
+.boton-eliminar:disabled {
+	opacity: 0.65;
+	cursor: not-allowed;
+	transform: none;
+}
+
+.mensaje-error-eliminar {
+	color: #c62828;
+	font-size: 0.95rem;
+	margin-top: 10px;
 }
 
 @media (max-width: 900px) {
