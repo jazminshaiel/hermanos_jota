@@ -1,7 +1,11 @@
+require("dotenv").config();
 const express = require('express');
 const cors = require('cors');
+const mongoose = require("mongoose");
 const routes = require("./routes-productos.js");
 const logger = require('./middlewares/logger.js');
+const Product = require("./models/Product");
+const productosData = require("./productos-data");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -38,7 +42,37 @@ app.use((err, req, res, next) => {
     res.status(500).json({ error: "Error interno del servidor" });
 });
 
-// Iniciar servidor
-app.listen(PORT, () => {
-    console.log(`Servidor corriendo en http://localhost:${PORT}`);
-});
+const seedInitialProducts = async () => {
+    const total = await Product.estimatedDocumentCount();
+    if (total > 0) return;
+
+    const productosFormateados = productosData.map(({ id, imagen, ...resto }) => ({
+        ...resto,
+        imagenUrl: imagen || "",
+    }));
+
+    await Product.insertMany(productosFormateados);
+    console.log("Productos iniciales cargados en la base de datos");
+};
+
+const startServer = async () => {
+    try {
+        if (!process.env.MONGODB_URI) {
+            throw new Error("La variable de entorno MONGODB_URI no está definida");
+        }
+
+        await mongoose.connect(process.env.MONGODB_URI);
+        console.log("Conexión a MongoDB establecida");
+
+        await seedInitialProducts();
+
+        app.listen(PORT, () => {
+            console.log(`Servidor corriendo en http://localhost:${PORT}`);
+        });
+    } catch (error) {
+        console.error("Error al iniciar el servidor:", error.message);
+        process.exit(1);
+    }
+};
+
+startServer();
