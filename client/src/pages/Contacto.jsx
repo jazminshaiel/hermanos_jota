@@ -74,7 +74,6 @@ function Contacto({ carritoItems = 0 }) {
 
     
     if (Object.keys(validationErrors).length === 0) {
-      console.log("Formulario válido. Datos enviados:", formData);
       setExito(true); 
 
      

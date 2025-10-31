@@ -26,12 +26,10 @@ function ProductDetail({ carritoItems = 0, añadirAlCarrito }) {
 
 		fetch(`http://localhost:3001/api/productos/${id}`)
 			.then((res) => {
-				console.log("Response status:", res.status);
 				if (!res.ok) throw new Error("Producto no encontrado");
 				return res.json();
 			})
 			.then((data) => {
-				console.log("Producto cargado:", data);
 				setProducto(data);
 				setLoading(false);
 				window.scrollTo(0, 0);
@@ -44,10 +42,6 @@ function ProductDetail({ carritoItems = 0, añadirAlCarrito }) {
 	}, [id]);
 
 	const handleProductClick = (producto) => {
-		console.log(
-			"handleProductClick - Navegando a:",
-			`/producto/${producto.id}`
-		);
 		navigate(`/producto/${producto.id}`);
 	};
 

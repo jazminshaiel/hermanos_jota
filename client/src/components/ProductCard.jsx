@@ -12,7 +12,6 @@ function ProductCard({ producto, onClick, añadirAlCarrito }) {
 		}
 	};
 
-	console.log("ProductCard producto:", producto);
 	return (
 		<div className="carta-producto" onClick={() => onClick(producto)}>
 			<img

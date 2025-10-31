@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const ModalCarrito = ({ isOpen, onClose, producto }) => {
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (isOpen) {
       // Cerrar modal automáticamente después de 3 segundos
@@ -61,7 +64,7 @@ const ModalCarrito = ({ isOpen, onClose, producto }) => {
             </button>
             <button className="btn-ver-carrito" onClick={() => {
               onClose();
-              window.location.href = '/carrito';
+              navigate("/carrito");
             }}>
               Ver carrito
             </button>
