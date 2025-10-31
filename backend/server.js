@@ -1,6 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-const productos = require('./productos-data.js');
 const routes = require("./routes-productos.js");
 const logger = require('./middlewares/logger.js');
 
@@ -13,23 +12,8 @@ app.use(express.json());
 app.use(logger);
 
 // IMPORTANTE: Las rutas API deben ir ANTES de los archivos estaticos
-// Devuelve todos los productos
-app.get('/api/productos', (req, res) => {
-    res.json(productos);
-});
-app.use("/api", routes);
-
-// Devuelve un producto específico
-app.get('/api/productos/:id' , (req,res) => {
-    const id = parseInt(req.params.id);
-    const producto = productos.find(p => p.id === id);
-
-    if(!producto){
-        return res.status(404).json({ error: "Producto no encontrado"});
-    }
-
-    res.json(producto);
-});
+// Rutas de productos - la base "/api/productos" se define aquí
+app.use("/api/productos", routes);
 
 // Ruta raíz (informativa)
 app.get('/', (req, res) => {
