@@ -7,6 +7,7 @@ import ProductDetail from "./pages/ProductDetail";
 import Cart from "./pages/Cart";
 import ModalCarrito from "./components/ModalCarrito";
 import ScrollToTop from "./components/ScrollToTop";
+import CreateProductPage from "./pages/CreateProductPage";
 
 function App() {
 	// Estado global del carrito
@@ -116,6 +117,16 @@ function App() {
 							carrito={carrito}
 							removerDelCarrito={removerDelCarrito}
 							actualizarCantidad={actualizarCantidad}
+							carritoItems={totalItems}
+						/>
+					} 
+				/>
+
+				{/* Página Crear Producto (Administrativa) */}
+				<Route 
+					path="/admin/crear-producto" 
+					element={
+						<CreateProductPage 
 							carritoItems={totalItems}
 						/>
 					} 
