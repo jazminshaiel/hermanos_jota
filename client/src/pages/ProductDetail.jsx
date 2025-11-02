@@ -1,138 +1,90 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { DetailedProduct } from "../components/DetailedProduct";
-import Footer from "../components/Footer";
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
-import { RelatedProducts } from "../components/RelatedProducts";
-import "../styles/estilos-globales.css";
-import "../styles/estilos-producto.css";
-import "../styles/Footer.css";
+import Footer from "../components/Footer";
+import { DetailedProduct } from "../components/DetailedProduct"; 
+import "../styles/estilos-detalle.css"; 
 
-function ProductDetail({ carritoItems = 0, añadirAlCarrito }) {
-	const params = useParams();
-	const { id } = params;
-	const navigate = useNavigate();
+// Aceptamos los props que vienen de App.js
+function ProductDetail({ carritoItems, añadirAlCarrito }) {
 	const [producto, setProducto] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
-	const [isDeleting, setIsDeleting] = useState(false);
-	const [deleteError, setDeleteError] = useState(null);
+	const [eliminando, setEliminando] = useState(false); // Estado para el botón de borrar
 
+	// Hooks de React Router
+	const { id } = useParams(); // Hook para leer el ":id" de la URL
+	const navigate = useNavigate(); // Hook para redirigir al usuario
+
+	// Hook para cargar los datos del producto
 	useEffect(() => {
-		if (!id) {
-			console.error("ID es undefined, no se puede hacer fetch");
-			setError("ID de producto no válido");
-			setLoading(false);
-			return;
-		}
-
-		fetch(`http://localhost:3001/api/productos/${id}`)
-			.then((res) => {
-				if (!res.ok) throw new Error("Producto no encontrado");
-				return res.json();
-			})
-			.then((data) => {
+		const fetchProducto = async () => {
+			try {
+				setLoading(true);
+				// Usamos el endpoint del backend
+				const response = await fetch(`/api/productos/${id}`);
+				if (!response.ok) {
+					throw new Error("El producto no fue encontrado.");
+				}
+				const data = await response.json();
 				setProducto(data);
-				setLoading(false);
-				setDeleteError(null);
-				window.scrollTo(0, 0);
-			})
-			.catch((err) => {
-				console.error("Error en fetch:", err);
+			} catch (err) {
 				setError(err.message);
+			} finally {
 				setLoading(false);
-			});
-	}, [id]);
-
-	const handleProductClick = (producto) => {
-		navigate(`/producto/${producto.id}`);
-	};
-
-	const handleBackToCatalog = () => {
-		navigate("/catalogo");
-	};
-
-	const handleDeleteProduct = async () => {
-		if (!producto?.id) return;
-
-		const confirmar = window.confirm(
-			`¿Estás seguro de que querés eliminar "${producto.nombre}"?`
-		);
-
-		if (!confirmar) return;
-
-		try {
-			setIsDeleting(true);
-			setDeleteError(null);
-
-			const response = await fetch(
-				`http://localhost:3001/api/productos/${producto.id}`,
-				{
-					method: "DELETE",
-				},
-			);
-
-			if (!response.ok) {
-				const body = await response.json().catch(() => ({}));
-				throw new Error(body.error || "No se pudo eliminar el producto");
 			}
+		};
 
-			navigate("/catalogo");
-		} catch (err) {
-			console.error("Error al eliminar producto:", err);
-			setDeleteError(err.message);
-		} finally {
-			setIsDeleting(false);
+		fetchProducto();
+	}, [id]); // Se ejecuta cada vez que el 'id' de la URL cambia
+
+	// Funcionalidad de Borrado
+	const handleEliminar = async () => {
+		// Pedimos confirmación
+		if (window.confirm("¿Estás seguro de que deseas eliminar este producto?")) {
+			setEliminando(true);
+			try {
+				// Usamos el endpoint DELETE de tu API
+				const response = await fetch(`/api/productos/${id}`, {
+					method: "DELETE",
+				});
+
+				if (!response.ok) {
+					throw new Error("No se pudo eliminar el producto.");
+				}
+				
+				// Redirigimos al catálogo tras el borrado exitoso
+				alert("Producto eliminado correctamente.");
+				navigate("/catalogo"); 
+			} catch (err) {
+				setError(err.message);
+				setEliminando(false);
+			}
 		}
 	};
 
-	if (loading)
-		return (
-			<p style={{ textAlign: "center", padding: "40px" }}>
-				Cargando producto...
-			</p>
+	// Lógica de renderizado
+	let content;
+	if (loading) {
+		content = <p className="loading-message">Cargando producto...</p>;
+	} else if (error) {
+		content = <p className="error-message">{error}</p>;
+	} else if (producto) {
+		// Usamos <DetailedProduct> y le pasamos los props
+		content = (
+			<DetailedProduct
+				producto={producto}
+				añadirAlCarrito={añadirAlCarrito}
+				onEliminar={handleEliminar}
+				eliminando={eliminando}
+			/>
 		);
-	if (error)
-		return (
-			<p style={{ textAlign: "center", padding: "40px", color: "red" }}>
-				{error}
-			</p>
-		);
-	if (!producto)
-		return (
-			<p style={{ textAlign: "center", padding: "40px" }}>
-				Producto no encontrado
-			</p>
-		);
+	}
 
 	return (
 		<>
 			<Header carritoItems={carritoItems} />
-			<div className="productDetail-div">
-				<button
-					className="backToCatalogButton"
-					onClick={handleBackToCatalog}
-					onMouseOver={(e) => (e.target.style.backgroundColor = "#8b4513")}
-					onMouseOut={(e) => (e.target.style.backgroundColor = "#a0522d")}
-				>
-					← Volver al catálogo
-				</button>
-			</div>
-			<div>
-				<DetailedProduct
-					producto={producto}
-					añadirAlCarrito={añadirAlCarrito}
-					onEliminar={handleDeleteProduct}
-					eliminando={isDeleting}
-				/>
-				{deleteError && (
-					<p className="mensaje-error-eliminar">{deleteError}</p>
-				)}
-				<RelatedProducts
-					productoActual={producto}
-					onProductClick={handleProductClick}
-				/>
-			</div>
+			<main className="container">{content}</main>
 			<Footer />
 		</>
 	);
