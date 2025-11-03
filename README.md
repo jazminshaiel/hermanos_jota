@@ -88,25 +88,51 @@ hermanos_jota/
 
 ## Cómo ejecutar el proyecto
 
-### 1. Backend
+### 1\. Configuración Previa (Setup)
+Antes de iniciar los servidores, necesitas instalar todas las dependencias en *ambos* proyectos (backend y frontend) y configurar el archivo de entorno del backend.
+#### A. Instalar Dependencias del Backend
+*Abre una terminal y navega a la carpeta `backend`.*
 ```bash
 cd backend
 npm install
-npx nodemon server.js
 ```
-El backend corre en **http://localhost:3001**
-
-### 2. Frontend
+*(Esto instalará `express`, `mongoose`, `dotenv`, etc.)*
+#### B. Instalar Dependencias del Frontend
+*Abre una **segunda** terminal y navega a la carpeta `client`.*
 ```bash
 cd client
 npm install
+```
+*(Esto instalará `react`, `react-router-dom`, etc.)*
+#### C. Configurar Variables de Entorno (.env)
+El backend necesita un archivo `.env` para conectarse a MongoDB.
+1.  En la carpeta `backend/` (en la misma ubicación que `server.js`), crea un archivo llamado `.env`
+2.  Abre el archivo y añade tu cadena de conexión de MongoDB.
+*Si usas una base de datos local (MongoDB Community):*
+```env
+MONGODB_URI=mongodb://localhost:27017/hermanosjota
+```
+*Si usas MongoDB Atlas (reemplaza con tus credenciales):*
+```env
+MONGODB_URI=mongodb+srv://tu_usuario:tu_contraseña@tucluster.mongodb.net/hermanosjota?retryWrites=true&w=majority
+```
+### 2\. Ejecutar el Proyecto
+Una vez configurado, necesitarás **dos terminales abiertas** para ejecutar la aplicación.
+#### Terminal 1: Backend (API)
+*En la terminal del `backend`*
+```bash
+npx nodemon server.js
+```
+El backend correrá en **http://localhost:3001**
+#### Terminal 2: Frontend (React)
+*En la terminal del `client`*
+```bash
 npm start
 ```
-El frontend corre en **http://localhost:3000**
-
-### 3. Acceso
-- **Frontend**: http://localhost:3000
-- **API Backend**: http://localhost:3001/api/productos
+El frontend correrá en **http://localhost:3000**
+### 3\. Acceso
+  - **Frontend**: http://localhost:3000
+  - **API Backend**: http://localhost:3001/api/productos
 
 ## Endpoints de la API
 
