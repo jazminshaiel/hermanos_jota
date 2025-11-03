@@ -3,6 +3,9 @@ import { useParams, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { DetailedProduct } from "../components/DetailedProduct"; 
+import "../styles/estilos-globales.css";
+import "../styles/estilos-producto.css";
+import "../styles/Footer.css";
 import "../styles/estilos-detalle.css"; 
 
 // Aceptamos los props que vienen de App.js
