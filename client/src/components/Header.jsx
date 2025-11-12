@@ -1,7 +1,9 @@
-import React from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 const Header = ({ carritoItems = 0 }) => {
+  const { currentUser, logout } = useContext(AuthContext);
   return (
     // Clase 'header'
     <header className="header">
@@ -22,6 +24,24 @@ const Header = ({ carritoItems = 0 }) => {
         </nav>
 
         <div className="header-icons">
+          {currentUser ? (
+            //Si el usuario SÍ está logueado
+            <>
+              <Link to="/perfil" className="icon-link">
+                Mi Perfil ({currentUser.username})
+              </Link>
+              {/* Usamos un <a> o <button> para el logout */}
+              <a href="#!" onClick={logout} className="icon-link" style={{cursor: 'pointer'}}>
+                Logout
+              </a>
+            </>
+          ) : (
+            // Si el usuario NO está logueado
+            <Link to="/login" className="icon-link">
+              Login
+            </Link>
+          )}
+          
           <Link to="/carrito" className="icon-link carrito-link">
             <svg 
               className="carrito-icon" 

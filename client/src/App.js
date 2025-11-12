@@ -1,13 +1,21 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { useState } from "react";
+// PAGES
 import Catalog from "./pages/Catalog";
 import Contacto from "./pages/Contacto";
 import Home from "./pages/Home";
 import ProductDetail from "./pages/ProductDetail";
 import Cart from "./pages/Cart";
+import CreateProductPage from "./pages/CreateProductPage";
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import ProfilePage from './pages/ProfilePage';
+import ProtectedRoute from './components/ProtectedRoute';
+
+//COMPONENTS
 import ModalCarrito from "./components/ModalCarrito";
 import ScrollToTop from "./components/ScrollToTop";
-import CreateProductPage from "./pages/CreateProductPage";
+
 
 function App() {
 	// Estado global del carrito
@@ -70,9 +78,11 @@ function App() {
 	const totalItems = carrito.reduce((total, item) => total + item.cantidad, 0);
 
 	return (
-		<BrowserRouter>
+		<>
 			<ScrollToTop />
 			<Routes>
+				<Route path="/login" element={<LoginPage />} />
+      			<Route path="/registro" element={<RegisterPage />} />
 				{/* Página de home */}
 				<Route 
 					path="/" 
@@ -122,15 +132,13 @@ function App() {
 					} 
 				/>
 
-				{/* Página Crear Producto (Administrativa) */}
-				<Route 
-					path="/admin/crear-producto" 
-					element={
-						<CreateProductPage 
-							carritoItems={totalItems}
-						/>
-					} 
-				/>
+				<Route element={<ProtectedRoute />}>
+					<Route path="/perfil" element={<ProfilePage />} />
+					<Route 
+						path="/admin/crear-producto" 
+						element={<CreateProductPage carritoItems={totalItems} />} 
+					/>
+				</Route>
 			</Routes>
 			
 			{/* Modal de Carrito */}
@@ -139,7 +147,7 @@ function App() {
 				onClose={() => setModalCarrito({ isOpen: false, producto: null })}
 				producto={modalCarrito.producto}
 			/>
-		</BrowserRouter>
+			</>
 	);
 }
 
