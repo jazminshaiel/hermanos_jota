@@ -67,7 +67,7 @@ function LoginPage() {
                 <button type="submit" className="auth-button">Ingresar</button>
                 
                 <p className="auth-link">
-                    ¿No tienes cuenta? <Link to="/register">Regístrate aquí</Link>
+                    ¿No tienes cuenta? <Link to="/registro">Regístrate aquí</Link>
                 </p>
 
             </form>
