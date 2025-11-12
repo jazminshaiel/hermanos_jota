@@ -57,6 +57,7 @@ function ProfilePage() {
             <Header />
             
             <main className="auth-container">
+                <div style={{ width: '100%', maxWidth: '500px' }}>
                 <form className="auth-form" onSubmit={handleSubmit}>
                     <h2>Mi Perfil</h2>
                     <p style={{textAlign: 'center', margin: '-1rem 0 1.5rem 0', fontFamily: '"Inter", sans-serif'}}>
@@ -97,8 +98,8 @@ function ProfilePage() {
                 >
                     Cerrar Sesión (Logout)
                 </button>
+                </div>
             </main>
-
             <Footer />
         </>
     );
