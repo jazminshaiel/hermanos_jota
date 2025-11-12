@@ -203,7 +203,9 @@ body {
 	cursor: pointer;
 	font-weight: 600;
 	transition: background-color 0.3s, transform 0.2s;
-	font-family: "Playfair Display", serif;
+	font-family: "Inter", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
 }
 
 .boton-carrito:hover {
