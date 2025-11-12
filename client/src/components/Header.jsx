@@ -25,19 +25,20 @@ const Header = ({ carritoItems = 0 }) => {
 
         <div className="header-icons">
           {currentUser ? (
-            //Si el usuario SÍ está logueado
             <>
-              <Link to="/perfil" className="icon-link">
-                Mi Perfil ({currentUser.username})
+              {/* El "cartel" con el nombre de usuario */}
+              <Link to="/perfil" className="user-info-link">
+                <span>Hola, <strong>{currentUser.username}</strong></span>
               </Link>
-              {/* Usamos un <a> o <button> para el logout */}
-              <a href="#!" onClick={logout} className="icon-link" style={{cursor: 'pointer'}}>
+              
+              {/* El botón de logout separado */}
+              <a href="#!" onClick={logout} className="logout-link">
                 Logout
               </a>
             </>
           ) : (
-            // Si el usuario NO está logueado
-            <Link to="/login" className="icon-link">
+            // El link de login cuando no hay nadie
+            <Link to="/login" className="login-link">
               Login
             </Link>
           )}

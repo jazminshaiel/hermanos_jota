@@ -45,13 +45,13 @@ const loginUser = async (req, res) => {
         // Buscar usuario por email
         const usuario = await User.findOne({ email });
         if (!usuario) {
-            return res.status(400).json({ mensaje: "Credenciales inválidas (email)" });
+            return res.status(400).json({ mensaje: "Credenciales inválidas" });
         }
 
         // Comparar contraseñas
         const esPasswordValido = await bcrypt.compare(password, usuario.password);
         if (!esPasswordValido) {
-            return res.status(400).json({ mensaje: "Credenciales inválidas (password)" });
+            return res.status(400).json({ mensaje: "Credenciales inválidas" });
         }
 
         // Crear el Payload para el JWT

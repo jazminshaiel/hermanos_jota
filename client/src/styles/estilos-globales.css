@@ -132,6 +132,60 @@ body {
 	color: #ffcc99;
 }
 
+.header-icons a {
+	font-size: 1rem; /* Resetea el tamaño de 1.3rem */
+}
+
+/* Estilo base para todos los links de auth */
+.header-icons .user-info-link,
+.header-icons .logout-link,
+.header-icons .login-link {
+    font-family: "Inter", sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* El "cartel" del nombre de usuario */
+.header-icons .user-info-link {
+    background-color: rgba(0, 0, 0, 0.1); /* Fondo sutil */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.header-icons .user-info-link:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+    color: #ffcc99; /* Color hover del manual */
+}
+
+/* El link de "Logout" */
+.header-icons .logout-link {
+    font-weight: 600;
+    background-color: transparent;
+}
+
+.header-icons .logout-link:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: #ffcc99; /* Color hover del manual */
+}
+
+/* El link de "Login" (cuando no está logueado) */
+.header-icons .login-link {
+    font-weight: 600;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.header-icons .login-link:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    color: white;
+}
+
 
 /* MEDIA QUERIES GLOBALES (Header) */
 @media (max-width: 768px) {
