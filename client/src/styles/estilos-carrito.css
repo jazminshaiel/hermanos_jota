@@ -989,6 +989,7 @@ input.error {
     background: #a0522d;
     color: white;
     border: 2px solid #a0522d;
+    text-transform: uppercase;
 }
 
 .btn-ver-carrito:hover {
