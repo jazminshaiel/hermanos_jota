@@ -6,6 +6,8 @@ const routes = require("./routes-productos.js");
 const logger = require('./middlewares/logger.js');
 const Product = require("./models/Product");
 const productosData = require("./productos-data");
+const authRoutes = require('./routes/authRoutes.js');
+const userRoutes = require('./routes/userRoutes.js');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -17,7 +19,9 @@ app.use(logger);
 
 // IMPORTANTE: Las rutas API deben ir ANTES de los archivos estaticos
 // Rutas de productos - la base "/api/productos" se define aquí
+app.use('/api/auth', authRoutes);
 app.use("/api/productos", routes);
+app.use('/api/users', userRoutes);
 
 // Ruta raíz (informativa)
 app.get('/', (req, res) => {
