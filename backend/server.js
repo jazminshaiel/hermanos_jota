@@ -1,9 +1,18 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const productos = require('./productos-data.js');
+const conectarDB = require('./config/database');
+
+// Importar rutas
+const authRoutes = require('./routes/auth');
+const pedidosRoutes = require('./routes/pedidos');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+// Conectar a MongoDB
+conectarDB();
 
 // Middleware
 app.use(cors());
@@ -27,6 +36,12 @@ app.get('/api/productos/:id' , (req,res) => {
     res.json(producto);
 });
 
+// Rutas de autenticación
+app.use('/api/auth', authRoutes);
+
+// Rutas de pedidos
+app.use('/api/pedidos', pedidosRoutes);
+
 // Ruta raíz (informativa)
 app.get('/', (req, res) => {
     res.json({ 
@@ -34,7 +49,16 @@ app.get('/', (req, res) => {
         version: "1.0.0",
         endpoints: {
             productos: "/api/productos",
-            productoById: "/api/productos/:id"
+            productoById: "/api/productos/:id",
+            auth: {
+                register: "POST /api/auth/register",
+                login: "POST /api/auth/login"
+            },
+            pedidos: {
+                crear: "POST /api/pedidos (requiere autenticación)",
+                misPedidos: "GET /api/pedidos/mis-pedidos (requiere autenticación)",
+                pedidoById: "GET /api/pedidos/:id (requiere autenticación)"
+            }
         }
     });
 });

@@ -12,7 +12,7 @@ import SearchBar from "../components/SearchBar";
 import Filters from "../components/Filters";
 import ProductList from "../components/ProductList";
 
-function Catalog({ agregarAlCarrito, cantidadCarrito }) {
+function Catalog({ agregarAlCarrito }) {
   const [productos, setProductos] = useState([]);
   const [filteredProductos, setFilteredProductos] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -69,8 +69,8 @@ function Catalog({ agregarAlCarrito, cantidadCarrito }) {
   // Manejador para agregar al carrito
   const handleAgregarAlCarrito = (producto) => {
     agregarAlCarrito(producto);
-    // Mostrar feedback visual o cerrar el modal
-    alert(`${producto.nombre} agregado al carrito`);
+    // Cerrar el modal después de agregar
+    handleCloseDetail();
   };
 
   if (loading) return <p>Cargando productos...</p>;
@@ -78,7 +78,7 @@ function Catalog({ agregarAlCarrito, cantidadCarrito }) {
 
   return (
     <div className="catalogo-container">
-      <Header cantidadCarrito={cantidadCarrito} />
+      <Header />
       <h1 className="titulo-catalogo">Nuestro Catálogo</h1>
 
       {/* Barra de búsqueda */}

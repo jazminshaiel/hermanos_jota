@@ -1,7 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useCart } from "../contexts/CartContext";
 
-const Header = ({ cantidadCarrito = 0 }) => {
+const Header = () => {
+  const { cantidadTotal } = useCart();
+
   return (
     // Clase 'header'
     <header className="header">
@@ -24,8 +27,8 @@ const Header = ({ cantidadCarrito = 0 }) => {
         <div className="header-icons">
           <Link to="/carrito" className="icon-link carrito-icon">
             <i className="fa-solid fa-shopping-cart"></i>
-            {cantidadCarrito > 0 && (
-              <span className="carrito-badge">{cantidadCarrito}</span>
+            {cantidadTotal > 0 && (
+              <span className="carrito-badge">{cantidadTotal}</span>
             )}
           </Link>
         </div>

@@ -5,10 +5,10 @@ import "../styles/estilos-contacto.css";
 import Header from "../components/Header"; 
 import Footer from "../components/Footer"; 
 
-function Contacto({ cantidadCarrito }) {
+function Contacto() {
     return (
         <>
-            <Header cantidadCarrito={cantidadCarrito} />
+            <Header />
             <main className="container"> 
                 <h1>Página de Contacto</h1>
                 

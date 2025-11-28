@@ -6,10 +6,10 @@ import "../styles/estilos-home.css";
 import Header from "../components/Header"; 
 import Footer from "../components/Footer"; 
 
-function Home({ cantidadCarrito }) {
+function Home() {
     return (
         <>
-            <Header cantidadCarrito={cantidadCarrito} />
+            <Header />
             <main>
                 <section className="banner">
                     <div className="contenido">

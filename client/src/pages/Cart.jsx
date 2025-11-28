@@ -1,16 +1,26 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useCart } from '../contexts/CartContext';
+import { useAuth } from '../contexts/AuthContext';
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import "../styles/estilos-globales.css";
 import "../styles/estilos-carrito.css";
 
-function Cart({ carrito, eliminarDelCarrito, actualizarCantidad, vaciarCarrito, cantidadCarrito }) {
-  
-  // Calcular el total del carrito
-  const calcularTotal = () => {
-    return carrito.reduce((total, item) => total + (item.precio * item.cantidad), 0);
-  };
+function Cart() {
+  const {
+    carrito,
+    cantidadTotal,
+    totalCarrito,
+    eliminarDelCarrito,
+    actualizarCantidad,
+    vaciarCarrito,
+  } = useCart();
+
+  const { estaAutenticado, token } = useAuth();
+  const navigate = useNavigate();
+  const [procesando, setProcesando] = useState(false);
+  const [error, setError] = useState(null);
 
   const formatearPrecio = (precio) => {
     return new Intl.NumberFormat("es-AR", {
@@ -20,11 +30,89 @@ function Cart({ carrito, eliminarDelCarrito, actualizarCantidad, vaciarCarrito, 
     }).format(precio);
   };
 
+  const handleFinalizarCompra = async () => {
+    // Verificar si el usuario está autenticado
+    if (!estaAutenticado) {
+      setError('Debes iniciar sesión para finalizar la compra');
+      // Redirigir a login (puedes crear esta página después)
+      setTimeout(() => {
+        navigate('/login');
+      }, 2000);
+      return;
+    }
+
+    // Verificar que el carrito no esté vacío
+    if (carrito.length === 0) {
+      setError('Tu carrito está vacío');
+      return;
+    }
+
+    setProcesando(true);
+    setError(null);
+
+    try {
+      // Preparar los datos del pedido
+      const pedidoData = {
+        productos: carrito.map((item) => ({
+          productoId: item.id,
+          nombre: item.nombre,
+          precio: item.precio,
+          cantidad: item.cantidad,
+          imagen: item.imagen,
+        })),
+        total: totalCarrito,
+        fecha: new Date().toISOString(),
+      };
+
+      // Enviar pedido al backend
+      const response = await fetch('http://localhost:3001/api/pedidos', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(pedidoData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Error al procesar el pedido');
+      }
+
+      const data = await response.json();
+
+      // Vaciar el carrito después de un pedido exitoso
+      vaciarCarrito();
+
+      // Mostrar mensaje de éxito y redirigir
+      alert(`¡Pedido realizado con éxito! Número de pedido: ${data.pedido.numeroPedido || data.pedido._id}`);
+      navigate('/');
+    } catch (err) {
+      setError(err.message || 'Error al procesar el pedido. Por favor, intenta nuevamente.');
+      console.error('Error al finalizar compra:', err);
+    } finally {
+      setProcesando(false);
+    }
+  };
+
   return (
     <>
-      <Header cantidadCarrito={cantidadCarrito} />
+      <Header />
       <main className="carrito-container">
         <h1 className="titulo-carrito">Mi Carrito de Compras</h1>
+
+        {error && (
+          <div style={{
+            background: '#ff4444',
+            color: 'white',
+            padding: '15px',
+            borderRadius: '8px',
+            marginBottom: '20px',
+            textAlign: 'center'
+          }}>
+            {error}
+          </div>
+        )}
 
         {carrito.length === 0 ? (
           <div className="carrito-vacio">
@@ -107,8 +195,8 @@ function Cart({ carrito, eliminarDelCarrito, actualizarCantidad, vaciarCarrito, 
               <h2>Resumen del Pedido</h2>
               <div className="resumen-detalle">
                 <div className="resumen-linea">
-                  <span>Productos ({cantidadCarrito} {cantidadCarrito === 1 ? 'item' : 'items'})</span>
-                  <span>{formatearPrecio(calcularTotal())}</span>
+                  <span>Productos ({cantidadTotal} {cantidadTotal === 1 ? 'item' : 'items'})</span>
+                  <span>{formatearPrecio(totalCarrito)}</span>
                 </div>
                 <div className="resumen-linea">
                   <span>Envío</span>
@@ -116,13 +204,29 @@ function Cart({ carrito, eliminarDelCarrito, actualizarCantidad, vaciarCarrito, 
                 </div>
                 <div className="resumen-total">
                   <span>Total</span>
-                  <span className="total-precio">{formatearPrecio(calcularTotal())}</span>
+                  <span className="total-precio">{formatearPrecio(totalCarrito)}</span>
                 </div>
               </div>
 
-              <button className="btn-finalizar-compra">
-                Finalizar Compra
+              <button
+                className="btn-finalizar-compra"
+                onClick={handleFinalizarCompra}
+                disabled={procesando || !estaAutenticado}
+                title={!estaAutenticado ? 'Debes iniciar sesión para finalizar la compra' : ''}
+              >
+                {procesando ? 'Procesando...' : 'Finalizar Compra'}
               </button>
+
+              {!estaAutenticado && (
+                <p style={{
+                  fontSize: '14px',
+                  color: '#ff4444',
+                  textAlign: 'center',
+                  marginTop: '10px'
+                }}>
+                  * Debes iniciar sesión para finalizar la compra
+                </p>
+              )}
 
               <Link to="/catalogo">
                 <button className="btn-seguir-comprando-secundario">
@@ -130,7 +234,7 @@ function Cart({ carrito, eliminarDelCarrito, actualizarCantidad, vaciarCarrito, 
                 </button>
               </Link>
 
-              <button 
+              <button
                 className="btn-vaciar-carrito"
                 onClick={vaciarCarrito}
               >
