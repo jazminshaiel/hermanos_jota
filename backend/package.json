@@ -23,6 +23,7 @@
   "homepage": "https://github.com/jazminshaiel/hermanos_jota#readme",
   "dependencies": {
     "bcrypt": "^6.0.0",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",

@@ -1,5 +1,8 @@
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
+import { CartProvider, useCart } from "./contexts/CartContext";
+import { AuthProvider } from "./contexts/AuthContext";
+
 // PAGES
 import Catalog from "./pages/Catalog";
 import Contacto from "./pages/Contacto";
@@ -12,14 +15,14 @@ import RegisterPage from './pages/RegisterPage';
 import ProfilePage from './pages/ProfilePage';
 import ProtectedRoute from './components/ProtectedRoute';
 
-//COMPONENTS
+// COMPONENTS
 import ModalCarrito from "./components/ModalCarrito";
 import ScrollToTop from "./components/ScrollToTop";
+import NotificationToast from "./components/NotificationToast";
 
-
-function App() {
-	// Estado global del carrito
-	const [carrito, setCarrito] = useState([]);
+// Componente interno que usa los Contexts
+function AppContent() {
+	const { agregarAlCarrito } = useCart();
 	
 	// Estado para el modal
 	const [modalCarrito, setModalCarrito] = useState({
@@ -27,24 +30,32 @@ function App() {
 		producto: null
 	});
 
-	// Función para añadir producto al carrito
-	const añadirAlCarrito = (producto) => {
-		setCarrito(prevCarrito => {
-			// Verificar si el producto ya está en el carrito
-			const productoExistente = prevCarrito.find(item => item.id === producto.id);
-			
-			if (productoExistente) {
-				// Si ya existe, incrementar la cantidad
-				return prevCarrito.map(item =>
-					item.id === producto.id
-						? { ...item, cantidad: item.cantidad + 1 }
-						: item
-				);
-			} else {
-				// Si no existe, agregarlo con cantidad 1
-				return [...prevCarrito, { ...producto, cantidad: 1 }];
-			}
+	// Estado para la notificación
+	const [notificacion, setNotificacion] = useState({
+		mostrar: false,
+		mensaje: "",
+	});
+
+	// Función para mostrar notificación
+	const mostrarNotificacion = (mensaje) => {
+		setNotificacion({
+			mostrar: true,
+			mensaje: mensaje,
 		});
+	};
+
+	// Función para cerrar notificación
+	const cerrarNotificacion = () => {
+		setNotificacion({
+			mostrar: false,
+			mensaje: "",
+		});
+	};
+
+	// Wrapper para agregar al carrito con notificación y modal
+	const añadirAlCarritoConNotificacion = (producto) => {
+		agregarAlCarrito(producto);
+		mostrarNotificacion(`${producto.nombre} agregado al carrito`);
 		
 		// Mostrar modal
 		setModalCarrito({
@@ -53,43 +64,24 @@ function App() {
 		});
 	};
 
-	// Función para remover producto del carrito
-	const removerDelCarrito = (productoId) => {
-		setCarrito(prevCarrito => prevCarrito.filter(item => item.id !== productoId));
-	};
-
-	// Función para actualizar cantidad de un producto
-	const actualizarCantidad = (productoId, nuevaCantidad) => {
-		if (nuevaCantidad <= 0) {
-			removerDelCarrito(productoId);
-			return;
-		}
-		
-		setCarrito(prevCarrito =>
-			prevCarrito.map(item =>
-				item.id === productoId
-					? { ...item, cantidad: nuevaCantidad }
-					: item
-			)
-		);
-	};
-
-	// Calcular total de items en el carrito
-	const totalItems = carrito.reduce((total, item) => total + item.cantidad, 0);
-
 	return (
 		<>
 			<ScrollToTop />
+			<NotificationToast
+				mensaje={notificacion.mensaje}
+				mostrar={notificacion.mostrar}
+				onCerrar={cerrarNotificacion}
+			/>
 			<Routes>
 				<Route path="/login" element={<LoginPage />} />
-      			<Route path="/registro" element={<RegisterPage />} />
+				<Route path="/registro" element={<RegisterPage />} />
+				
 				{/* Página de home */}
 				<Route 
 					path="/" 
 					element={
 						<Home 
-							carritoItems={totalItems}
-							añadirAlCarrito={añadirAlCarrito}
+							añadirAlCarrito={añadirAlCarritoConNotificacion}
 						/>
 					} 
 				/>
@@ -99,22 +91,20 @@ function App() {
 					path="/catalogo" 
 					element={
 						<Catalog 
-							carritoItems={totalItems}
-							añadirAlCarrito={añadirAlCarrito}
+							añadirAlCarrito={añadirAlCarritoConNotificacion}
 						/>
 					} 
 				/>
 
 				{/* Página de contacto */}
-				<Route path="/contacto" element={<Contacto carritoItems={totalItems} />} />
+				<Route path="/contacto" element={<Contacto />} />
 
 				{/* Página de detalle de producto */}
 				<Route 
 					path="/producto/:id" 
 					element={
 						<ProductDetail 
-							carritoItems={totalItems}
-							añadirAlCarrito={añadirAlCarrito}
+							añadirAlCarrito={añadirAlCarritoConNotificacion}
 						/>
 					} 
 				/>
@@ -122,21 +112,14 @@ function App() {
 				{/* Página del carrito */}
 				<Route 
 					path="/carrito" 
-					element={
-						<Cart 
-							carrito={carrito}
-							removerDelCarrito={removerDelCarrito}
-							actualizarCantidad={actualizarCantidad}
-							carritoItems={totalItems}
-						/>
-					} 
+					element={<Cart />}
 				/>
 
 				<Route element={<ProtectedRoute />}>
 					<Route path="/perfil" element={<ProfilePage />} />
 					<Route 
 						path="/admin/crear-producto" 
-						element={<CreateProductPage carritoItems={totalItems} />} 
+						element={<CreateProductPage />} 
 					/>
 				</Route>
 			</Routes>
@@ -147,7 +130,19 @@ function App() {
 				onClose={() => setModalCarrito({ isOpen: false, producto: null })}
 				producto={modalCarrito.producto}
 			/>
-			</>
+		</>
+	);
+}
+
+function App() {
+	return (
+		<BrowserRouter>
+			<AuthProvider>
+				<CartProvider>
+					<AppContent />
+				</CartProvider>
+			</AuthProvider>
+		</BrowserRouter>
 	);
 }
 

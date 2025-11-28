@@ -12,12 +12,14 @@ import Header from "../components/Header";
 import Filters from "../components/Filters";
 import ProductList from "../components/ProductList";
 import SearchBar from "../components/SearchBar";
-function Catalog({ carritoItems = 0, añadirAlCarrito }) {
+
+function Catalog({ añadirAlCarrito }) {
 	const navigate = useNavigate();
 	const [productos, setProductos] = useState([]);
 	const [filteredProductos, setFilteredProductos] = useState([]);
 	const [searchTerm, setSearchTerm] = useState("");
 	const [selectedCategory, setSelectedCategory] = useState("todos");
+	const [selectedProduct, setSelectedProduct] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 
@@ -57,16 +59,36 @@ function Catalog({ carritoItems = 0, añadirAlCarrito }) {
 		setFilteredProductos(resultados);
 	}, [searchTerm, selectedCategory, productos]);
 
-	if (loading) return <p>Cargando productos...</p>;
-	if (error) return <p style={{ color: "red" }}>{error}</p>;
-
+	// Manejador para cuando se hace clic en una tarjeta de producto - mostrar modal
 	const handleProductClick = (producto) => {
+		setSelectedProduct(producto);
+	};
+
+	// Manejador para cerrar el detalle del producto
+	const handleCloseDetail = () => {
+		setSelectedProduct(null);
+	};
+
+	// Manejador para ver detalles completos (navegar a página de detalle)
+	const handleVerDetalles = (producto) => {
 		navigate(`/producto/${producto.id}`);
 	};
 
+	// Manejador para agregar al carrito desde el modal
+	const handleAgregarAlCarrito = (producto) => {
+		if (añadirAlCarrito) {
+			añadirAlCarrito(producto);
+		}
+		// Cerrar el modal después de agregar
+		handleCloseDetail();
+	};
+
+	if (loading) return <p>Cargando productos...</p>;
+	if (error) return <p style={{ color: "red" }}>{error}</p>;
+
 	return (
 		<div className="catalogo-container">
-			<Header carritoItems={carritoItems} />
+			<Header />
 			<h1 className="titulo-catalogo">Nuestro Catálogo</h1>
 
 			{/* Barra de búsqueda */}
@@ -96,6 +118,53 @@ function Catalog({ carritoItems = 0, añadirAlCarrito }) {
 				onProductClick={handleProductClick}
 				añadirAlCarrito={añadirAlCarrito}
 			/>
+
+			{/* Modal de detalle del producto */}
+			{selectedProduct && (
+				<div className="modal-overlay" onClick={handleCloseDetail}>
+					<div className="modal-content" onClick={(e) => e.stopPropagation()}>
+						<button className="close-button" onClick={handleCloseDetail}>
+							✕
+						</button>
+						<div className="product-detail">
+							<img
+								src={selectedProduct.imagen}
+								alt={selectedProduct.nombre}
+								onError={(e) =>
+									(e.target.src =
+										"https://jazminshaiel.github.io/hermanos_jota/img/placeholder.png")
+								}
+							/>
+							<div className="product-info">
+								<h2>{selectedProduct.nombre}</h2>
+								<p className="category">{selectedProduct.categoria}</p>
+								<p className="description">{selectedProduct.descripcion}</p>
+								<p className="price">
+									{new Intl.NumberFormat("es-AR", {
+										style: "currency",
+										currency: "ARS",
+										minimumFractionDigits: 0,
+									}).format(selectedProduct.precio)}
+								</p>
+								<button
+									className="add-to-cart-button"
+									onClick={() => handleAgregarAlCarrito(selectedProduct)}
+								>
+									Agregar al carrito
+								</button>
+								<button
+									className="add-to-cart-button"
+									style={{ marginTop: '10px', backgroundColor: '#666' }}
+									onClick={() => handleVerDetalles(selectedProduct)}
+								>
+									Ver detalles completos
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			)}
+
 			<Footer />
 		</div>
 	);

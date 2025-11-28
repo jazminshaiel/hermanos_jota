@@ -6,7 +6,7 @@ import "../styles/estilos-globales.css";
 import "../styles/Home.css";
 import "../styles/Footer.css";
 
-function Home({ carritoItems = 0, añadirAlCarrito }) {
+function Home({ añadirAlCarrito }) {
     const [productos, setProductos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -38,7 +38,7 @@ function Home({ carritoItems = 0, añadirAlCarrito }) {
 
     return (
         <>
-            <Header carritoItems={carritoItems} />
+            <Header />
             
             <main>
                 <section className="hero">

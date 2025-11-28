@@ -121,12 +121,33 @@ body {
 	color: #ffcc99;
 }
 
+/* Badge del carrito */
 .carrito-icon {
+	position: relative;
+	display: inline-block;
 	width: 24px;
 	height: 24px;
 	color: white;
 	transition: color 0.2s ease;
 }
+
+.carrito-badge {
+	position: absolute;
+	top: -8px;
+	right: -10px;
+	background-color: #ff4444;
+	color: white;
+	border-radius: 50%;
+	width: 20px;
+	height: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 0.75rem;
+	font-weight: bold;
+	border: 2px solid #a0522d;
+}
+
 
 .icon-link:hover .carrito-icon {
 	color: #ffcc99;
