@@ -24,10 +24,18 @@ router.post('/', verificarToken, async (req, res) => {
       });
     }
 
+    // Validar y normalizar productos - asegurar que productoId sea String
+    const productosNormalizados = productos.map((producto) => ({
+      ...producto,
+      productoId: String(producto.productoId), // Asegurar que sea String
+      precio: Number(producto.precio), // Asegurar que precio sea Number
+      cantidad: Number(producto.cantidad), // Asegurar que cantidad sea Number
+    }));
+
     // Crear nuevo pedido
     const pedido = new Pedido({
       usuario: req.usuario._id,
-      productos,
+      productos: productosNormalizados,
       total,
     });
 

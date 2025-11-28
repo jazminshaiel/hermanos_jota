@@ -9,7 +9,7 @@ import "../styles/Footer.css";
 import "../styles/estilos-detalle.css"; 
 
 // Aceptamos los props que vienen de App.js
-function ProductDetail({ carritoItems, añadirAlCarrito }) {
+function ProductDetail({ carritoItems, agregarAlCarrito }) {
 	const [producto, setProducto] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
@@ -77,7 +77,7 @@ function ProductDetail({ carritoItems, añadirAlCarrito }) {
 		content = (
 			<DetailedProduct
 				producto={producto}
-				añadirAlCarrito={añadirAlCarrito}
+				agregarAlCarrito={agregarAlCarrito}
 				onEliminar={handleEliminar}
 				eliminando={eliminando}
 			/>

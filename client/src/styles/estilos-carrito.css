@@ -232,8 +232,8 @@
     display: none;
 }
 
-/* Animación cuando se añade un producto */
-.contador-carrito.animacion-añadir {
+/* Animación cuando se agrega un producto */
+.contador-carrito.animacion-agregar {
     transform: scale(1.2);
     background: #4CAF50;
 }
@@ -266,7 +266,7 @@
     font-size: 16px;
 }
 
-/* Botón añadir al carrito */
+/* Botón agregar al carrito */
 .boton-carrito {
     background: #a0522d;
     color: white;

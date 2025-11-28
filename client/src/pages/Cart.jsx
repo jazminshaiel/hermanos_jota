@@ -4,6 +4,7 @@ import { useCart } from '../contexts/CartContext';
 import { useAuth } from '../contexts/AuthContext';
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import NotificationToast from "../components/NotificationToast";
 import "../styles/estilos-globales.css";
 import "../styles/Footer.css";
 import "../styles/estilos-carrito.css";
@@ -22,6 +23,10 @@ function Cart() {
   const navigate = useNavigate();
   const [procesando, setProcesando] = useState(false);
   const [error, setError] = useState(null);
+  const [notificacionExito, setNotificacionExito] = useState({
+    mostrar: false,
+    mensaje: "",
+  });
 
   const formatearPrecio = (precio) => {
     return new Intl.NumberFormat("es-AR", {
@@ -85,9 +90,17 @@ function Cart() {
       // Vaciar el carrito después de un pedido exitoso
       vaciarCarrito();
 
-      // Mostrar mensaje de éxito y redirigir
-      alert(`¡Pedido realizado con éxito! Número de pedido: ${data.pedido.numeroPedido || data.pedido._id}`);
-      navigate('/');
+      // Mostrar notificación de éxito
+      const numeroPedido = data.pedido.numeroPedido || data.pedido._id;
+      setNotificacionExito({
+        mostrar: true,
+        mensaje: `¡Pedido realizado con éxito! Número de pedido: ${numeroPedido}`,
+      });
+
+      // Redirigir después de un breve delay para que se vea la notificación
+      setTimeout(() => {
+        navigate('/');
+      }, 2000);
     } catch (err) {
       setError(err.message || 'Error al procesar el pedido. Por favor, intenta nuevamente.');
       console.error('Error al finalizar compra:', err);
@@ -99,6 +112,11 @@ function Cart() {
   return (
     <>
       <Header />
+      <NotificationToast
+        mensaje={notificacionExito.mensaje}
+        mostrar={notificacionExito.mostrar}
+        onCerrar={() => setNotificacionExito({ mostrar: false, mensaje: "" })}
+      />
       <main className="carrito-container">
         <h1 className="titulo-carrito">Mi Carrito de Compras</h1>
 

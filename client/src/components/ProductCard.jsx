@@ -1,14 +1,14 @@
-function ProductCard({ producto, onClick, añadirAlCarrito }) {
+function ProductCard({ producto, onClick, agregarAlCarrito }) {
 	const precioFormateado = new Intl.NumberFormat("es-AR", {
 		style: "currency",
 		currency: "ARS",
 		minimumFractionDigits: 0,
 	}).format(producto.precio);
 
-	const handleAñadirAlCarrito = (e) => {
+	const handleAgregarAlCarrito = (e) => {
 		e.stopPropagation(); // Evitar que se ejecute el onClick del contenedor
-		if (añadirAlCarrito) {
-			añadirAlCarrito(producto);
+		if (agregarAlCarrito) {
+			agregarAlCarrito(producto);
 		}
 	};
 
@@ -29,9 +29,9 @@ function ProductCard({ producto, onClick, añadirAlCarrito }) {
 			</div>
 			<button 
 				className="boton-carrito" 
-				onClick={handleAñadirAlCarrito}
+				onClick={handleAgregarAlCarrito}
 			>
-				Añadir al carrito
+				Agregar al carrito
 			</button>
 		</div>
 	);

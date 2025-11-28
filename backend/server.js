@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require('express');
 const cors = require('cors');
-const routes = require("./routes-productos.js");
+const productosRoutes = require("./routes/productos.js");
 const logger = require('./middlewares/logger.js');
 const Product = require("./models/Product");
 const productosData = require("./productos-data");
@@ -25,7 +25,7 @@ app.use(logger);
 
 // IMPORTANTE: Las rutas API deben ir ANTES de los archivos estaticos
 // Rutas de productos - la base "/api/productos" se define aquí
-app.use("/api/productos", routes);
+app.use("/api/productos", productosRoutes);
 
 // Rutas de autenticación
 app.use('/api/auth', authRoutes);

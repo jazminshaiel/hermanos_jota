@@ -102,6 +102,10 @@ export const AuthProvider = ({ children }) => {
     if (typeof window !== 'undefined') {
       localStorage.removeItem('token');
       localStorage.removeItem('usuario');
+      // Limpiar el carrito al cerrar sesión
+      localStorage.removeItem('carrito');
+      // Disparar evento personalizado para que CartContext también limpie su estado
+      window.dispatchEvent(new Event('userLogout'));
     }
     setToken(null);
     setUsuario(null);

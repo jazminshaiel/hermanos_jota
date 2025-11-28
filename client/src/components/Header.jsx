@@ -5,7 +5,7 @@ import { useCart } from "../contexts/CartContext";
 
 const Header = () => {
 	const { usuario, logout } = useAuth();
-	const { cantidadTotal } = useCart();
+	const { cantidadTotal, vaciarCarrito } = useCart();
 
 	return (
 		// Clase 'header'
@@ -35,7 +35,14 @@ const Header = () => {
 							</Link>
 							
 							{/* El botón de logout separado */}
-							<a href="#!" onClick={logout} className="logout-link">
+							<a 
+								href="#!" 
+								onClick={() => {
+									vaciarCarrito();
+									logout();
+								}} 
+								className="logout-link"
+							>
 								Logout
 							</a>
 						</>

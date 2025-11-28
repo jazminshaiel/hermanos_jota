@@ -1,5 +1,7 @@
-import { useContext, useState, useEffect } from 'react';
-import { AuthContext } from '../context/AuthContext';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
+import { useCart } from '../contexts/CartContext';
 import axios from 'axios';
 
 // componentes y estilos
@@ -8,18 +10,20 @@ import Footer from '../components/Footer';
 import '../styles/estilos-auth.css';
 
 function ProfilePage() {
-    const { currentUser, logout } = useContext(AuthContext);
+    const { usuario, logout, token, cargando } = useAuth();
+    const { vaciarCarrito } = useCart();
+    const navigate = useNavigate();
     
-    const [username, setUsername] = useState('');
+    const [nombre, setNombre] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
 
     useEffect(() => {
-        if (currentUser) {
-            setUsername(currentUser.username);
+        if (usuario) {
+            setNombre(usuario.nombre || usuario.username || '');
         }
-    }, [currentUser]);
+    }, [usuario]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -27,14 +31,13 @@ function ProfilePage() {
         setSuccess(null);
         
         try {
-            const token = localStorage.getItem('token');
-            const updateBody = { username };
+            const updateBody = { nombre };
             if (password) {
                 updateBody.password = password;
             }
 
             await axios.put(
-                '/api/users/profile', 
+                'http://localhost:3001/api/users/profile', 
                 updateBody,
                 {
                     headers: { 'Authorization': `Bearer ${token}` }
@@ -44,12 +47,26 @@ function ProfilePage() {
             setSuccess('¡Perfil actualizado! (Necesitarás re-loguear para ver los cambios)');
             setPassword('');
         } catch (err) {
-            setError(err.response?.data?.mensaje || 'Error al actualizar');
+            setError(err.response?.data?.message || err.response?.data?.mensaje || 'Error al actualizar');
         }
     };
 
-    if (!currentUser) {
+    const handleLogout = () => {
+        vaciarCarrito();
+        logout();
+        navigate('/login');
+    };
+
+    if (cargando) {
         return <p>Cargando...</p>;
+    }
+
+    if (!usuario) {
+        return (
+            <div>
+                <p>No estás autenticado. Redirigiendo...</p>
+            </div>
+        );
     }
 
     return (
@@ -61,16 +78,16 @@ function ProfilePage() {
                 <form className="auth-form" onSubmit={handleSubmit}>
                     <h2>Mi Perfil</h2>
                     <p style={{textAlign: 'center', margin: '-1rem 0 1.5rem 0', fontFamily: '"Inter", sans-serif'}}>
-                        Hola, {currentUser.username}. Aquí puedes actualizar tus datos.
+                        Hola, {usuario.nombre || usuario.username || 'Usuario'}. Aquí puedes actualizar tus datos.
                     </p>
                     
                     <div className="form-group">
-                        <label htmlFor="username">Nombre de Usuario</label>
+                        <label htmlFor="nombre">Nombre</label>
                         <input
                             type="text"
-                            id="username"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
+                            id="nombre"
+                            value={nombre}
+                            onChange={(e) => setNombre(e.target.value)}
                         />
                     </div>
                     
@@ -92,7 +109,7 @@ function ProfilePage() {
                 </form>
 
                 <button 
-                    onClick={logout} 
+                    onClick={handleLogout} 
                     className="auth-button" 
                     style={{marginTop: '1rem', backgroundColor: '#6c757d', maxWidth: '500px', width: '100%'}}
                 >

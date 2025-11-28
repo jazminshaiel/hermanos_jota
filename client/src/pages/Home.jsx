@@ -6,7 +6,7 @@ import "../styles/estilos-globales.css";
 import "../styles/Home.css";
 import "../styles/Footer.css";
 
-function Home({ añadirAlCarrito }) {
+function Home({ agregarAlCarrito }) {
     const [productos, setProductos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -93,12 +93,12 @@ function Home({ añadirAlCarrito }) {
                                         <button 
                                             className="boton-carrito" 
                                             onClick={() => {
-                                                if (añadirAlCarrito) {
-                                                    añadirAlCarrito(p);
+                                                if (agregarAlCarrito) {
+                                                    agregarAlCarrito(p);
                                                 }
                                             }}
                                         >
-                                            Añadir al carrito
+                                            Agregar al carrito
                                         </button>
                                     </div>
                                 </div>

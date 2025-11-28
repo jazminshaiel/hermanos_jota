@@ -6,7 +6,7 @@ import "../styles/Footer.css";
 import Header from "../components/Header"; 
 import Footer from "../components/Footer"; 
 
-function Contacto({ carritoItems = 0 }) {
+function Contacto() {
   
   const [formData, setFormData] = useState({
     nombre: "",
@@ -21,15 +21,28 @@ function Contacto({ carritoItems = 0 }) {
   const [exito, setExito] = useState(false);
 
   
-  const [submitted, setSubmitted] = useState(false);
-
-  
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
+    
+    // Validación especial para el campo comentario
+    if (name === 'comentario') {
+      // Permitir solo letras, números, espacios, signos de pregunta y exclamación
+      // Y limitar a 200 caracteres
+      // Primero filtrar caracteres no permitidos, luego limitar a 200
+      const sanitizedValue = value
+        .replace(/[^a-zA-Z0-9\s¿?¡!]/g, '') // Remover caracteres no permitidos
+        .slice(0, 200); // Limitar a 200 caracteres
+      
+      setFormData({
+        ...formData,
+        [name]: sanitizedValue
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value
+      });
+    }
   };
 
  
@@ -47,7 +60,6 @@ function Contacto({ carritoItems = 0 }) {
   
   const handleSubmit = (e) => {
     e.preventDefault(); 
-    setSubmitted(true); 
     setExito(false); 
 
     const validationErrors = {};
@@ -68,6 +80,10 @@ function Contacto({ carritoItems = 0 }) {
     if (comentario.trim().length < 10) {
       validationErrors.comentario = "El comentario debe tener al menos 10 caracteres.";
     }
+    
+    if (comentario.length > 200) {
+      validationErrors.comentario = "El comentario no puede exceder 200 caracteres.";
+    }
 
     
     setErrors(validationErrors);
@@ -79,13 +95,12 @@ function Contacto({ carritoItems = 0 }) {
      
       setFormData({ nombre: "", email: "", comentario: "" });
       setErrors({});
-      setSubmitted(false);
     }
   };
 
   return (
     <>
-      <Header carritoItems={carritoItems} />
+      <Header />
       <main>
         <div id="mini_banner">
           <div id="palabras-banner">
@@ -95,57 +110,88 @@ function Contacto({ carritoItems = 0 }) {
         </div>
 
         <div className="formulario-contenedor">
-          <form id="contactoForm" onSubmit={handleSubmit} noValidate>
+          <form id="contactoForm" className="contacto-form" onSubmit={handleSubmit} noValidate>
             
-            
+            {/* Mensajes de error y éxito */}
             <div id="mensajes">
               {Object.keys(errors).length > 0 && (
-                <ul className="lista-errores">
-                  {Object.values(errors).map((error, index) => <li key={index}>{error}</li>)}
-                </ul>
+                <div className="error-message">
+                  <span>Por favor, corrige los siguientes errores:</span>
+                  <ul className="lista-errores">
+                    {Object.values(errors).map((error, index) => (
+                      <li key={index}>{error}</li>
+                    ))}
+                  </ul>
+                </div>
               )}
-              {exito && <p className="mensaje-exito">✅ ¡Mensaje enviado con éxito!</p>}
+              {exito && (
+                <div className="success-message">
+                  ¡Mensaje enviado con éxito! Te responderemos pronto.
+                </div>
+              )}
             </div>
 
-            <div>
-              <label htmlFor="Nombre">Nombre<br /></label>
-              <input
-                className={`campo ${submitted && (errors.nombre ? 'input-error' : 'input-success')}`}
-                type="text"
-                id="Nombre"
-                name="nombre"
-                value={formData.nombre}
-                onChange={handleChange}
-              />
+            <div className="form-group">
+              <label htmlFor="Nombre">Nombre Completo</label>
+              <div className="input-wrapper">
+                <i className="fa-solid fa-user input-icon"></i>
+                <input
+                  className={`campo ${errors.nombre ? 'error' : ''}`}
+                  type="text"
+                  id="Nombre"
+                  name="nombre"
+                  placeholder="Ingresa tu nombre completo"
+                  value={formData.nombre}
+                  onChange={handleChange}
+                />
+              </div>
             </div>
 
-            <div>
-              <label htmlFor="Email">Correo<br /></label>
-              <input
-                className={`campo ${submitted && (errors.email ? 'input-error' : 'input-success')}`}
-                type="email"
-                id="Email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-              />
+            <div className="form-group">
+              <label htmlFor="Email">Correo Electrónico</label>
+              <div className="input-wrapper">
+                <i className="fa-solid fa-envelope input-icon"></i>
+                <input
+                  className={`campo ${errors.email ? 'error' : ''}`}
+                  type="email"
+                  id="Email"
+                  name="email"
+                  placeholder="tu@email.com"
+                  value={formData.email}
+                  onChange={handleChange}
+                />
+              </div>
             </div>
 
-            <div>
-              <label htmlFor="Comentario">Comentario<br /></label>
-              <textarea
-                className={`campo ${submitted && (errors.comentario ? 'input-error' : 'input-success')}`}
-                id="Comentario"
-                name="comentario" 
-                rows="10"
-                value={formData.comentario}
-                onChange={handleChange}
-              ></textarea>
+            <div className="form-group">
+              <label htmlFor="Comentario">Mensaje</label>
+              <div className="textarea-wrapper">
+                <i className="fa-solid fa-comment textarea-icon"></i>
+                <textarea
+                  className={`campo ${errors.comentario ? 'error' : ''}`}
+                  id="Comentario"
+                  name="comentario"
+                  placeholder="Escribe tu mensaje aquí..."
+                  rows="8"
+                  maxLength={200}
+                  value={formData.comentario}
+                  onChange={handleChange}
+                ></textarea>
+              </div>
+              <div className="field-hint-wrapper">
+                <small className="field-hint">
+                  Mínimo 10 caracteres. 
+                </small>
+                <small className={`character-count ${formData.comentario.length >= 200 ? 'character-count-warning' : ''}`}>
+                  {formData.comentario.length}/200 caracteres
+                </small>
+              </div>
             </div>
 
-            <div className="boton">
-              <button id="Enviar" type="submit">enviar</button>
-            </div>
+            <button id="Enviar" type="submit" className="contacto-button">
+              <i className="fa-solid fa-paper-plane" style={{ marginRight: '8px' }}></i>
+              Enviar Mensaje
+            </button>
 
           </form>
         </div>

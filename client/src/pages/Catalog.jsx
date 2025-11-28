@@ -13,7 +13,7 @@ import Filters from "../components/Filters";
 import ProductList from "../components/ProductList";
 import SearchBar from "../components/SearchBar";
 
-function Catalog({ añadirAlCarrito }) {
+function Catalog({ agregarAlCarrito }) {
 	const navigate = useNavigate();
 	const [productos, setProductos] = useState([]);
 	const [filteredProductos, setFilteredProductos] = useState([]);
@@ -76,8 +76,8 @@ function Catalog({ añadirAlCarrito }) {
 
 	// Manejador para agregar al carrito desde el modal
 	const handleAgregarAlCarrito = (producto) => {
-		if (añadirAlCarrito) {
-			añadirAlCarrito(producto);
+		if (agregarAlCarrito) {
+			agregarAlCarrito(producto);
 		}
 		// Cerrar el modal después de agregar
 		handleCloseDetail();
@@ -116,7 +116,7 @@ function Catalog({ añadirAlCarrito }) {
 			<ProductList
 				productos={filteredProductos}
 				onProductClick={handleProductClick}
-				añadirAlCarrito={añadirAlCarrito}
+				agregarAlCarrito={agregarAlCarrito}
 			/>
 
 			{/* Modal de detalle del producto */}

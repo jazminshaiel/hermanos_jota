@@ -1,6 +1,4 @@
-const express = require("express");
-const router = express.Router();
-const Product = require("./models/Product");
+const Product = require("../models/Product");
 
 const buildProductPayload = (body) => {
   const payload = {
@@ -22,8 +20,7 @@ const buildProductPayload = (body) => {
 };
 
 // GET: Obtener todos los productos
-// URL completa: /api/productos
-router.get("/", async (req, res) => {
+const obtenerProductos = async (req, res) => {
   try {
     const productos = await Product.find();
     res.json(productos);
@@ -31,11 +28,10 @@ router.get("/", async (req, res) => {
     console.error("Error al obtener productos:", error);
     res.status(500).json({ error: "Error al obtener productos" });
   }
-});
+};
 
 // GET: Obtener un producto específico por ID
-// URL completa: /api/productos/:id
-router.get("/:id", async (req, res) => {
+const obtenerProductoPorId = async (req, res) => {
   try {
     const producto = await Product.findById(req.params.id);
 
@@ -48,10 +44,10 @@ router.get("/:id", async (req, res) => {
     console.error("Error al obtener producto por ID:", error);
     res.status(500).json({ error: "Error al obtener el producto" });
   }
-});
+};
 
-// Crear un nuevo producto
-router.post("/", async (req, res) => {
+// POST: Crear un nuevo producto
+const crearProducto = async (req, res) => {
   const { nombre, precio } = req.body;
 
   if (!nombre || precio === undefined) {
@@ -67,10 +63,10 @@ router.post("/", async (req, res) => {
     console.error("Error al crear producto:", error);
     res.status(500).json({ error: "Error al crear el producto" });
   }
-});
+};
 
-// Actualizar un producto existente
-router.put("/:id", async (req, res) => {
+// PUT: Actualizar un producto existente
+const actualizarProducto = async (req, res) => {
   try {
     const productoActualizado = await Product.findByIdAndUpdate(
       req.params.id,
@@ -87,10 +83,10 @@ router.put("/:id", async (req, res) => {
     console.error("Error al actualizar producto:", error);
     res.status(500).json({ error: "Error al actualizar el producto" });
   }
-});
+};
 
-// Eliminar un producto
-router.delete("/:id", async (req, res) => {
+// DELETE: Eliminar un producto
+const eliminarProducto = async (req, res) => {
   try {
     const productoEliminado = await Product.findByIdAndDelete(req.params.id);
 
@@ -103,6 +99,13 @@ router.delete("/:id", async (req, res) => {
     console.error("Error al eliminar producto:", error);
     res.status(500).json({ error: "Error al eliminar el producto" });
   }
-});
+};
 
-module.exports = router;
+module.exports = {
+  obtenerProductos,
+  obtenerProductoPorId,
+  crearProducto,
+  actualizarProducto,
+  eliminarProducto,
+};
+

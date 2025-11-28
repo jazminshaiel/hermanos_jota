@@ -1,18 +1,21 @@
-import { useContext } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
+import { useAuth } from '../contexts/AuthContext';
 
 const ProtectedRoute = () => {
-    // Obtenemos el 'currentUser' de nuestro contexto
-    const { currentUser } = useContext(AuthContext);
+    // Obtenemos el estado de autenticación del nuevo contexto
+    const { estaAutenticado, cargando } = useAuth();
 
-    // Si el usuario existe (está logueado), le permitimos ver
-    // el componente hijo (ProfilePage) usando <Outlet />.
-    if (currentUser) {
+    // Mientras carga, mostramos un mensaje
+    if (cargando) {
+        return <div>Cargando...</div>;
+    }
+
+    // Si el usuario está autenticado, le permitimos ver el componente hijo usando <Outlet />.
+    if (estaAutenticado) {
         return <Outlet />;
     }
 
-    // Si 'currentUser' es null (no logueado), lo redirigimos a la página de login.
+    // Si no está autenticado, lo redirigimos a la página de login.
     return <Navigate to="/login" replace />;
 };
 

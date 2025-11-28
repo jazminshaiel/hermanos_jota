@@ -9,7 +9,7 @@ const pedidoSchema = new mongoose.Schema({
   productos: [
     {
       productoId: {
-        type: Number,
+        type: String,
         required: true,
       },
       nombre: {

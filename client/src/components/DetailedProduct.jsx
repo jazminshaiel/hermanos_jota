@@ -1,13 +1,13 @@
-export function DetailedProduct({ producto, añadirAlCarrito, onEliminar, eliminando = false }) {
+export function DetailedProduct({ producto, agregarAlCarrito, onEliminar, eliminando = false }) {
 	const precioFormateado = new Intl.NumberFormat("es-AR", {
 		style: "currency",
 		currency: "ARS",
 		minimumFractionDigits: 0,
 	}).format(producto.precio);
 
-	const handleAñadirAlCarrito = () => {
-		if (añadirAlCarrito) {
-			añadirAlCarrito(producto);
+	const handleAgregarAlCarrito = () => {
+		if (agregarAlCarrito) {
+			agregarAlCarrito(producto);
 		}
 	};
 
@@ -23,9 +23,9 @@ export function DetailedProduct({ producto, añadirAlCarrito, onEliminar, elimin
 				<div className="producto-acciones">
 					<button
 						className="boton-carrito"
-						onClick={handleAñadirAlCarrito}
+						onClick={handleAgregarAlCarrito}
 					>
-						Añadir al carrito
+						Agregar al carrito
 					</button>
 					{onEliminar && (
 						<button

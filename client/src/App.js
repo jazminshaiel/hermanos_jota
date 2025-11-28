@@ -53,7 +53,7 @@ function AppContent() {
 	};
 
 	// Wrapper para agregar al carrito con notificación y modal
-	const añadirAlCarritoConNotificacion = (producto) => {
+	const agregarAlCarritoConNotificacion = (producto) => {
 		agregarAlCarrito(producto);
 		mostrarNotificacion(`${producto.nombre} agregado al carrito`);
 		
@@ -81,7 +81,7 @@ function AppContent() {
 					path="/" 
 					element={
 						<Home 
-							añadirAlCarrito={añadirAlCarritoConNotificacion}
+							agregarAlCarrito={agregarAlCarritoConNotificacion}
 						/>
 					} 
 				/>
@@ -91,7 +91,7 @@ function AppContent() {
 					path="/catalogo" 
 					element={
 						<Catalog 
-							añadirAlCarrito={añadirAlCarritoConNotificacion}
+							agregarAlCarrito={agregarAlCarritoConNotificacion}
 						/>
 					} 
 				/>
@@ -104,7 +104,7 @@ function AppContent() {
 					path="/producto/:id" 
 					element={
 						<ProductDetail 
-							añadirAlCarrito={añadirAlCarritoConNotificacion}
+							agregarAlCarrito={agregarAlCarritoConNotificacion}
 						/>
 					} 
 				/>
