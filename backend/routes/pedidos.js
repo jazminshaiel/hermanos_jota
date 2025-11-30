@@ -1,6 +1,6 @@
 const express = require('express');
 const Pedido = require('../models/Pedido');
-const { verificarToken } = require('../middleware/auth');
+const { verificarToken } = require('../middlewares/auth');
 
 const router = express.Router();
 

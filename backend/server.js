@@ -18,7 +18,7 @@ const PORT = process.env.PORT || 3001;
 // Conectar a MongoDB
 conectarDB();
 
-// Middleware
+// Middlewares
 app.use(cors());
 app.use(express.json());
 app.use(logger);

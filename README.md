@@ -1,15 +1,13 @@
-﻿# Proyecto: E-Commerce Hermanos Jota
+﻿# Proyecto Final: E-Commerce Mueblería Hermanos Jota
+El proyecto utiliza el stack MERN (MongoDB, Express, React, Node.js), la encriptación de contraseñas con bcrypt y la gestión de sesiones mediante JSON Web Tokens (JWT), cumpliendo así con los requisitos de desarrollo.
+La página posee: catálogo de productos, carrito de compras, páginas de detalle, formulario de contacto y navegación completa.
+
 ### Integrantes
  - Srdos Gorosito Silvana
  - Roman Ezequiel Zorrilla
  - Jazmín Shaiel Nieto
  - Moreno Iñaki
  - Torres Lell Pablo A.
- 
-# E-Commerce Hermanos Jota
-
-Sistema completo de e-commerce para la **Mueblería Hermanos Jota**, desarrollado con **React + Node/Express**.  
-Incluye catálogo de productos, carrito de compras, páginas de detalle, formulario de contacto y navegación completa.
 
 ## Características Principales
 
@@ -27,47 +25,66 @@ Incluye catálogo de productos, carrito de compras, páginas de detalle, formula
 ## Estructura de Carpetas
 
 hermanos_jota/
+├── backend/                  # Servidor con Node.js y Express (API RESTful)
+│   ├── config/               # Configuraciones del servidor y base de datos
+│   │   └── database.js
+│   ├── controllers/          # Lógica de negocio para las rutas
+│   │   ├── authController.js
+│   │   ├── productController.js
+│   │   └── userController.js
+│   ├── middlewares/          # Middlewares de Express (ej. autenticación, logging)
+│   │   ├── auth.js           # Middleware para verificar JWT
+│   │   ├── logger.js         # Middleware para manejo de errores
+│   │   └── verifyToken.js 
+│   ├── models/               # Modelos de Mongoose (esquemas de la DB)
+│   │   ├── Pedido.js
+│   │   ├── Product.js
+│   │   ├── User.js
+│   │   └── Usuario.js
+│   ├── routes/               # Definición de rutas de la API
+│   │   ├── auth.js
+│   │   ├── authRoutes.js
+│   │   ├── pedidos.js
+│   │   ├── productos.js
+│   │   └── userRoutes.js
+│   ├── server.js             # Punto de entrada del servidor Express
+│   └── productos-data.js     # Datos mock iniciales para cargar en la base de datos
 │
-├── backend/ # Servidor con Node + Express
-│ ├── server.js # Configuración del servidor y rutas API
-│ ├── productos-data.js # Array con productos (mock data)
-│ ├── routes-productos.js # Rutas específicas de productos
-│ └── middlewares/
-│   └── logger.js # Middleware de logging
+├── client/                   # Frontend con React
+│   ├── public/               # Archivos estáticos (index.html, imágenes, etc.)
+│   │   ├── index.html
+│   │   └── ...               # Imágenes y otros recursos
+│   ├── src/                  # Código fuente de la aplicación React
+│   │   ├── components/       # Componentes reutilizables de UI
+│   │   │   ├── Header.jsx
+│   │   │   ├── Footer.jsx
+│   │   │   ├── Filters.jsx
+│   │   │   ├── DetailedProduct.jsx
+│   │   │   ├── SearchBar.jsx
+│   │   │   └── ...
+│   │   ├── contexts/          # Context API para gestión de estado global
+│   │   │   ├── AuthContext.jsx
+│   │   │   └── CartContext.jsx
+│   │   ├── pages/             # Componentes de página (rutas principales)
+│   │   │   ├── Cart.jsx
+│   │   │   ├── Catalog.jsx
+│   │   │   ├── Contacto.jsx
+│   │   │   ├── CreateProdcutPage.jsx
+│   │   │   ├── Home.jsx
+│   │   │   ├── LoginPage.jsx
+│   │   │   ├── ProductDetail.jsx
+│   │   │   ├── ProfilePage.jsx
+│   │   │   ├── RegisterPage.jsx
+│   │   ├── styles/           # Archivos CSS/SCSS modulares o globales
+│   │   │   ├── Home.css
+│   │   │   ├── Footer.css
+│   │   │   ├── carrito.css
+│   │   │   └── ...
+│   │   ├── App.js            # Componente principal y enrutador de React
+│   └── └── index.js          # Punto de entrada de la aplicación React
 │
-├── client/ # Frontend con React
-│ ├── public/ # Archivos estáticos (logo, imágenes, index.html)
-│ └── src/
-│   ├── App.js # Enrutador principal con React Router
-│   ├── pages/
-│   │ ├── Home.jsx # Página de inicio con productos destacados
-│   │ ├── Catalog.jsx # Página del catálogo
-│   │ ├── ProductDetail.jsx # Página de detalle de producto
-│   │ ├── Cart.jsx # Página del carrito de compras
-│   │ └── Contacto.jsx # Página de contacto
-│   ├── components/
-│   │ ├── Header.jsx # Header global con navegación
-│   │ ├── Footer.jsx # Footer global
-│   │ ├── ProductCard.jsx # Tarjeta de producto
-│   │ ├── ProductList.jsx # Lista de productos
-│   │ ├── DetailedProduct.jsx # Componente de producto detallado
-│   │ ├── RelatedProducts.jsx # Productos relacionados
-│   │ ├── Filters.jsx # Filtros por categorías
-│   │ ├── SearchBar.jsx # Barra de búsqueda
-│   │ ├── ModalCarrito.jsx # Modal de confirmación de carrito
-│   │ └── ScrollToTop.jsx # Componente para scroll automático
-│   └── styles/
-│     ├── estilos-globales.css # Estilos globales y header
-│     ├── Home.css # Estilos de la página de inicio
-│     ├── estilos-catalogo.css # Estilos del catálogo
-│     ├── estilos-producto.css # Estilos de detalle de producto
-│     ├── estilos-carrito.css # Estilos del carrito y modal
-│     ├── estilos-contacto.css # Estilos de contacto
-│     └── Footer.css # Estilos del footer
-│
-├── documentation/ # Documentación del proyecto
-│ ├── README-index.md # Documentación de la página inicial
-│ └── README-CARRITO.md # Documentación del sistema de carrito
+├── README.md                 # Documentación principal del proyecto (este archivo)
+└── package.json              # Metadatos y dependencias del proyecto (global)
 
 
 ---
