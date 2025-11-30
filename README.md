@@ -4,7 +4,7 @@
 
 La aplicación posee un completo **catálogo de productos**, **carrito de compras**, **páginas de detalle**, **formulario de contacto** y **navegación** completa.
 
------
+----
 
 ## 👥 Integrantes del Equipo
 
@@ -14,7 +14,7 @@ La aplicación posee un completo **catálogo de productos**, **carrito de compra
   * Moreno Iñaki
   * Torres Lell Pablo A.
 
------
+----
 
 ## ⚙️ Arquitectura y Características Principales
 
@@ -22,24 +22,22 @@ El proyecto utiliza el stack **MERN** (MongoDB, Express, React, Node.js), la enc
 
 ### 🖼️ Frontend (React SPA)
 
-  - **Single Page Application (SPA):** Arquitectura basada en React Router para una navegación fluida.
-  - **Gestión de Estado Profesional:** Uso de la **React Context API** para centralizar la gestión del estado global de **Autenticación** (`AuthContext`) y **Carrito de Compras** (`CartContext`).
-  - **Rutas Protegidas:** Implementación de componentes `<ProtectedRoute>` que verifican el estado de autenticación antes de permitir el acceso a páginas sensibles (ej: `/perfil`, `/carrito`).
-  - **Catálogo y Búsqueda:** Catálogo de productos con filtros y funcionalidad de búsqueda.
-  - **Diseño Responsive:** Layout adaptativo para garantizar accesibilidad en todos los dispositivos mediante implementación de menú colapsable (móvil), optimización de tamaños y tamaños de fuente adaptativos.
-
-  #### Breakpoints (Responsive Design)
-
-    - **Desktop**: 1000px (4 columnas de productos)
-    - **Tablet**: 768px - 1000px (2 columnas de productos)
-    - **Móvil**: \< 768px (1 columna de productos)
+  * **Single Page Application (SPA):** Arquitectura basada en React Router para una navegación fluida.
+  * **Gestión de Estado Profesional:** Uso de la **React Context API** para centralizar la gestión del estado global de **Autenticación** (`AuthContext`) y **Carrito de Compras** (`CartContext`).
+  * **Rutas Protegidas:** Implementación de componentes `<ProtectedRoute>` que verifican el estado de autenticación antes de permitir el acceso a páginas sensibles (ej: `/perfil`, `/carrito`).
+  * **Catálogo y Búsqueda:** Catálogo de productos con filtros y funcionalidad de búsqueda.
+  * **Diseño Responsive:** Layout adaptativo para garantizar accesibilidad en todos los dispositivos mediante implementación de menú colapsable (móvil), optimización de tamaños y tamaños de fuente adaptativos.
+      **Breakpoints (Responsive Design):**
+          * **Desktop**: 1000px (4 columnas de productos)
+          * **Tablet**: 768px - 1000px (2 columnas de productos)
+          * **Móvil**: \< 768px (1 columna de productos)
 
 ### 🔒 Backend (Express API)
 
-  - **Autenticación y Autorización (JWT):** Sistema de **Registro** y **Login** seguro que utiliza **bcrypt** para el hashing de contraseñas. Generación de **JSON Web Tokens** para la gestión de sesiones.
-  - **Rutas Protegidas (Middleware):** Las rutas sensibles están protegidas por un middleware (`auth.js`) que verifica la validez del JWT y adjunta el objeto `usuario` al request.
-  - **API RESTful:** Endpoints organizados con el patrón **MVC (Modelo-Vista-Controlador)**.
-  - **Organización:** Uso de `express.Router` y controladores para separar la lógica de negocio de la definición de rutas.
+  * **Autenticación y Autorización (JWT):** Sistema de **Registro** y **Login** seguro que utiliza **bcrypt** para el hashing de contraseñas. Generación de **JSON Web Tokens** para la gestión de sesiones.
+  * **Rutas Protegidas (Middleware):** Las rutas sensibles están protegidas por un middleware (`auth.js`) que verifica la validez del JWT y adjunta el objeto `usuario` al request.
+  * **API RESTful:** Endpoints organizados con el patrón **MVC (Modelo-Vista-Controlador)**.
+  * **Organización:** Uso de `express.Router` y controladores para separar la lógica de negocio de la definición de rutas.
 
 -----
 
@@ -49,7 +47,7 @@ El proyecto utiliza el stack **MERN** (MongoDB, Express, React, Node.js), la enc
 
   * **`express`**: Framework web principal para construir la API RESTful.
   * **`mongoose`**: Modelado de objetos para MongoDB (ORM).
-  * **`bcrypt` / `bcryptjs`**: Librerías para el hashing seguro de contraseñas.
+  * **`bcrypt / bcryptjs`**: Librerías para el hashing seguro de contraseñas.
   * **`jsonwebtoken`**: Generación y verificación de JSON Web Tokens (JWT) para autenticación.
   * **`cors`**: Middleware para habilitar peticiones CORS (Cross-Origin Resource Sharing) entre Frontend y Backend.
   * **`dotenv`**: Gestión de variables de entorno (ej. `JWT_SECRET`, `MONGODB_URI`) desde un archivo `.env`.
@@ -70,29 +68,65 @@ El proyecto utiliza el stack **MERN** (MongoDB, Express, React, Node.js), la enc
 
 ```
 hermanos_jota/
-├── backend/                  # Servidor con Node.js y Express (API RESTful)
-│   ├── config/               # Configuraciones del servidor y base de datos
-│   │   └── database.js
-│   ├── controllers/          # Lógica de negocio para las rutas (authController.js, productController.js, userController.js)
-│   ├── middlewares/          # Middlewares de Express
-│   │   ├── auth.js           # Middleware para verificar JWT
-│   │   └── logger.js         # Middleware para logging
-│   ├── models/               # Modelos de Mongoose (Pedido.js, Product.js, Usuario.js)
-│   ├── routes/               # Definición de rutas de la API (authRoutes.js, pedidos.js, productos.js, userRoutes.js)
-│   ├── server.js             # Punto de entrada del servidor Express
-│   └── productos-data.js     # Datos mock iniciales (seeding)
+├── backend/                  # Servidor con Node.js y Express (API RESTful)
+│   ├── config/               # Configuraciones del servidor y base de datos
+│   │   └── database.js
+│   ├── controllers/          # Lógica de negocio para las rutas
+│   │   ├── authController.js
+│   │   ├── productController.js
+│   │   └── userController.js
+│   ├── middlewares/          # Middlewares de Express (ej. autenticación, logging)
+│   │   ├── auth.js           # Middleware para verificar JWT
+│   │   ├── logger.js         # Middleware para manejo de errores
+│   │   └── verifyToken.js
+│   ├── models/               # Modelos de Mongoose (esquemas de la DB)
+│   │   ├── Pedido.js
+│   │   ├── Product.js
+│   │   ├── User.js
+│   │   └── Usuario.js
+│   ├── routes/               # Definición de rutas de la API
+│   │   ├── auth.js
+│   │   ├── authRoutes.js
+│   │   ├── pedidos.js
+│   │   ├── productos.js
+│   │   └── userRoutes.js
+│   ├── server.js             # Punto de entrada del servidor Express
+│   └── productos-data.js     # Datos mock iniciales para cargar en la base de datos
 │
-├── client/                   # Frontend con React
-│   ├── public/               # Archivos estáticos (index.html, imágenes, etc.)
-│   ├── src/                  # Código fuente de la aplicación React
-│   │   ├── components/       # Componentes reutilizables de UI
-│   │   ├── contexts/         # Context API para gestión de estado global (AuthContext.jsx, CartContext.jsx)
-│   │   ├── pages/            # Componentes de página (Cart.jsx, Catalog.jsx, ProfilePage.jsx, etc.)
-│   │   ├── styles/           # Archivos CSS/SCSS modulares o globales
-│   │   ├── App.js            # Componente principal y enrutador de React
-│   └── └── index.js          # Punto de entrada de la aplicación React
+├── client/                   # Frontend con React
+│   ├── public/               # Archivos estáticos (index.html, imágenes, etc.)
+│   │   ├── index.html
+│   │   └── ...               # Imágenes y otros recursos
+│   ├── src/                  # Código fuente de la aplicación React
+│   │   ├── components/       # Componentes reutilizables de UI
+│   │   │   ├── Header.jsx
+│   │   │   ├── Footer.jsx
+│   │   │   ├── Filters.jsx
+│   │   │   ├── DetailedProduct.jsx
+│   │   │   ├── SearchBar.jsx
+│   │   │   └── ...
+│   │   ├── contexts/          # Context API para gestión de estado global
+│   │   │   ├── AuthContext.jsx
+│   │   │   └── CartContext.jsx
+│   │   ├── pages/             # Componentes de página (rutas principales)
+│   │   │   ├── Cart.jsx
+│   │   │   ├── Catalog.jsx
+│   │   │   ├── Contacto.jsx
+│   │   │   ├── CreateProdcutPage.jsx
+│   │   │   ├── Home.jsx
+│   │   │   ├── LoginPage.jsx
+│   │   │   ├── ProductDetail.jsx
+│   │   │   ├── ProfilePage.jsx
+│   │   │   ├── RegisterPage.jsx
+│   │   ├── styles/           # Archivos CSS/SCSS modulares o globales
+│   │   │   ├── Home.css
+│   │   │   ├── Footer.css
+│   │   │   ├── carrito.css
+│   │   │   └── ...
+│   │   ├── App.js            # Componente principal y enrutador de React
+│   └── └── index.js          # Punto de entrada de la aplicación React
 │
-└── README.md                 # Documentación principal del proyecto
+└── README.md                 # Documentación principal del proyecto
 ```
 
 -----
@@ -161,5 +195,3 @@ Necesitas **dos terminales abiertas** simultáneamente:
 
   * **Frontend (App)**: `http://localhost:3000`
   * **API Backend (Ejemplo)**: `http://localhost:3001/api/productos`
-
------
