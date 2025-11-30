@@ -23,7 +23,7 @@ La página posee: catálogo de productos, carrito de compras, páginas de detall
 ---
 
 ## Estructura de Carpetas
-
+```
 hermanos_jota/
 ├── backend/                  # Servidor con Node.js y Express (API RESTful)
 │   ├── config/               # Configuraciones del servidor y base de datos
@@ -86,7 +86,7 @@ hermanos_jota/
 ├── README.md                 # Documentación principal del proyecto (este archivo)
 └── package.json              # Metadatos y dependencias del proyecto (global)
 
-
+```
 ---
 
 ## Dependencias
@@ -280,19 +280,4 @@ El frontend correrá en **http://localhost:3000**
 - ✅ **express.json()** para procesar JSON
 - ✅ **express.Router** para organización de rutas
 - ✅ **Manejadores de errores** (404 y centralizados)
-
-
-
-## Contacto del Proyecto
-
-**Equipo de Desarrollo Hermanos Jota**
-- Srdos Gorosito Silvana
-- Roman Ezequiel Zorrilla  
-- Jazmín Shaiel Nieto
-- Moreno Iñaki
-- Torres Lell Pablo A.
-
-**Documentación adicional:**
-- [README de la página inicial](documentation/README-index.md)
-- [README del sistema de carrito](documentation/README-CARRITO.md)
 
