@@ -1,7 +1,7 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { CartProvider, useCart } from "./contexts/CartContext";
-import { AuthProvider } from "./contexts/AuthContext";
+import { AuthProvider, useAuth } from "./contexts/AuthContext";
 
 // PAGES
 import Catalog from "./pages/Catalog";
@@ -23,6 +23,8 @@ import NotificationToast from "./components/NotificationToast";
 // Componente interno que usa los Contexts
 function AppContent() {
 	const { agregarAlCarrito } = useCart();
+	const { estaAutenticado } = useAuth();
+	const navigate = useNavigate();
 	
 	// Estado para el modal
 	const [modalCarrito, setModalCarrito] = useState({
@@ -54,6 +56,13 @@ function AppContent() {
 
 	// Wrapper para agregar al carrito con notificación y modal
 	const agregarAlCarritoConNotificacion = (producto) => {
+
+		if (!estaAutenticado) {
+			mostrarNotificacion("Debes iniciar sesión para agregar productos al carrito.");
+			navigate('/login'); // Redirige al login
+			return; // Detiene la ejecución
+		}
+
 		agregarAlCarrito(producto);
 		mostrarNotificacion(`${producto.nombre} agregado al carrito`);
 		

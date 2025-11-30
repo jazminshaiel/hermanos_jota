@@ -32,31 +32,22 @@ export const CartProvider = ({ children }) => {
   }, [carrito]);
 
   // Limpiar el carrito cuando el usuario cierra sesión (se elimina el token)
-  useEffect(() => {
+useEffect(() => {
     if (typeof window !== 'undefined') {
-      const checkAuthStatus = () => {
-        const token = localStorage.getItem('token');
-        // Si no hay token y hay items en el carrito, limpiar el carrito
-        if (!token && carrito.length > 0) {
-          setCarrito([]);
-        }
-      };
-
-      // Verificar el estado de autenticación cada vez que cambie el carrito
-      checkAuthStatus();
-
-      // También escuchar eventos personalizados cuando se hace logout
+      // Función para limpiar el carrito al cerrar sesión
       const handleLogout = () => {
-        setCarrito([]);
+        setCarrito([]); // Limpia el estado
       };
 
+      // Agregar el listener solo una vez
       window.addEventListener('userLogout', handleLogout);
 
       return () => {
+        // Remover el listener al desmontar
         window.removeEventListener('userLogout', handleLogout);
       };
     }
-  }, [carrito]);
+  }, []);
 
   // Función para agregar producto al carrito
   const agregarAlCarrito = (producto) => {
