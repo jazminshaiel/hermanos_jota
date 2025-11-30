@@ -1,5 +1,5 @@
 ﻿# Proyecto Final: E-Commerce Mueblería Hermanos Jota
-El proyecto utiliza el stack MERN (MongoDB, Express, React, Node.js), la encriptación de contraseñas con bcrypt y la gestión de sesiones mediante JSON Web Tokens (JWT), cumpliendo así con los requisitos de desarrollo.
+Mueblería Hermanos Jota es un proyecto de e-commerce full-stack que simula una tienda de muebles, ofreciendo un catálogo interactivo con filtros, gestión de carrito de compras persistente, y un sistema de autenticación seguro (JWT). Cubre el ciclo completo de vida del usuario: registro, login, acceso a rutas protegidas y finalización de pedidos.
 La página posee: catálogo de productos, carrito de compras, páginas de detalle, formulario de contacto y navegación completa.
 
 ### Integrantes
@@ -9,17 +9,28 @@ La página posee: catálogo de productos, carrito de compras, páginas de detall
  - Moreno Iñaki
  - Torres Lell Pablo A.
 
-## Características Principales
+# ⚙️ Arquitectura
+El proyecto utiliza el stack MERN (MongoDB, Express, React, Node.js), la encriptación de contraseñas con bcrypt y la gestión de sesiones mediante JSON Web Tokens (JWT), cumpliendo así con los requisitos de desarrollo.
 
-- ✅ **Single Page Application (SPA)** con React Router
-- ✅ **Catálogo de productos** con filtros y búsqueda
-- ✅ **Carrito de compras** completo con persistencia
-- ✅ **Páginas de detalle** de productos
-- ✅ **Formulario de contacto** funcional
-- ✅ **Diseño responsive** para todos los dispositivos
-- ✅ **API REST** con Express.js
-- ✅ **Navegación moderna** con efectos visuales
+## Frontend
+- *Single Page Application (SPA):* Arquitectura basada en React Router para una navegación fluida.
+- *Diseño Responsive:* Layout adaptativo para garantizar accesibilidad en todos los dispositivos mediante implementación de menú colapsable (móvil), optimizacipon de tamaños y tamaños de fuente adaptativos.
 
+    ### Breakpoints
+    - **Desktop**: 1000px (4 columnas de productos)
+    - **Tablet**: 768px - 1000px (2 columnas de productos)
+    - **Móvil**: < 768px (1 columna de productos)
+
+
+- *Gestión de Estado Profesional:* Uso de la React Context API para centralizar la gestión del estado global de Autenticación (AuthContext) y Carrito de Compras (CartContext).
+- *Rutas Protegidas:* Implementación de componentes <ProtectedRoute> que verifican el estado de autenticación antes de permitir el acceso a páginas sensibles (ej: /perfil, /carrito).
+- *Catálogo y Búsqueda:¨* Catálogo de productos con filtros y funcionalidad de búsqueda.
+
+## Backend
+-*Autenticación y Autorización (JWT):* Sistema de Registro y Login seguro que utiliza bcrypt para el hashing de contraseñas. Generación de JSON Web Tokens para la gestión de sesiones.
+-*Rutas Protegidas (Middleware):* Las rutas sensibles están protegidas por un middleware que verifica la validez del JWT y adjunta el objeto usuario al request.
+-*API RESTful:* Endpoints organizados con el patrón MVC (Modelo-Vista-Controlador).
+-*Organización:* Uso de express.Router y controladores para separar la lógica de negocio de la definición de rutas.
 ---
 
 ## Estructura de Carpetas
@@ -85,21 +96,49 @@ hermanos_jota/
 │
 ├── README.md                 # Documentación principal del proyecto (este archivo)
 └── package.json              # Metadatos y dependencias del proyecto (global)
-
 ```
 ---
 
-## Dependencias
+## 📦 Dependencias
 
 ### Backend
-- `express` - Framework web para Node.js
-- `cors` - Middleware para habilitar CORS
-- `nodemon` (solo dev) - Auto-restart del servidor
+- `express`	- Framework web principal para construir la API RESTful.
+- `mongoose` - Modelado de objetos para MongoDB (ORM).
+- `bcrypt / bcryptjs` -	Librerías para el hashing seguro de contraseñas.
+-`jsonwebtoken` - Generación y verificación de JSON Web Tokens (JWT) para autenticación.
+-`cors` -	Middleware para habilitar peticiones CORS (Cross-Origin Resource Sharing) entre Frontend y Backend.
+-`dotenv` -	Gestión de variables de entorno (ej. JWT_SECRET, MONGODB_URI) desde un archivo .env.
+- `nodemon (Dev)` -	Herramienta para el reinicio automático del servidor durante el desarrollo.
 
 ### Frontend
-- `react` - Biblioteca principal de React
-- `react-dom` - Renderizado de React en el DOM
-- `react-router-dom` - Enrutamiento para React SPA
+-`react` -	Biblioteca principal para la construcción de la interfaz de usuario.
+-`react-dom` -	Paquete para el renderizado de componentes React en el DOM.
+-`react-router-dom` -	Implementación del enrutamiento dinámico para la Single Page Application (SPA).
+-`react-scripts` -	Conjunto de scripts proporcionados por Create React App (CRA) para la configuración y el build.
+-`axios` -	Cliente HTTP basado en promesas para hacer peticiones al Backend API.
+-`jwt-decode` -	Decodificación rápida de JWT en el lado del cliente para obtener datos del usuario (ej. ID).
+---
+
+
+## Componentes de React
+### Páginas
+- **Home.jsx** - Página de inicio con productos destacados y hero banner
+- **Catalog.jsx** - Catálogo completo con filtros y búsqueda
+- **ProductDetail.jsx** - Vista detallada de un producto individual
+- **Cart.jsx** - Carrito de compras con gestión completa
+- **Contacto.jsx** - Formulario de contacto funcional
+
+### Componentes Reutilizables
+- **Header.jsx** - Navegación global con contador de carrito
+- **Footer.jsx** - Footer con información de la empresa
+- **ProductCard.jsx** - Tarjeta de producto con botón de añadir al carrito
+- **ProductList.jsx** - Grid responsivo de productos
+- **DetailedProduct.jsx** - Vista detallada de producto
+- **RelatedProducts.jsx** - Productos relacionados
+- **Filters.jsx** - Filtros por categorías
+- **SearchBar.jsx** - Búsqueda de productos
+- **ModalCarrito.jsx** - Modal de confirmación al añadir al carrito
+- **ScrollToTop.jsx** - Scroll automático al cambiar de página
 
 ---
 
@@ -150,134 +189,4 @@ El frontend correrá en **http://localhost:3000**
 ### 3\. Acceso
   - **Frontend**: http://localhost:3000
   - **API Backend**: http://localhost:3001/api/productos
-
-## Endpoints de la API
-
-### Productos
-- **GET /api/productos** - Retorna el listado completo de productos
-- **GET /api/productos/:id** - Retorna un producto específico por ID (404 si no existe)
-
-### Middleware
-- **Logging** - Registra todas las peticiones HTTP (método y URL)
-- **CORS** - Habilita peticiones desde el frontend
-- **JSON Parser** - Procesa datos JSON en las peticiones
-
----
-
-## Componentes de React
-
-### Páginas
-- **Home.jsx** - Página de inicio con productos destacados y hero banner
-- **Catalog.jsx** - Catálogo completo con filtros y búsqueda
-- **ProductDetail.jsx** - Vista detallada de un producto individual
-- **Cart.jsx** - Carrito de compras con gestión completa
-- **Contacto.jsx** - Formulario de contacto funcional
-
-### Componentes Reutilizables
-- **Header.jsx** - Navegación global con contador de carrito
-- **Footer.jsx** - Footer con información de la empresa
-- **ProductCard.jsx** - Tarjeta de producto con botón de añadir al carrito
-- **ProductList.jsx** - Grid responsivo de productos
-- **DetailedProduct.jsx** - Vista detallada de producto
-- **RelatedProducts.jsx** - Productos relacionados
-- **Filters.jsx** - Filtros por categorías
-- **SearchBar.jsx** - Búsqueda de productos
-- **ModalCarrito.jsx** - Modal de confirmación al añadir al carrito
-- **ScrollToTop.jsx** - Scroll automático al cambiar de página
-
----
-
-## Sistema de Carrito de Compras
-
-### Funcionalidades
-- ✅ **Añadir productos** desde cualquier página
-- ✅ **Contador en tiempo real** en la barra de navegación
-- ✅ **Gestión de cantidades** (aumentar/disminuir)
-- ✅ **Eliminar productos** del carrito
-- ✅ **Cálculo automático** del total
-- ✅ **Modal de confirmación** al añadir productos
-- ✅ **Persistencia** en el estado global de React
-
-### Estados del Carrito
-- **Array de productos** con información completa
-- **Cantidad total** de items para el contador
-- **Modal de confirmación** con auto-cierre
-
----
-
-## Diseño y Estilos
-
-### Características de Diseño
-- **Responsive Design** - Mobile-first con breakpoints
-- **Paleta de colores** - Marrón siena (#A0522D), verde salvia (#87A96B)
-- **Tipografías** - Inter (sans-serif) y Playfair Display (serif)
-- **Efectos visuales** - Hover, transiciones suaves, sombras
-- **Layout moderno** - Flexbox y CSS Grid
-
-### Páginas Estilizadas
-- **Home** - Hero banner con productos destacados
-- **Catálogo** - Grid responsivo con filtros
-- **Detalle de producto** - Layout de dos columnas
-- **Carrito** - Lista de productos con controles
-- **Contacto** - Formulario centrado con banner
-
----
-
-## Funcionalidades Técnicas
-
-### React Router
-- **Navegación SPA** - Sin recarga de página
-- **Rutas protegidas** - Manejo de rutas no encontradas
-- **Scroll automático** - Al cambiar de página
-
-### Estado Global
-- **Carrito de compras** - Estado compartido entre componentes
-- **Modal de confirmación** - Estado global del modal
-- **Gestión de props** - Paso de funciones entre componentes
-
-### Formularios
-- **Formulario de contacto** - Componente controlado con validación
-- **Console.log** - Envío de datos al hacer submit
-
----
-
-## Responsive Design
-
-### Breakpoints
-- **Desktop** - > 1000px (4 columnas de productos)
-- **Tablet** - 768px - 1000px (2 columnas de productos)
-- **Móvil** - < 768px (1 columna de productos)
-
-### Adaptaciones
-- **Navegación** - Menú colapsable en móvil
-- **Imágenes** - Optimización de tamaños
-- **Texto** - Tamaños de fuente adaptativos
-- **Espaciado** - Márgenes y padding responsivos
-
----
-
-## Cumplimiento de Requisitos
-
-### Frontend (React SPA)
-- ✅ **Single Page Application** con React Router
-- ✅ **Componentes reutilizables** (Header, Footer, ProductCard, etc.)
-- ✅ **Página de catálogo** con fetch al backend
-- ✅ **Estados de carga** ("Cargando..." y "Error al cargar")
-- ✅ **Renderizado con .map()** de productos
-- ✅ **Vista de detalle** con renderizado condicional
-- ✅ **Carrito de compras** con estado en App.js
-- ✅ **Contador en Navbar** actualizado en tiempo real
-- ✅ **Formulario de contacto** controlado con useState
-- ✅ **Console.log** en envío de formulario
-
-### Backend (Express.js)
-- ✅ **Servidor Express** configurado correctamente
-- ✅ **Datos locales** en archivo .js (productos-data.js)
-- ✅ **Endpoints API**:
-  - GET /api/productos (listado completo)
-  - GET /api/productos/:id (producto específico con 404)
-- ✅ **Middleware global** de logging
-- ✅ **express.json()** para procesar JSON
-- ✅ **express.Router** para organización de rutas
-- ✅ **Manejadores de errores** (404 y centralizados)
 
