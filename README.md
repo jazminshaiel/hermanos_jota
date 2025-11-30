@@ -27,9 +27,10 @@ El proyecto utiliza el stack **MERN** (MongoDB, Express, React, Node.js), la enc
   - **Rutas Protegidas:** Implementación de componentes `<ProtectedRoute>` que verifican el estado de autenticación antes de permitir el acceso a páginas sensibles (ej: `/perfil`, `/carrito`).
   - **Catálogo y Búsqueda:** Catálogo de productos con filtros y funcionalidad de búsqueda.
   - **Diseño Responsive:** Layout adaptativo para garantizar accesibilidad en todos los dispositivos mediante implementación de menú colapsable (móvil), optimización de tamaños y tamaños de fuente adaptativos.
-    -**Desktop**: 1000px (4 columnas de productos)
-    -**Tablet**: 768px - 1000px (2 columnas de productos)
-    -**Móvil**: \< 768px (1 columna de productos)
+    #### Breakpoints (Responsive Design):
+      -**Desktop**: 1000px (4 columnas de productos)
+      -**Tablet**: 768px - 1000px (2 columnas de productos)
+      -**Móvil**: \< 768px (1 columna de productos)
 
 ### 🔒 Backend (Express API)
 
