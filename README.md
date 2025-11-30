@@ -1,7 +1,5 @@
 ﻿# 🌟 Proyecto Final: E-Commerce Mueblería Hermanos Jota
 
-## 💡 Resumen del Proyecto
-
 **Mueblería Hermanos Jota** es un proyecto de **e-commerce full-stack** construido con la arquitectura **MERN** (MongoDB, Express, React, Node.js). La plataforma simula una tienda de muebles, ofreciendo un **catálogo interactivo** con filtros, gestión de **carrito de compras** persistente, y un sistema de **autenticación seguro (JWT)**. Cubre el ciclo completo de vida del usuario: registro, login, acceso a rutas protegidas y finalización de pedidos.
 
 La aplicación posee un completo **catálogo de productos**, **carrito de compras**, **páginas de detalle**, **formulario de contacto** y **navegación** completa.
@@ -24,24 +22,24 @@ El proyecto utiliza el stack **MERN** (MongoDB, Express, React, Node.js), la enc
 
 ### 🖼️ Frontend (React SPA)
 
-  * **Single Page Application (SPA):** Arquitectura basada en React Router para una navegación fluida.
-  * **Gestión de Estado Profesional:** Uso de la **React Context API** para centralizar la gestión del estado global de **Autenticación** (`AuthContext`) y **Carrito de Compras** (`CartContext`).
-  * **Rutas Protegidas:** Implementación de componentes `<ProtectedRoute>` que verifican el estado de autenticación antes de permitir el acceso a páginas sensibles (ej: `/perfil`, `/carrito`).
-  * **Catálogo y Búsqueda:** Catálogo de productos con filtros y funcionalidad de búsqueda.
-  * **Diseño Responsive:** Layout adaptativo para garantizar accesibilidad en todos los dispositivos mediante implementación de menú colapsable (móvil), optimización de tamaños y tamaños de fuente adaptativos.
+  - **Single Page Application (SPA):** Arquitectura basada en React Router para una navegación fluida.
+  - **Gestión de Estado Profesional:** Uso de la **React Context API** para centralizar la gestión del estado global de **Autenticación** (`AuthContext`) y **Carrito de Compras** (`CartContext`).
+  - **Rutas Protegidas:** Implementación de componentes `<ProtectedRoute>` que verifican el estado de autenticación antes de permitir el acceso a páginas sensibles (ej: `/perfil`, `/carrito`).
+  - **Catálogo y Búsqueda:** Catálogo de productos con filtros y funcionalidad de búsqueda.
+  - **Diseño Responsive:** Layout adaptativo para garantizar accesibilidad en todos los dispositivos mediante implementación de menú colapsable (móvil), optimización de tamaños y tamaños de fuente adaptativos.
 
-#### Breakpoints (Responsive Design)
+  #### Breakpoints (Responsive Design)
 
-  * **Desktop**: 1000px (4 columnas de productos)
-  * **Tablet**: 768px - 1000px (2 columnas de productos)
-  * **Móvil**: \< 768px (1 columna de productos)
+    - **Desktop**: 1000px (4 columnas de productos)
+    - **Tablet**: 768px - 1000px (2 columnas de productos)
+    - **Móvil**: \< 768px (1 columna de productos)
 
 ### 🔒 Backend (Express API)
 
-  * **Autenticación y Autorización (JWT):** Sistema de **Registro** y **Login** seguro que utiliza **bcrypt** para el hashing de contraseñas. Generación de **JSON Web Tokens** para la gestión de sesiones.
-  * **Rutas Protegidas (Middleware):** Las rutas sensibles están protegidas por un middleware (`auth.js`) que verifica la validez del JWT y adjunta el objeto `usuario` al request.
-  * **API RESTful:** Endpoints organizados con el patrón **MVC (Modelo-Vista-Controlador)**.
-  * **Organización:** Uso de `express.Router` y controladores para separar la lógica de negocio de la definición de rutas.
+  - **Autenticación y Autorización (JWT):** Sistema de **Registro** y **Login** seguro que utiliza **bcrypt** para el hashing de contraseñas. Generación de **JSON Web Tokens** para la gestión de sesiones.
+  - **Rutas Protegidas (Middleware):** Las rutas sensibles están protegidas por un middleware (`auth.js`) que verifica la validez del JWT y adjunta el objeto `usuario` al request.
+  - **API RESTful:** Endpoints organizados con el patrón **MVC (Modelo-Vista-Controlador)**.
+  - **Organización:** Uso de `express.Router` y controladores para separar la lógica de negocio de la definición de rutas.
 
 -----
 
