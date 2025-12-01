@@ -19,7 +19,11 @@ const PORT = process.env.PORT || 3001;
 conectarDB();
 
 // Middlewares
-app.use(cors());
+app.use(cors({
+  origin: ["https://hermanos-jota-ochre.vercel.app/"], // Frontend de vercel
+  methods: ["GET", "POST", "PUT", "DELETE"], 
+  credentials: true
+}));
 app.use(express.json());
 app.use(logger);
 
