@@ -20,8 +20,8 @@ conectarDB();
 
 // Middlewares
 app.use(cors({
-  origin: ["https://hermanos-jota-ochre.vercel.app/"], // Frontend de vercel
-  methods: ["GET", "POST", "PUT", "DELETE"], 
+  origin: "https://hermanos-jota-ochre.vercel.app",
+  methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
 app.use(express.json());
