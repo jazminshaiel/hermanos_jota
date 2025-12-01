@@ -117,7 +117,7 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem('usuario', JSON.stringify(nuevoUsuario));
     }
     setUsuario(nuevoUsuario);
-q  };
+  };
 
   // Verificar si el usuario está autenticado
   const estaAutenticado = !!token && !!usuario;

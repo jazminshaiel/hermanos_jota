@@ -17,7 +17,7 @@ const verifyToken = (req, res, next) => {
     }
 
     try {
-        const decodedPayload = jwt.verify(token, process.env.JWT_SECRET);
+        const decodedPayload = jwt.verify(token, process.env.JWT_SECRET || 'tu_secreto_super_seguro_cambiar_en_produccion');
         console.log('✅ Token válido, payload:', decodedPayload); // ← AÑADE ESTO
         
         req.userId = decodedPayload.id; 
