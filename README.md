@@ -15,7 +15,13 @@ La aplicación posee un completo **catálogo de productos**, **carrito de compra
   * Torres Lell Pablo A.
 
 ----
+## 🚀 Despliegue (Deploy)
 
+- **Frontend:** hermanos-jota-ochre.vercel.app
+
+- **Backend:** hermanos-jota-api.onrender.com
+
+----
 ## ⚙️ Arquitectura y Características Principales
 
 El proyecto utiliza el stack **MERN** (MongoDB, Express, React, Node.js), la encriptación de contraseñas con **bcrypt** y la gestión de sesiones mediante **JSON Web Tokens (JWT)**, cumpliendo así con los requisitos de desarrollo final.
