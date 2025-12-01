@@ -6,6 +6,8 @@ import "../styles/estilos-globales.css";
 import "../styles/Home.css";
 import "../styles/Footer.css";
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+
 function Home({ agregarAlCarrito }) {
     const [productos, setProductos] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -18,7 +20,7 @@ function Home({ agregarAlCarrito }) {
     const fetchProductos = async () => {
         try {
             setLoading(true);
-            const response = await fetch('http://localhost:3001/api/productos');
+            const response = await fetch(`${API_URL}/api/productos`);
             
             if (!response.ok) {
                 throw new Error('Error al cargar productos');

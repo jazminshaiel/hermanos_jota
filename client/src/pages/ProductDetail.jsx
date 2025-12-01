@@ -8,6 +8,8 @@ import "../styles/estilos-producto.css";
 import "../styles/Footer.css";
 import "../styles/estilos-detalle.css"; 
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+
 // Aceptamos los props que vienen de App.js
 function ProductDetail({ carritoItems, agregarAlCarrito }) {
 	const [producto, setProducto] = useState(null);
@@ -25,7 +27,7 @@ function ProductDetail({ carritoItems, agregarAlCarrito }) {
 			try {
 				setLoading(true);
 				// Usamos el endpoint del backend
-				const response = await fetch(`/api/productos/${id}`);
+				const response = await fetch(`${API_URL}/api/productos/${id}`);
 				if (!response.ok) {
 					throw new Error("El producto no fue encontrado.");
 				}
@@ -48,7 +50,7 @@ function ProductDetail({ carritoItems, agregarAlCarrito }) {
 			setEliminando(true);
 			try {
 				// Usamos el endpoint DELETE de tu API
-				const response = await fetch(`/api/productos/${id}`, {
+				const response = await fetch(`${API_URL}/api/productos/${id}`, {
 					method: "DELETE",
 				});
 

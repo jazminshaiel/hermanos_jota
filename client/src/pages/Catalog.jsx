@@ -13,6 +13,8 @@ import Filters from "../components/Filters";
 import ProductList from "../components/ProductList";
 import SearchBar from "../components/SearchBar";
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+
 function Catalog({ agregarAlCarrito }) {
 	const navigate = useNavigate();
 	const [productos, setProductos] = useState([]);
@@ -24,7 +26,7 @@ function Catalog({ agregarAlCarrito }) {
 	const [error, setError] = useState(null);
 
 	useEffect(() => {
-		fetch("http://localhost:3001/api/productos")
+		fetch(`${API_URL}/api/productos`)
 			.then((res) => {
 				if (!res.ok) throw new Error("Error al cargar productos");
 				return res.json();

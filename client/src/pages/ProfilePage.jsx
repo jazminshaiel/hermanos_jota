@@ -9,6 +9,8 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import '../styles/estilos-auth.css';
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+
 function ProfilePage() {
     const { usuario, logout, token, cargando, updateUsuario } = useAuth(); 
     const { vaciarCarrito } = useCart();
@@ -37,7 +39,7 @@ function ProfilePage() {
         }
 
         const response = await axios.put(
-            'http://localhost:3001/api/users/profile', 
+            `${API_URL}/api/users/profile`, 
             updateBody,
             {
                 headers: { 'Authorization': `Bearer ${token}` }

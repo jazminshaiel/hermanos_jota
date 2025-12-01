@@ -4,8 +4,11 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import "../styles/estilos-formularios.css";
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+
 // Aceptamos 'carritoItems' para pasarlo al Header
 function CreateProductPage({ carritoItems }) {
+	const { token } = useAuth();
 	const navigate = useNavigate();
 	const [formData, setFormData] = useState({
 		nombre: "",
@@ -33,12 +36,19 @@ function CreateProductPage({ carritoItems }) {
 		setLoading(true);
 		setError(null);
 
+		if (!token) {
+			setError("Necesitas estar autenticado para crear productos.");
+			setLoading(false);
+			return;
+		}
+
 		try {
 			// Usamos el endpoint POST de la API
-			const response = await fetch("/api/productos", {
+			const response = await fetch(`${API_URL}/api/productos`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
+					"Authorization": `Bearer ${token}`, 
 				},
 				body: JSON.stringify(formData),
 			});

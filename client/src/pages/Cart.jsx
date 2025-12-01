@@ -8,6 +8,7 @@ import NotificationToast from "../components/NotificationToast";
 import "../styles/estilos-globales.css";
 import "../styles/Footer.css";
 import "../styles/estilos-carrito.css";
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
 
 function Cart() {
   const {
@@ -71,7 +72,7 @@ function Cart() {
       };
 
       // Enviar pedido al backend
-      const response = await fetch('http://localhost:3001/api/pedidos', {
+      const response = await fetch(`${API_URL}/api/pedidos`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
