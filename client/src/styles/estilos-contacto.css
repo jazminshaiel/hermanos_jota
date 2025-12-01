@@ -194,7 +194,7 @@
     transition: all 0.3s ease;
     background-color: #fafafa;
     color: #333;
-    resize: vertical;
+    resize: none;
     min-height: 150px;
     line-height: 1.6;
 }
