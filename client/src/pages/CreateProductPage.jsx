@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import "../styles/estilos-formularios.css";
+import { useAuth } from "../contexts/AuthContext"; 
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
 
