@@ -6,7 +6,7 @@ import "../styles/estilos-globales.css";
 import "../styles/Home.css";
 import "../styles/Footer.css";
 
-const API_URL = "https://hermanos-jota-api.onrender.com";
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
 
 function Home({ agregarAlCarrito }) {
     const [productos, setProductos] = useState([]);
