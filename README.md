@@ -17,9 +17,9 @@ La aplicación posee un completo **catálogo de productos**, **carrito de compra
 ----
 ## 🚀 Despliegue (Deploy)
 
-- **Frontend:** hermanos-jota-ochre.vercel.app
+- **Frontend (Vercel):** [hermanos-jota-ochre.vercel.app](https://hermanos-jota-ochre.vercel.app/)
 
-- **Backend:** hermanos-jota-api.onrender.com
+- **Backend (Render):** [hermanos-jota-api.onrender.com](https://hermanos-jota-api.onrender.com/)
 
 ----
 ## ⚙️ Arquitectura y Características Principales
