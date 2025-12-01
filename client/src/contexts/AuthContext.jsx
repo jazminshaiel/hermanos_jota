@@ -111,6 +111,14 @@ export const AuthProvider = ({ children }) => {
     setUsuario(null);
   };
 
+  // Función para actualizar el usuario en el contexto
+  const updateUsuario = (nuevoUsuario) => {
+    if (typeof window !== 'undefined') {
+        localStorage.setItem('usuario', JSON.stringify(nuevoUsuario));
+    }
+    setUsuario(nuevoUsuario);
+q  };
+
   // Verificar si el usuario está autenticado
   const estaAutenticado = !!token && !!usuario;
 
@@ -122,6 +130,7 @@ export const AuthProvider = ({ children }) => {
     login,
     register,
     logout,
+    updateUsuario,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

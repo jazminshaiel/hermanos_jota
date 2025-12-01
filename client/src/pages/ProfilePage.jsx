@@ -10,7 +10,7 @@ import Footer from '../components/Footer';
 import '../styles/estilos-auth.css';
 
 function ProfilePage() {
-    const { usuario, logout, token, cargando } = useAuth();
+    const { usuario, logout, token, cargando, updateUsuario } = useAuth(); 
     const { vaciarCarrito } = useCart();
     const navigate = useNavigate();
     
@@ -26,31 +26,36 @@ function ProfilePage() {
     }, [usuario]);
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        setError(null);
-        setSuccess(null);
-        
-        try {
-            const updateBody = { nombre };
-            if (password) {
-                updateBody.password = password;
-            }
-
-            await axios.put(
-                'http://localhost:3001/api/users/profile', 
-                updateBody,
-                {
-                    headers: { 'Authorization': `Bearer ${token}` }
-                }
-            );
-            
-            setSuccess('¡Perfil actualizado! (Necesitarás re-loguear para ver los cambios)');
-            setPassword('');
-        } catch (err) {
-            setError(err.response?.data?.message || err.response?.data?.mensaje || 'Error al actualizar');
+    e.preventDefault();
+    setError(null);
+    setSuccess(null);
+    
+    try {
+        const updateBody = { nombre: nombre };
+        if (password) {
+            updateBody.password = password;
         }
-    };
 
+        const response = await axios.put(
+            'http://localhost:3001/api/users/profile', 
+            updateBody,
+            {
+                headers: { 'Authorization': `Bearer ${token}` }
+            }
+        );
+        
+        
+        const usuarioActualizado = response.data;
+        updateUsuario(usuarioActualizado);
+        
+        setSuccess('¡Perfil actualizado correctamente!');
+        setPassword('');
+        
+    } catch (err) {
+        console.error('❌ Error:', err);
+        setError(err.response?.data?.message || err.response?.data?.mensaje || 'Error al actualizar');
+    }
+    };
     const handleLogout = () => {
         vaciarCarrito();
         logout();
